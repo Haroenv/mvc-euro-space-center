@@ -15,9 +15,10 @@ namespace EuroSpaceCenter.Views.Account {
                     email = email.Value.ToString(),
                     password = password.Text
                 };
-                if (users.create(u)) {
+                try {
+                    users.create(u);
                     output.Text = "Check your email!";
-                } else {
+                } catch {
                     output.Text = "Something didn't work, sorry 😞";
                 }
             }
