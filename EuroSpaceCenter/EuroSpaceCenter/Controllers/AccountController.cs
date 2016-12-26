@@ -10,10 +10,5 @@ namespace EuroSpaceCenter.Controllers {
         public ActionResult Index() {
             return View();
         }
-
-        // GET: Register
-        public ActionResult Register() {
-            return View();
-        }
     }
 }

@@ -10,6 +10,12 @@ namespace EuroSpaceCenter {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapPageRoute(
+                "Register",
+                "Account/Register",
+                "~/Views/Account/Register.aspx"
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
