@@ -1,4 +1,6 @@
-﻿namespace EuroSpaceCenter.Models {
+﻿using System;
+
+namespace EuroSpaceCenter.Models {
     public partial class users {
         public static bool create(user u) {
             using(var db = new DataClassesDataContext()) {
@@ -10,7 +12,8 @@
                         return false;
                     }
                     return util.Email.sendInvite(u, a);
-                } catch {
+                } catch (Exception e) {
+                    throw e;
                     return false;
                 }
             }

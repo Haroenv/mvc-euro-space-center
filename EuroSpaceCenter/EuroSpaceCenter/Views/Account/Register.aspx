@@ -50,6 +50,7 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
                 <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number" ControlToValidate="password"/>
             </div>
         </div>
         <div class="form-group">
@@ -61,6 +62,7 @@
         </div>
         <div class="form-group">
             <asp:Button ID="submit" runat="server" Text="Create" CssClass="btn btn-success" OnClick="submit_Click"/>
+            <asp:Label ID="output" runat="server" />
         </div>
     </form>
     <script src="/Scripts/jquery-1.10.2.min.js"></script>

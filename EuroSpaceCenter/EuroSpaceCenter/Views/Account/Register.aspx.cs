@@ -10,14 +10,15 @@ namespace EuroSpaceCenter.Views.Account {
 
         protected void submit_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
-                var u = new user();
-                u.name = name.Text;
-                u.email = email.Value.ToString();
-                u.password = password.Text;
+                var u = new user() {
+                    name = name.Text,
+                    email = email.Value.ToString(),
+                    password = password.Text
+                };
                 if (users.create(u)) {
-                    submit.Text = "goed gememed";
+                    output.Text = "goed gememed";
                 } else {
-                    submit.Text = "slecht gememed";
+                    output.Text = "slecht gememed";
                 }
             }
         }
