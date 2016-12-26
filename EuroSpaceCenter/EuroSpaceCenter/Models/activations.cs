@@ -14,7 +14,8 @@ namespace EuroSpaceCenter.Models {
                     db.activations.InsertOnSubmit(a);
                     db.SubmitChanges();
                     return a;
-                } catch {
+                } catch (Exception e) {
+                    throw e;
                     return null;
                 }
             }
