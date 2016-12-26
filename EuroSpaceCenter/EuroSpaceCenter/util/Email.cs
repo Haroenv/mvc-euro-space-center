@@ -8,7 +8,7 @@ namespace EuroSpaceCenter.util {
     internal class Email {
         internal static bool sendInvite(user u, activation a) {
             try {
-                string body = "Hey " + u.name + ",\n\nWelcome to Euro Space Center. <a href= 'http://eurospacecenter.haroenviaene.ikdoeict.net/Account/Activate/" + a.code + "'>Click this link to verify your account!\n\n if the link is not readable you can go to http://eurospacecenter.haroenviaene.ikdoeict.net/Account/Activate/"+a.code+ "/!\n\ngreetz,\n\nEuro Space Center";
+                string body = "Hey " + u.name + ",<br><br>Welcome to Euro Space Center. Click <a href= 'http://eurospacecenter.haroenviaene.ikdoeict.net/Account/Activate/" + a.code + "'>this link</a> to verify your account!<br><br> if the link is not readable you can go to http://eurospacecenter.haroenviaene.ikdoeict.net/Account/Activate/" + a.code+ "/!<br><br>greetz,<br><br>Euro Space Center";
                 MailMessage message = new MailMessage();
                 message.Subject = "Euro Space Center - Activation account";
                 message.From = new MailAddress(WebConfigurationManager.AppSettings["emailAddress"]);
