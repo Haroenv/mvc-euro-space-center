@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EuroSpaceCenter.Views.Account {
+namespace EuroSpaceCenter.Register {
     
     
-    public partial class Register {
+    public partial class Index {
         
         /// <summary>
         /// form1 control.

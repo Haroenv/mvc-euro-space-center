@@ -10,5 +10,10 @@ namespace EuroSpaceCenter.Controllers {
         public ActionResult Index() {
             return View();
         }
+
+        // GET: Account/Register
+        public ActionResult Register() {
+            return Redirect("~/Register/Index.aspx");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="EuroSpaceCenter.Views.Account.Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="EuroSpaceCenter.Register.Index" %>
 
 <!DOCTYPE html>
 
@@ -42,7 +42,7 @@
             <label for="email" class="control-label">Email address</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
-                <input type="email" name="email" id="email" class="form-control" runat="server"/>
+                <input type="email" name="email" id="email" class="form-control" runat="server" />
             </div>
         </div>
         <div class="form-group">
@@ -51,7 +51,7 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
                 <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
-            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic" CssClass="form-control-feedback"/>
+            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic" CssClass="form-control-feedback" />
         </div>
         <div class="form-group">
             <label for="password1" class="control-label">Repeat password</label>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Button ID="submit" runat="server" Text="Create" CssClass="btn btn-success" OnClick="submit_Click"/>
+            <asp:Button ID="submit" runat="server" Text="Create" CssClass="btn btn-success" OnClick="submit_Click" />
             <asp:Label ID="output" runat="server" />
         </div>
     </form>

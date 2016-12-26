@@ -16,7 +16,6 @@ namespace EuroSpaceCenter.Models {
                     return a;
                 } catch (Exception e) {
                     throw e;
-                    return null;
                 }
             }
         }
