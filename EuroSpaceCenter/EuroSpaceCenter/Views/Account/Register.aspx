@@ -50,8 +50,8 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
                 <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number" ControlToValidate="password"/>
             </div>
+            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic" CssClass="form-control-feedback"/>
         </div>
         <div class="form-group">
             <label for="password1" class="control-label">Repeat password</label>
