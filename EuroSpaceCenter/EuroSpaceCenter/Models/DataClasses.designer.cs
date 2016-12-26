@@ -30,6 +30,9 @@ namespace EuroSpaceCenter.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Insertusers_has_parkplan(users_has_parkplan instance);
+    partial void Updateusers_has_parkplan(users_has_parkplan instance);
+    partial void Deleteusers_has_parkplan(users_has_parkplan instance);
     partial void Insertactivation(activation instance);
     partial void Updateactivation(activation instance);
     partial void Deleteactivation(activation instance);
@@ -39,6 +42,9 @@ namespace EuroSpaceCenter.Models
     partial void Insertparkplan(parkplan instance);
     partial void Updateparkplan(parkplan instance);
     partial void Deleteparkplan(parkplan instance);
+    partial void Insertparkplans_has_item(parkplans_has_item instance);
+    partial void Updateparkplans_has_item(parkplans_has_item instance);
+    partial void Deleteparkplans_has_item(parkplans_has_item instance);
     partial void Insertrating(rating instance);
     partial void Updaterating(rating instance);
     partial void Deleterating(rating instance);
@@ -77,19 +83,19 @@ namespace EuroSpaceCenter.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<activation> activations
-		{
-			get
-			{
-				return this.GetTable<activation>();
-			}
-		}
-		
 		public System.Data.Linq.Table<users_has_parkplan> users_has_parkplans
 		{
 			get
 			{
 				return this.GetTable<users_has_parkplan>();
+			}
+		}
+		
+		public System.Data.Linq.Table<activation> activations
+		{
+			get
+			{
+				return this.GetTable<activation>();
 			}
 		}
 		
@@ -158,6 +164,198 @@ namespace EuroSpaceCenter.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].users_has_parkplans")]
+	public partial class users_has_parkplan : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private bool _accepted;
+		
+		private int _users_id;
+		
+		private int _parkplans_id;
+		
+		private EntityRef<parkplan> _parkplan;
+		
+		private EntityRef<user> _user;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnacceptedChanging(bool value);
+    partial void OnacceptedChanged();
+    partial void Onusers_idChanging(int value);
+    partial void Onusers_idChanged();
+    partial void Onparkplans_idChanging(int value);
+    partial void Onparkplans_idChanged();
+    #endregion
+		
+		public users_has_parkplan()
+		{
+			this._parkplan = default(EntityRef<parkplan>);
+			this._user = default(EntityRef<user>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accepted", DbType="Bit NOT NULL")]
+		public bool accepted
+		{
+			get
+			{
+				return this._accepted;
+			}
+			set
+			{
+				if ((this._accepted != value))
+				{
+					this.OnacceptedChanging(value);
+					this.SendPropertyChanging();
+					this._accepted = value;
+					this.SendPropertyChanged("accepted");
+					this.OnacceptedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int users_id
+		{
+			get
+			{
+				return this._users_id;
+			}
+			set
+			{
+				if ((this._users_id != value))
+				{
+					if (this._user.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onusers_idChanging(value);
+					this.SendPropertyChanging();
+					this._users_id = value;
+					this.SendPropertyChanged("users_id");
+					this.Onusers_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parkplans_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int parkplans_id
+		{
+			get
+			{
+				return this._parkplans_id;
+			}
+			set
+			{
+				if ((this._parkplans_id != value))
+				{
+					if (this._parkplan.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onparkplans_idChanging(value);
+					this.SendPropertyChanging();
+					this._parkplans_id = value;
+					this.SendPropertyChanged("parkplans_id");
+					this.Onparkplans_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="parkplan_users_has_parkplan", Storage="_parkplan", ThisKey="parkplans_id", OtherKey="id", IsForeignKey=true)]
+		public parkplan parkplan
+		{
+			get
+			{
+				return this._parkplan.Entity;
+			}
+			set
+			{
+				parkplan previousValue = this._parkplan.Entity;
+				if (((previousValue != value) 
+							|| (this._parkplan.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._parkplan.Entity = null;
+						previousValue.users_has_parkplans.Remove(this);
+					}
+					this._parkplan.Entity = value;
+					if ((value != null))
+					{
+						value.users_has_parkplans.Add(this);
+						this._parkplans_id = value.id;
+					}
+					else
+					{
+						this._parkplans_id = default(int);
+					}
+					this.SendPropertyChanged("parkplan");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_users_has_parkplan", Storage="_user", ThisKey="users_id", OtherKey="id", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.users_has_parkplans.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.users_has_parkplans.Add(this);
+						this._users_id = value.id;
+					}
+					else
+					{
+						this._users_id = default(int);
+					}
+					this.SendPropertyChanged("user");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].activations")]
 	public partial class activation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -190,7 +388,7 @@ namespace EuroSpaceCenter.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -309,69 +507,6 @@ namespace EuroSpaceCenter.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].users_has_parkplans")]
-	public partial class users_has_parkplan
-	{
-		
-		private bool _accepted;
-		
-		private System.Nullable<int> _users_id;
-		
-		private System.Nullable<int> _parkplans_id;
-		
-		public users_has_parkplan()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accepted", DbType="Bit NOT NULL")]
-		public bool accepted
-		{
-			get
-			{
-				return this._accepted;
-			}
-			set
-			{
-				if ((this._accepted != value))
-				{
-					this._accepted = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_id", DbType="Int")]
-		public System.Nullable<int> users_id
-		{
-			get
-			{
-				return this._users_id;
-			}
-			set
-			{
-				if ((this._users_id != value))
-				{
-					this._users_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parkplans_id", DbType="Int")]
-		public System.Nullable<int> parkplans_id
-		{
-			get
-			{
-				return this._parkplans_id;
-			}
-			set
-			{
-				if ((this._parkplans_id != value))
-				{
-					this._parkplans_id = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].attractions")]
 	public partial class attraction
 	{
@@ -447,6 +582,8 @@ namespace EuroSpaceCenter.Models
 		
 		private string _description;
 		
+		private EntitySet<parkplans_has_item> _parkplans_has_items;
+		
 		private EntitySet<rating> _ratings;
 		
     #region Extensibility Method Definitions
@@ -463,11 +600,12 @@ namespace EuroSpaceCenter.Models
 		
 		public item()
 		{
+			this._parkplans_has_items = new EntitySet<parkplans_has_item>(new Action<parkplans_has_item>(this.attach_parkplans_has_items), new Action<parkplans_has_item>(this.detach_parkplans_has_items));
 			this._ratings = new EntitySet<rating>(new Action<rating>(this.attach_ratings), new Action<rating>(this.detach_ratings));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -527,6 +665,19 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_parkplans_has_item", Storage="_parkplans_has_items", ThisKey="id", OtherKey="items_id")]
+		public EntitySet<parkplans_has_item> parkplans_has_items
+		{
+			get
+			{
+				return this._parkplans_has_items;
+			}
+			set
+			{
+				this._parkplans_has_items.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_rating", Storage="_ratings", ThisKey="id", OtherKey="items_id")]
 		public EntitySet<rating> ratings
 		{
@@ -560,6 +711,18 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
+		private void attach_parkplans_has_items(parkplans_has_item entity)
+		{
+			this.SendPropertyChanging();
+			entity.item = this;
+		}
+		
+		private void detach_parkplans_has_items(parkplans_has_item entity)
+		{
+			this.SendPropertyChanging();
+			entity.item = null;
+		}
+		
 		private void attach_ratings(rating entity)
 		{
 			this.SendPropertyChanging();
@@ -587,6 +750,10 @@ namespace EuroSpaceCenter.Models
 		
 		private string _description;
 		
+		private EntitySet<users_has_parkplan> _users_has_parkplans;
+		
+		private EntitySet<parkplans_has_item> _parkplans_has_items;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -603,10 +770,12 @@ namespace EuroSpaceCenter.Models
 		
 		public parkplan()
 		{
+			this._users_has_parkplans = new EntitySet<users_has_parkplan>(new Action<users_has_parkplan>(this.attach_users_has_parkplans), new Action<users_has_parkplan>(this.detach_users_has_parkplans));
+			this._parkplans_has_items = new EntitySet<parkplans_has_item>(new Action<parkplans_has_item>(this.attach_parkplans_has_items), new Action<parkplans_has_item>(this.detach_parkplans_has_items));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -686,6 +855,32 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="parkplan_users_has_parkplan", Storage="_users_has_parkplans", ThisKey="id", OtherKey="parkplans_id")]
+		public EntitySet<users_has_parkplan> users_has_parkplans
+		{
+			get
+			{
+				return this._users_has_parkplans;
+			}
+			set
+			{
+				this._users_has_parkplans.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="parkplan_parkplans_has_item", Storage="_parkplans_has_items", ThisKey="id", OtherKey="parkplans_id")]
+		public EntitySet<parkplans_has_item> parkplans_has_items
+		{
+			get
+			{
+				return this._parkplans_has_items;
+			}
+			set
+			{
+				this._parkplans_has_items.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -705,22 +900,65 @@ namespace EuroSpaceCenter.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_users_has_parkplans(users_has_parkplan entity)
+		{
+			this.SendPropertyChanging();
+			entity.parkplan = this;
+		}
+		
+		private void detach_users_has_parkplans(users_has_parkplan entity)
+		{
+			this.SendPropertyChanging();
+			entity.parkplan = null;
+		}
+		
+		private void attach_parkplans_has_items(parkplans_has_item entity)
+		{
+			this.SendPropertyChanging();
+			entity.parkplan = this;
+		}
+		
+		private void detach_parkplans_has_items(parkplans_has_item entity)
+		{
+			this.SendPropertyChanging();
+			entity.parkplan = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].parkplans_has_items")]
-	public partial class parkplans_has_item
+	public partial class parkplans_has_item : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<int> _parkplans_id;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _items_id;
+		private int _parkplans_id;
+		
+		private int _items_id;
+		
+		private EntityRef<item> _item;
+		
+		private EntityRef<parkplan> _parkplan;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onparkplans_idChanging(int value);
+    partial void Onparkplans_idChanged();
+    partial void Onitems_idChanging(int value);
+    partial void Onitems_idChanged();
+    #endregion
 		
 		public parkplans_has_item()
 		{
+			this._item = default(EntityRef<item>);
+			this._parkplan = default(EntityRef<parkplan>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parkplans_id", DbType="Int")]
-		public System.Nullable<int> parkplans_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parkplans_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int parkplans_id
 		{
 			get
 			{
@@ -730,13 +968,21 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._parkplans_id != value))
 				{
+					if (this._parkplan.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onparkplans_idChanging(value);
+					this.SendPropertyChanging();
 					this._parkplans_id = value;
+					this.SendPropertyChanged("parkplans_id");
+					this.Onparkplans_idChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int")]
-		public System.Nullable<int> items_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int items_id
 		{
 			get
 			{
@@ -746,8 +992,104 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._items_id != value))
 				{
+					if (this._item.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onitems_idChanging(value);
+					this.SendPropertyChanging();
 					this._items_id = value;
+					this.SendPropertyChanged("items_id");
+					this.Onitems_idChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_parkplans_has_item", Storage="_item", ThisKey="items_id", OtherKey="id", IsForeignKey=true)]
+		public item item
+		{
+			get
+			{
+				return this._item.Entity;
+			}
+			set
+			{
+				item previousValue = this._item.Entity;
+				if (((previousValue != value) 
+							|| (this._item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._item.Entity = null;
+						previousValue.parkplans_has_items.Remove(this);
+					}
+					this._item.Entity = value;
+					if ((value != null))
+					{
+						value.parkplans_has_items.Add(this);
+						this._items_id = value.id;
+					}
+					else
+					{
+						this._items_id = default(int);
+					}
+					this.SendPropertyChanged("item");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="parkplan_parkplans_has_item", Storage="_parkplan", ThisKey="parkplans_id", OtherKey="id", IsForeignKey=true)]
+		public parkplan parkplan
+		{
+			get
+			{
+				return this._parkplan.Entity;
+			}
+			set
+			{
+				parkplan previousValue = this._parkplan.Entity;
+				if (((previousValue != value) 
+							|| (this._parkplan.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._parkplan.Entity = null;
+						previousValue.parkplans_has_items.Remove(this);
+					}
+					this._parkplan.Entity = value;
+					if ((value != null))
+					{
+						value.parkplans_has_items.Add(this);
+						this._parkplans_id = value.id;
+					}
+					else
+					{
+						this._parkplans_id = default(int);
+					}
+					this.SendPropertyChanged("parkplan");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -799,7 +1141,7 @@ namespace EuroSpaceCenter.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -1122,6 +1464,8 @@ namespace EuroSpaceCenter.Models
 		
 		private bool _admin;
 		
+		private EntitySet<users_has_parkplan> _users_has_parkplans;
+		
 		private EntitySet<activation> _activations;
 		
 		private EntitySet<rating> _ratings;
@@ -1144,12 +1488,13 @@ namespace EuroSpaceCenter.Models
 		
 		public user()
 		{
+			this._users_has_parkplans = new EntitySet<users_has_parkplan>(new Action<users_has_parkplan>(this.attach_users_has_parkplans), new Action<users_has_parkplan>(this.detach_users_has_parkplans));
 			this._activations = new EntitySet<activation>(new Action<activation>(this.attach_activations), new Action<activation>(this.detach_activations));
 			this._ratings = new EntitySet<rating>(new Action<rating>(this.attach_ratings), new Action<rating>(this.detach_ratings));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -1249,6 +1594,19 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_users_has_parkplan", Storage="_users_has_parkplans", ThisKey="id", OtherKey="users_id")]
+		public EntitySet<users_has_parkplan> users_has_parkplans
+		{
+			get
+			{
+				return this._users_has_parkplans;
+			}
+			set
+			{
+				this._users_has_parkplans.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_activation", Storage="_activations", ThisKey="id", OtherKey="users_id")]
 		public EntitySet<activation> activations
 		{
@@ -1293,6 +1651,18 @@ namespace EuroSpaceCenter.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_users_has_parkplans(users_has_parkplan entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_users_has_parkplans(users_has_parkplan entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
 		}
 		
 		private void attach_activations(activation entity)
