@@ -16,9 +16,9 @@ namespace EuroSpaceCenter.Views.Account {
                     password = password.Text
                 };
                 if (users.create(u)) {
-                    output.Text = "goed gememed";
+                    output.Text = "Check your email!";
                 } else {
-                    output.Text = "slecht gememed";
+                    output.Text = "Something didn't work, sorry 😞";
                 }
             }
         }
