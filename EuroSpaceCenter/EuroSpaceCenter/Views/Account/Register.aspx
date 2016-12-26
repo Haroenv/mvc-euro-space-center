@@ -1,13 +1,6 @@
-﻿<%@ Page Language="C#" CodeBehind="Register.aspx.cs" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="EuroSpaceCenter.Views.Account.Register" %>
 
 <!DOCTYPE html>
-<script runat="server">
-
-    protected void submit_Click(object sender, EventArgs e) {
-
-    }
-</script>
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">

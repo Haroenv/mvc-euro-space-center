@@ -9,7 +9,7 @@ namespace EuroSpaceCenter.Models {
             using (var db = new DataClassesDataContext()) {
                 try {
                     var a = new activation();
-                    a.code = util.Random.Words(5);
+                    a.code = util.Rand.String(15);
                     a.users_id = u.id;
                     db.activations.InsertOnSubmit(a);
                     db.SubmitChanges();

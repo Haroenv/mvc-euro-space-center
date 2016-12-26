@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EuroSpaceCenter.Models {
+﻿namespace EuroSpaceCenter.Models {
     public partial class users {
-        public bool create(user u) {
+        public static bool create(user u) {
             using(var db = new DataClassesDataContext()) {
                 try {
                     db.users.InsertOnSubmit(u);
