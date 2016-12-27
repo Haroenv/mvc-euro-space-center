@@ -13,7 +13,8 @@ namespace EuroSpaceCenter.Register {
                 var u = new user() {
                     name = name.Text,
                     email = email.Value.ToString(),
-                    password = password.Text
+                    password = password.Text,
+                    admin = false
                 };
                 try {
                     users.create(u);

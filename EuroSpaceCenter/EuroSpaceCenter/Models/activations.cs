@@ -19,5 +19,22 @@ namespace EuroSpaceCenter.Models {
                 }
             }
         }
+
+        public static bool activate(string code) {
+            using (var db = new DataClassesDataContext()) {
+                try {
+                    var act = db.activations.SingleOrDefault(ac => ac.code == code);
+                    if (act != null) {
+                        db.activations.DeleteOnSubmit(act);
+                        db.SubmitChanges();
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
+            }
+        }
     }
 }

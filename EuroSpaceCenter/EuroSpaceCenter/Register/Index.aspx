@@ -9,7 +9,7 @@
     <link href="/Content/site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,13 +37,17 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
                 <asp:TextBox ID="name" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
+            <asp:RequiredFieldValidator ID="RequiredNameValidator" ControlToValidate="name" runat="server" ErrorMessage="You need to have a name" Display="Dynamic"></asp:RequiredFieldValidator>
         </div>
         <div class="form-group">
             <label for="email" class="control-label">Email address</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
                 <input type="email" name="email" id="email" class="form-control" runat="server" />
+
             </div>
+            <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredEmailValidator" ControlToValidate="email" runat="server" ErrorMessage="You need to have an email address"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionEmailValidator" runat="server" ErrorMessage="This is not a valid email address" ControlToValidate="email" ValidationExpression=".+@.+(\.|:).+" Display="Dynamic"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
             <label for="password" class="control-label">Password</label>
@@ -51,6 +55,7 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
                 <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
+            <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredPasswordValidator" ControlToValidate="password" runat="server" ErrorMessage="You need to have a password"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic" CssClass="form-control-feedback" />
         </div>
         <div class="form-group">
@@ -59,6 +64,8 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
                 <asp:TextBox ID="password1" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
+            <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredPassword1Validator" ControlToValidate="password1" runat="server" ErrorMessage="You need to repeat the password"></asp:RequiredFieldValidator>
+            <asp:CompareValidator ID="PasswordEqualsValidator" ControlToCompare="password" ControlToValidate="password1" runat="server" ErrorMessage="You need to type the password the same twice"></asp:CompareValidator>
         </div>
         <div class="form-group">
             <asp:Button ID="submit" runat="server" Text="Create" CssClass="btn btn-success" OnClick="submit_Click" />

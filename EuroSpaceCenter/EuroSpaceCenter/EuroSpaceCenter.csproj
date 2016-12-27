@@ -152,6 +152,7 @@
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="util\Email.cs" />
+    <Compile Include="util\Flash.cs" />
     <Compile Include="util\Rand.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,15 @@ namespace EuroSpaceCenter.Register {
         protected global::System.Web.UI.WebControls.TextBox name;
         
         /// <summary>
+        /// RequiredNameValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredNameValidator;
+        
+        /// <summary>
         /// email control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,24 @@ namespace EuroSpaceCenter.Register {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl email;
         
         /// <summary>
+        /// RequiredEmailValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredEmailValidator;
+        
+        /// <summary>
+        /// RegularExpressionEmailValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionEmailValidator;
+        
+        /// <summary>
         /// password control.
         /// </summary>
         /// <remarks>
@@ -47,6 +74,15 @@ namespace EuroSpaceCenter.Register {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox password;
+        
+        /// <summary>
+        /// RequiredPasswordValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredPasswordValidator;
         
         /// <summary>
         /// passwordRegex control.
@@ -65,6 +101,24 @@ namespace EuroSpaceCenter.Register {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox password1;
+        
+        /// <summary>
+        /// RequiredPassword1Validator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredPassword1Validator;
+        
+        /// <summary>
+        /// PasswordEqualsValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator PasswordEqualsValidator;
         
         /// <summary>
         /// submit control.
