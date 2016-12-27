@@ -14,7 +14,11 @@ namespace EuroSpaceCenter.Controllers
         {
             if (cat != null) {
                 // zoek categorien
-                ViewBag.Items = items.Get(cat);
+                try {
+                    ViewBag.Items = items.Get(cat);
+                } catch {
+                    ViewBag.Items = items.GetAll();
+                }
             } else {
                 ViewBag.Items = items.GetAll();
             }
