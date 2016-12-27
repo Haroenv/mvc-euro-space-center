@@ -19,7 +19,7 @@
   </Table>
   <Table Name="[haroen.viaeneharoen.viaene].attractions" Member="attractions">
     <Type Name="attraction">
-      <Column Name="item_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="item_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="min_height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="max_height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="item_attraction" Member="item" ThisKey="item_id" OtherKey="id" Type="item" IsForeignKey="true" />
@@ -30,11 +30,13 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="item_attraction" Member="attractions" ThisKey="id" OtherKey="item_id" Type="attraction" />
+      <Column Name="image" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="alt" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="item_attraction" Member="attraction" ThisKey="id" OtherKey="item_id" Type="attraction" Cardinality="One" />
       <Association Name="item_parkplans_has_item" Member="parkplans_has_items" ThisKey="id" OtherKey="items_id" Type="parkplans_has_item" />
       <Association Name="item_rating" Member="ratings" ThisKey="id" OtherKey="items_id" Type="rating" />
-      <Association Name="item_restaurant" Member="restaurants" ThisKey="id" OtherKey="items_id" Type="restaurant" />
-      <Association Name="item_show" Member="shows" ThisKey="id" OtherKey="items_id" Type="show" />
+      <Association Name="item_restaurant" Member="restaurant" ThisKey="id" OtherKey="items_id" Type="restaurant" Cardinality="One" />
+      <Association Name="item_show" Member="show" ThisKey="id" OtherKey="items_id" Type="show" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="[haroen.viaeneharoen.viaene].parkplans" Member="parkplans">
@@ -69,14 +71,14 @@
   </Table>
   <Table Name="[haroen.viaeneharoen.viaene].restaurants" Member="restaurants">
     <Type Name="restaurant">
-      <Column Name="items_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="items_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="payment_type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="item_restaurant" Member="item" ThisKey="items_id" OtherKey="id" Type="item" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="[haroen.viaeneharoen.viaene].shows" Member="shows">
     <Type Name="show">
-      <Column Name="items_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="items_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="datetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="item_show" Member="item" ThisKey="items_id" OtherKey="id" Type="item" IsForeignKey="true" />
     </Type>

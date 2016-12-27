@@ -5,52 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<label for="search">Search</label>
-<input type="search" id="search"/>
-
-<div>
-    @foreach (item i in ViewBag.Items) {
-        <article class="item">
-            <h1>@i.title</h1>
-            <p>@i.description</p>
-        </article>
-    }
-    <button onclick="paginate(5)" role="button">show more</button>
+<div class="form-group">
+    <label for="search">Search</label>
+    <input type="search" id="search" class="form-control"/>
 </div>
+
+<div class="row">
+    @foreach (item i in ViewBag.Items) {
+        <a class="col-md-3 item blocklink" href="/Detail?id=@i.id">
+            <article class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">@i.title</h2>
+                </div>
+                <div class="panel-image">
+                    <img src="@i.image" alt="@i.alt" />
+                </div>
+                <div class="panel-body text-center">
+                    <p>@i.description</p>
+                </div>
+            </article>
+        </a>
+    }
+</div>
+
 
 <script src="https://unpkg.com/holmes.js@1.15.1"></script>
 <script>
-    var MAX = 0;
-
-    function showMore(n) {
-        MAX += n;
-        paginate();
-    }
-
-    var h = new holmes({
+    holmes({
         hiddenAttr: true,
-        find: '.item',
-        placeholder: 'No results',
-        onInput: paginate
+        find: '.item'
     });
-
-    function paginate() {
-        h.elementsArray.forEach(function (el, index) {
-            if (index > MAX) {
-                el.setAttribute("hidden", "true");
-            } else if (!el.classList.contains("hidden")) {
-                el.removeAttribute("hidden");
-            }
-        });
-    }
-
-    function check() {
-        if (h.running) {
-            paginate(5);
-        }
-
-        while (!h.running) {
-            setTimeout(check, 0);
-        }
-    }
 </script>

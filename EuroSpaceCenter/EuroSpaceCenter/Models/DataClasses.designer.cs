@@ -36,6 +36,9 @@ namespace EuroSpaceCenter.Models
     partial void Insertusers_has_parkplan(users_has_parkplan instance);
     partial void Updateusers_has_parkplan(users_has_parkplan instance);
     partial void Deleteusers_has_parkplan(users_has_parkplan instance);
+    partial void Insertattraction(attraction instance);
+    partial void Updateattraction(attraction instance);
+    partial void Deleteattraction(attraction instance);
     partial void Insertitem(item instance);
     partial void Updateitem(item instance);
     partial void Deleteitem(item instance);
@@ -48,6 +51,12 @@ namespace EuroSpaceCenter.Models
     partial void Insertrating(rating instance);
     partial void Updaterating(rating instance);
     partial void Deleterating(rating instance);
+    partial void Insertrestaurant(restaurant instance);
+    partial void Updaterestaurant(restaurant instance);
+    partial void Deleterestaurant(restaurant instance);
+    partial void Insertshow(show instance);
+    partial void Updateshow(show instance);
+    partial void Deleteshow(show instance);
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
@@ -508,8 +517,10 @@ namespace EuroSpaceCenter.Models
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].attractions")]
-	public partial class attraction
+	public partial class attraction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _item_id;
 		
@@ -517,11 +528,27 @@ namespace EuroSpaceCenter.Models
 		
 		private System.Nullable<int> _max_height;
 		
+		private EntityRef<item> _item;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onitem_idChanging(int value);
+    partial void Onitem_idChanged();
+    partial void Onmin_heightChanging(System.Nullable<int> value);
+    partial void Onmin_heightChanged();
+    partial void Onmax_heightChanging(System.Nullable<int> value);
+    partial void Onmax_heightChanged();
+    #endregion
+		
 		public attraction()
 		{
+			this._item = default(EntityRef<item>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_id", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int item_id
 		{
 			get
@@ -532,7 +559,15 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._item_id != value))
 				{
+					if (this._item.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onitem_idChanging(value);
+					this.SendPropertyChanging();
 					this._item_id = value;
+					this.SendPropertyChanged("item_id");
+					this.Onitem_idChanged();
 				}
 			}
 		}
@@ -548,7 +583,11 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._min_height != value))
 				{
+					this.Onmin_heightChanging(value);
+					this.SendPropertyChanging();
 					this._min_height = value;
+					this.SendPropertyChanged("min_height");
+					this.Onmin_heightChanged();
 				}
 			}
 		}
@@ -564,8 +603,66 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._max_height != value))
 				{
+					this.Onmax_heightChanging(value);
+					this.SendPropertyChanging();
 					this._max_height = value;
+					this.SendPropertyChanged("max_height");
+					this.Onmax_heightChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_attraction", Storage="_item", ThisKey="item_id", OtherKey="id", IsForeignKey=true)]
+		public item item
+		{
+			get
+			{
+				return this._item.Entity;
+			}
+			set
+			{
+				item previousValue = this._item.Entity;
+				if (((previousValue != value) 
+							|| (this._item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._item.Entity = null;
+						previousValue.attraction = null;
+					}
+					this._item.Entity = value;
+					if ((value != null))
+					{
+						value.attraction = this;
+						this._item_id = value.id;
+					}
+					else
+					{
+						this._item_id = default(int);
+					}
+					this.SendPropertyChanged("item");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -582,9 +679,19 @@ namespace EuroSpaceCenter.Models
 		
 		private string _description;
 		
+		private string _image;
+		
+		private string _alt;
+		
+		private EntityRef<attraction> _attraction;
+		
 		private EntitySet<parkplans_has_item> _parkplans_has_items;
 		
 		private EntitySet<rating> _ratings;
+		
+		private EntityRef<restaurant> _restaurant;
+		
+		private EntityRef<show> _show;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -596,12 +703,19 @@ namespace EuroSpaceCenter.Models
     partial void OntitleChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
+    partial void OnimageChanging(string value);
+    partial void OnimageChanged();
+    partial void OnaltChanging(string value);
+    partial void OnaltChanged();
     #endregion
 		
 		public item()
 		{
+			this._attraction = default(EntityRef<attraction>);
 			this._parkplans_has_items = new EntitySet<parkplans_has_item>(new Action<parkplans_has_item>(this.attach_parkplans_has_items), new Action<parkplans_has_item>(this.detach_parkplans_has_items));
 			this._ratings = new EntitySet<rating>(new Action<rating>(this.attach_ratings), new Action<rating>(this.detach_ratings));
+			this._restaurant = default(EntityRef<restaurant>);
+			this._show = default(EntityRef<show>);
 			OnCreated();
 		}
 		
@@ -665,6 +779,75 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="NVarChar(MAX)")]
+		public string image
+		{
+			get
+			{
+				return this._image;
+			}
+			set
+			{
+				if ((this._image != value))
+				{
+					this.OnimageChanging(value);
+					this.SendPropertyChanging();
+					this._image = value;
+					this.SendPropertyChanged("image");
+					this.OnimageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_alt", DbType="NVarChar(MAX)")]
+		public string alt
+		{
+			get
+			{
+				return this._alt;
+			}
+			set
+			{
+				if ((this._alt != value))
+				{
+					this.OnaltChanging(value);
+					this.SendPropertyChanging();
+					this._alt = value;
+					this.SendPropertyChanged("alt");
+					this.OnaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_attraction", Storage="_attraction", ThisKey="id", OtherKey="item_id", IsUnique=true, IsForeignKey=false)]
+		public attraction attraction
+		{
+			get
+			{
+				return this._attraction.Entity;
+			}
+			set
+			{
+				attraction previousValue = this._attraction.Entity;
+				if (((previousValue != value) 
+							|| (this._attraction.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._attraction.Entity = null;
+						previousValue.item = null;
+					}
+					this._attraction.Entity = value;
+					if ((value != null))
+					{
+						value.item = this;
+					}
+					this.SendPropertyChanged("attraction");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_parkplans_has_item", Storage="_parkplans_has_items", ThisKey="id", OtherKey="items_id")]
 		public EntitySet<parkplans_has_item> parkplans_has_items
 		{
@@ -688,6 +871,64 @@ namespace EuroSpaceCenter.Models
 			set
 			{
 				this._ratings.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_restaurant", Storage="_restaurant", ThisKey="id", OtherKey="items_id", IsUnique=true, IsForeignKey=false)]
+		public restaurant restaurant
+		{
+			get
+			{
+				return this._restaurant.Entity;
+			}
+			set
+			{
+				restaurant previousValue = this._restaurant.Entity;
+				if (((previousValue != value) 
+							|| (this._restaurant.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._restaurant.Entity = null;
+						previousValue.item = null;
+					}
+					this._restaurant.Entity = value;
+					if ((value != null))
+					{
+						value.item = this;
+					}
+					this.SendPropertyChanged("restaurant");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_show", Storage="_show", ThisKey="id", OtherKey="items_id", IsUnique=true, IsForeignKey=false)]
+		public show show
+		{
+			get
+			{
+				return this._show.Entity;
+			}
+			set
+			{
+				show previousValue = this._show.Entity;
+				if (((previousValue != value) 
+							|| (this._show.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._show.Entity = null;
+						previousValue.item = null;
+					}
+					this._show.Entity = value;
+					if ((value != null))
+					{
+						value.item = this;
+					}
+					this.SendPropertyChanged("show");
+				}
 			}
 		}
 		
@@ -1359,19 +1600,35 @@ namespace EuroSpaceCenter.Models
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].restaurants")]
-	public partial class restaurant
+	public partial class restaurant : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<int> _items_id;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _items_id;
 		
 		private string _payment_type;
 		
+		private EntityRef<item> _item;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onitems_idChanging(int value);
+    partial void Onitems_idChanged();
+    partial void Onpayment_typeChanging(string value);
+    partial void Onpayment_typeChanged();
+    #endregion
+		
 		public restaurant()
 		{
+			this._item = default(EntityRef<item>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int")]
-		public System.Nullable<int> items_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int items_id
 		{
 			get
 			{
@@ -1381,7 +1638,15 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._items_id != value))
 				{
+					if (this._item.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onitems_idChanging(value);
+					this.SendPropertyChanging();
 					this._items_id = value;
+					this.SendPropertyChanged("items_id");
+					this.Onitems_idChanged();
 				}
 			}
 		}
@@ -1397,25 +1662,99 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._payment_type != value))
 				{
+					this.Onpayment_typeChanging(value);
+					this.SendPropertyChanging();
 					this._payment_type = value;
+					this.SendPropertyChanged("payment_type");
+					this.Onpayment_typeChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_restaurant", Storage="_item", ThisKey="items_id", OtherKey="id", IsForeignKey=true)]
+		public item item
+		{
+			get
+			{
+				return this._item.Entity;
+			}
+			set
+			{
+				item previousValue = this._item.Entity;
+				if (((previousValue != value) 
+							|| (this._item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._item.Entity = null;
+						previousValue.restaurant = null;
+					}
+					this._item.Entity = value;
+					if ((value != null))
+					{
+						value.restaurant = this;
+						this._items_id = value.id;
+					}
+					else
+					{
+						this._items_id = default(int);
+					}
+					this.SendPropertyChanged("item");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].shows")]
-	public partial class show
+	public partial class show : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _items_id;
 		
 		private System.Nullable<System.DateTime> _datetime;
 		
+		private EntityRef<item> _item;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onitems_idChanging(int value);
+    partial void Onitems_idChanged();
+    partial void OndatetimeChanging(System.Nullable<System.DateTime> value);
+    partial void OndatetimeChanged();
+    #endregion
+		
 		public show()
 		{
+			this._item = default(EntityRef<item>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int items_id
 		{
 			get
@@ -1426,7 +1765,15 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._items_id != value))
 				{
+					if (this._item.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onitems_idChanging(value);
+					this.SendPropertyChanging();
 					this._items_id = value;
+					this.SendPropertyChanged("items_id");
+					this.Onitems_idChanged();
 				}
 			}
 		}
@@ -1442,8 +1789,66 @@ namespace EuroSpaceCenter.Models
 			{
 				if ((this._datetime != value))
 				{
+					this.OndatetimeChanging(value);
+					this.SendPropertyChanging();
 					this._datetime = value;
+					this.SendPropertyChanged("datetime");
+					this.OndatetimeChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_show", Storage="_item", ThisKey="items_id", OtherKey="id", IsForeignKey=true)]
+		public item item
+		{
+			get
+			{
+				return this._item.Entity;
+			}
+			set
+			{
+				item previousValue = this._item.Entity;
+				if (((previousValue != value) 
+							|| (this._item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._item.Entity = null;
+						previousValue.show = null;
+					}
+					this._item.Entity = value;
+					if ((value != null))
+					{
+						value.show = this;
+						this._items_id = value.id;
+					}
+					else
+					{
+						this._items_id = default(int);
+					}
+					this.SendPropertyChanged("item");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

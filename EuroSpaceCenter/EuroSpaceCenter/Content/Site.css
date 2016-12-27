@@ -39,3 +39,9 @@ img {
     background-image: url("http://www.eurospacecenter.be/sites/default/files/jumbotron/esc_jumbo_hp_2220x700.jpg");
     color: white;
 }
+
+/* a whole block which is a link */
+a.blocklink {
+    color: inherit;
+    text-decoration: none;
+}
