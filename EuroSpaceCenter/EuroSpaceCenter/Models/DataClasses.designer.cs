@@ -30,12 +30,12 @@ namespace EuroSpaceCenter.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertusers_has_parkplan(users_has_parkplan instance);
-    partial void Updateusers_has_parkplan(users_has_parkplan instance);
-    partial void Deleteusers_has_parkplan(users_has_parkplan instance);
     partial void Insertactivation(activation instance);
     partial void Updateactivation(activation instance);
     partial void Deleteactivation(activation instance);
+    partial void Insertusers_has_parkplan(users_has_parkplan instance);
+    partial void Updateusers_has_parkplan(users_has_parkplan instance);
+    partial void Deleteusers_has_parkplan(users_has_parkplan instance);
     partial void Insertitem(item instance);
     partial void Updateitem(item instance);
     partial void Deleteitem(item instance);
@@ -83,19 +83,19 @@ namespace EuroSpaceCenter.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<users_has_parkplan> users_has_parkplans
-		{
-			get
-			{
-				return this.GetTable<users_has_parkplan>();
-			}
-		}
-		
 		public System.Data.Linq.Table<activation> activations
 		{
 			get
 			{
 				return this.GetTable<activation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<users_has_parkplan> users_has_parkplans
+		{
+			get
+			{
+				return this.GetTable<users_has_parkplan>();
 			}
 		}
 		
@@ -160,6 +160,157 @@ namespace EuroSpaceCenter.Models
 			get
 			{
 				return this.GetTable<user>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].activations")]
+	public partial class activation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _code;
+		
+		private System.Nullable<int> _users_id;
+		
+		private EntityRef<user> _user;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OncodeChanging(string value);
+    partial void OncodeChanged();
+    partial void Onusers_idChanging(System.Nullable<int> value);
+    partial void Onusers_idChanged();
+    #endregion
+		
+		public activation()
+		{
+			this._user = default(EntityRef<user>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_code", DbType="NVarChar(50)")]
+		public string code
+		{
+			get
+			{
+				return this._code;
+			}
+			set
+			{
+				if ((this._code != value))
+				{
+					this.OncodeChanging(value);
+					this.SendPropertyChanging();
+					this._code = value;
+					this.SendPropertyChanged("code");
+					this.OncodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_id", DbType="Int")]
+		public System.Nullable<int> users_id
+		{
+			get
+			{
+				return this._users_id;
+			}
+			set
+			{
+				if ((this._users_id != value))
+				{
+					if (this._user.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onusers_idChanging(value);
+					this.SendPropertyChanging();
+					this._users_id = value;
+					this.SendPropertyChanged("users_id");
+					this.Onusers_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_activation", Storage="_user", ThisKey="users_id", OtherKey="id", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.activations.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.activations.Add(this);
+						this._users_id = value.id;
+					}
+					else
+					{
+						this._users_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("user");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -329,157 +480,6 @@ namespace EuroSpaceCenter.Models
 					else
 					{
 						this._users_id = default(int);
-					}
-					this.SendPropertyChanged("user");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].activations")]
-	public partial class activation : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _code;
-		
-		private System.Nullable<int> _users_id;
-		
-		private EntityRef<user> _user;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OncodeChanging(string value);
-    partial void OncodeChanged();
-    partial void Onusers_idChanging(System.Nullable<int> value);
-    partial void Onusers_idChanged();
-    #endregion
-		
-		public activation()
-		{
-			this._user = default(EntityRef<user>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_code", DbType="NVarChar(50)")]
-		public string code
-		{
-			get
-			{
-				return this._code;
-			}
-			set
-			{
-				if ((this._code != value))
-				{
-					this.OncodeChanging(value);
-					this.SendPropertyChanging();
-					this._code = value;
-					this.SendPropertyChanged("code");
-					this.OncodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_id", DbType="Int")]
-		public System.Nullable<int> users_id
-		{
-			get
-			{
-				return this._users_id;
-			}
-			set
-			{
-				if ((this._users_id != value))
-				{
-					if (this._user.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onusers_idChanging(value);
-					this.SendPropertyChanging();
-					this._users_id = value;
-					this.SendPropertyChanged("users_id");
-					this.Onusers_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_activation", Storage="_user", ThisKey="users_id", OtherKey="id", IsForeignKey=true)]
-		public user user
-		{
-			get
-			{
-				return this._user.Entity;
-			}
-			set
-			{
-				user previousValue = this._user.Entity;
-				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._user.Entity = null;
-						previousValue.activations.Remove(this);
-					}
-					this._user.Entity = value;
-					if ((value != null))
-					{
-						value.activations.Add(this);
-						this._users_id = value.id;
-					}
-					else
-					{
-						this._users_id = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("user");
 				}
@@ -1464,9 +1464,11 @@ namespace EuroSpaceCenter.Models
 		
 		private bool _admin;
 		
-		private EntitySet<users_has_parkplan> _users_has_parkplans;
+		private bool _verified;
 		
 		private EntitySet<activation> _activations;
+		
+		private EntitySet<users_has_parkplan> _users_has_parkplans;
 		
 		private EntitySet<rating> _ratings;
 		
@@ -1484,12 +1486,14 @@ namespace EuroSpaceCenter.Models
     partial void OnpasswordChanged();
     partial void OnadminChanging(bool value);
     partial void OnadminChanged();
+    partial void OnverifiedChanging(bool value);
+    partial void OnverifiedChanged();
     #endregion
 		
 		public user()
 		{
-			this._users_has_parkplans = new EntitySet<users_has_parkplan>(new Action<users_has_parkplan>(this.attach_users_has_parkplans), new Action<users_has_parkplan>(this.detach_users_has_parkplans));
 			this._activations = new EntitySet<activation>(new Action<activation>(this.attach_activations), new Action<activation>(this.detach_activations));
+			this._users_has_parkplans = new EntitySet<users_has_parkplan>(new Action<users_has_parkplan>(this.attach_users_has_parkplans), new Action<users_has_parkplan>(this.detach_users_has_parkplans));
 			this._ratings = new EntitySet<rating>(new Action<rating>(this.attach_ratings), new Action<rating>(this.detach_ratings));
 			OnCreated();
 		}
@@ -1514,7 +1518,7 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(250)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
 		public string name
 		{
 			get
@@ -1554,7 +1558,7 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(250)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
 		public string password
 		{
 			get
@@ -1594,16 +1598,23 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_users_has_parkplan", Storage="_users_has_parkplans", ThisKey="id", OtherKey="users_id")]
-		public EntitySet<users_has_parkplan> users_has_parkplans
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verified", DbType="Bit NOT NULL")]
+		public bool verified
 		{
 			get
 			{
-				return this._users_has_parkplans;
+				return this._verified;
 			}
 			set
 			{
-				this._users_has_parkplans.Assign(value);
+				if ((this._verified != value))
+				{
+					this.OnverifiedChanging(value);
+					this.SendPropertyChanging();
+					this._verified = value;
+					this.SendPropertyChanged("verified");
+					this.OnverifiedChanged();
+				}
 			}
 		}
 		
@@ -1617,6 +1628,19 @@ namespace EuroSpaceCenter.Models
 			set
 			{
 				this._activations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_users_has_parkplan", Storage="_users_has_parkplans", ThisKey="id", OtherKey="users_id")]
+		public EntitySet<users_has_parkplan> users_has_parkplans
+		{
+			get
+			{
+				return this._users_has_parkplans;
+			}
+			set
+			{
+				this._users_has_parkplans.Assign(value);
 			}
 		}
 		
@@ -1653,18 +1677,6 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		private void attach_users_has_parkplans(users_has_parkplan entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = this;
-		}
-		
-		private void detach_users_has_parkplans(users_has_parkplan entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = null;
-		}
-		
 		private void attach_activations(activation entity)
 		{
 			this.SendPropertyChanging();
@@ -1672,6 +1684,18 @@ namespace EuroSpaceCenter.Models
 		}
 		
 		private void detach_activations(activation entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
+		}
+		
+		private void attach_users_has_parkplans(users_has_parkplan entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_users_has_parkplans(users_has_parkplan entity)
 		{
 			this.SendPropertyChanging();
 			entity.user = null;
@@ -1688,6 +1712,6 @@ namespace EuroSpaceCenter.Models
 			this.SendPropertyChanging();
 			entity.user = null;
 		}
-    }
+	}
 }
 #pragma warning restore 1591

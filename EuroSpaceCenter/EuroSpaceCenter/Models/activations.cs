@@ -25,6 +25,7 @@ namespace EuroSpaceCenter.Models {
                 try {
                     var act = db.activations.SingleOrDefault(ac => ac.code == code);
                     if (act != null) {
+                        act.user.verified = true;
                         db.activations.DeleteOnSubmit(act);
                         db.SubmitChanges();
                         return true;

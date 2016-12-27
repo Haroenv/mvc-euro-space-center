@@ -31,3 +31,11 @@ img {
     	font-weight: normal;
 	font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
 }
+
+/* background for jumbo */
+.jumbotron {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("http://www.eurospacecenter.be/sites/default/files/jumbotron/esc_jumbo_hp_2220x700.jpg");
+    color: white;
+}

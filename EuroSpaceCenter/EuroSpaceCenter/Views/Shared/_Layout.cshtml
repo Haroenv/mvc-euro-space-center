@@ -23,6 +23,9 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.IsInRole("admin")) {
+                        <li>@Html.ActionLink("Admin", "Index", "Home")</li>
+                    }
                 </ul>
                 @if (User.Identity.IsAuthenticated) {
                     <ul class="nav navbar-nav navbar-right">

@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="haroen.viaeneeurospacecenter" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=10.129.28.188\SQL_WEBSPACES;Initial Catalog=haroen.viaeneeurospacecenter;Persist Security Info=True;User ID=haroen.viaeneharoen.viaene" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="haroen_viaeneeurospacecenterConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="[haroen.viaeneharoen.viaene].activations" Member="activations">
+    <Type Name="activation">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="user_activation" Member="user" ThisKey="users_id" OtherKey="id" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="[haroen.viaeneharoen.viaene].users_has_parkplans" Member="users_has_parkplans">
     <Type Name="users_has_parkplan">
       <Column Name="accepted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
@@ -7,14 +15,6 @@
       <Column Name="parkplans_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="parkplan_users_has_parkplan" Member="parkplan" ThisKey="parkplans_id" OtherKey="id" Type="parkplan" IsForeignKey="true" />
       <Association Name="user_users_has_parkplan" Member="user" ThisKey="users_id" OtherKey="id" Type="user" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="[haroen.viaeneharoen.viaene].activations" Member="activations">
-    <Type Name="activation">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="user_activation" Member="user" ThisKey="users_id" OtherKey="id" Type="user" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="[haroen.viaeneharoen.viaene].attractions" Member="attractions">
@@ -84,12 +84,13 @@
   <Table Name="[haroen.viaeneharoen.viaene].users" Member="users">
     <Type Name="user">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="admin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="user_users_has_parkplan" Member="users_has_parkplans" ThisKey="id" OtherKey="users_id" Type="users_has_parkplan" />
+      <Column Name="verified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="user_activation" Member="activations" ThisKey="id" OtherKey="users_id" Type="activation" />
+      <Association Name="user_users_has_parkplan" Member="users_has_parkplans" ThisKey="id" OtherKey="users_id" Type="users_has_parkplan" />
       <Association Name="user_rating" Member="ratings" ThisKey="id" OtherKey="users_id" Type="rating" />
     </Type>
   </Table>
