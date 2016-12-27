@@ -16,7 +16,7 @@
             @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="input-group">
-                    <span class="input-group-addon" id="sizing-addon2">@@</span>
+                    <span class="input-group-addon" id="sizing-addon2"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
                     @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", aria_describedby = "sizing-addon2" } })
                 </div>
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })

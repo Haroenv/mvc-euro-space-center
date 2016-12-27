@@ -1688,6 +1688,6 @@ namespace EuroSpaceCenter.Models
 			this.SendPropertyChanging();
 			entity.user = null;
 		}
-	}
+    }
 }
 #pragma warning restore 1591

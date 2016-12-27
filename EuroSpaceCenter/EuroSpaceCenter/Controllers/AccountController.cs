@@ -10,8 +10,51 @@ using System.Web.Security;
 namespace EuroSpaceCenter.Controllers {
     public class AccountController : Controller {
         // GET: Account
+        [Authorize]
         public ActionResult Index() {
-            return View();
+            return View(users.Get(User.Identity.Name));
+        }
+
+        // POST: Account
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(user u) {
+            var active = users.Get(User.Identity.Name);
+            try {
+                if (ModelState.IsValid) {
+                    users.Update(active, u);
+                    FormsAuthentication.SetAuthCookie(u.email, false);
+                    Flash.Set(TempData, "Information edited.");
+                    return View(u);
+                }
+                return View(u);
+            } catch {
+                Flash.Set(TempData, "Something went wrong");
+                return View(u);
+            }
+            
+        }
+
+        // POST: Account/Password
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Password(user u) {
+            var active = users.Get(User.Identity.Name);
+            try {
+                if (ModelState.IsValid) {
+                    users.Update(active, u);
+                    FormsAuthentication.SetAuthCookie(u.email, false);
+                    Flash.Set(TempData, "Password edited.");
+                    return View(u);
+                }
+                return View(u);
+            } catch {
+                Flash.Set(TempData, "Something went wrong");
+                return View(u);
+            }
+
         }
 
         // GET: Account/Login
@@ -19,19 +62,27 @@ namespace EuroSpaceCenter.Controllers {
             return View();
         }
 
+        // POST: Account/Login
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(user u) {
             if (ModelState.IsValid) {
                 user active = users.Get(u.email, u.password);
                 if (active != null) {
                     FormsAuthentication.SetAuthCookie(active.email, false);
-                    Flash.Set(TempData, User.Identity.IsAuthenticated + User.Identity.Name);
                     return Redirect("/");
                 } else {
                     ModelState.AddModelError(String.Empty, "Oops! A mistake happened");
                 }
             }
             return View(u);
+        }
+
+        // GET Account/Logout
+        public ActionResult Logout() {
+            FormsAuthentication.SignOut();
+            Flash.Set(TempData, "Logged out 👋");
+            return Redirect("/");
         }
 
         // GET: Account/Register
