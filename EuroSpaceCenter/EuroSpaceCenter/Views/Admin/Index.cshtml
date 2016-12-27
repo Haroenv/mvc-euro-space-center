@@ -1,0 +1,40 @@
+﻿@using EuroSpaceCenter.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Admin <span class="emoji">🕶</span></h2>
+
+<a href="/Admin/Create" class="btn btn-success">New Item</a>
+
+<section>
+    <h3>Attractions</h3>
+    <a href="/Admin/Create/attraction" class="btn btn-success">New attraction</a>
+    <ul>
+        @foreach (item i in ViewBag.Attractions) {
+            <li><a class="item" href="/Detail?id=@i.id">@i.title</a></li>
+        }
+    </ul>
+</section>
+
+<section>
+    <h3>Shows</h3>
+    <a href="/Admin/Create/show" class="btn btn-success">New show</a>
+    <ul>
+        @foreach (item i in ViewBag.Shows) {
+            <li><a class="item" href="/Detail?id=@i.id">@i.title</a></li>
+        }
+    </ul>
+</section>
+
+<section>
+    <h3>Restaurants</h3>
+    <a href="/Admin/Create/restaurant" class="btn btn-success">New restaurant</a>
+    <ul>
+        @foreach (item i in ViewBag.Restaurants) {
+            <li><a class="item" href="/Detail?id=@i.id">@i.title</a></li>
+        }
+    </ul>
+</section>
