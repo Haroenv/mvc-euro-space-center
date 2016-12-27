@@ -12,7 +12,9 @@ namespace EuroSpaceCenter.Controllers {
         // GET: Account
         [Authorize]
         public ActionResult Index() {
-            return View(users.Get(User.Identity.Name));
+            var u = users.Get(User.Identity.Name);
+            u.password = "";
+            return View(u);
         }
 
         // POST: Account
@@ -33,7 +35,6 @@ namespace EuroSpaceCenter.Controllers {
                 Flash.Set(TempData, "Something went wrong");
                 return View(u);
             }
-            
         }
 
         // POST: Account/Password
@@ -43,16 +44,17 @@ namespace EuroSpaceCenter.Controllers {
         public ActionResult Password(user u) {
             var active = users.Get(User.Identity.Name);
             try {
-                if (ModelState.IsValid) {
-                    users.Update(active, u);
-                    FormsAuthentication.SetAuthCookie(u.email, false);
-                    Flash.Set(TempData, "Password edited.");
-                    return View(u);
+                if (Request.Form.Get("password1") != u.password) {
+                    ModelState.AddModelError(String.Empty, "Passwords don't match");
                 }
-                return View(u);
-            } catch {
-                Flash.Set(TempData, "Something went wrong");
-                return View(u);
+                if (ModelState.IsValid) {
+                    users.SetPassword(User.Identity.Name, u.password);
+                    Flash.Set(TempData, "Password edited.");
+                }
+                return View("Index", active);
+            } catch (Exception e) {
+                Flash.Set(TempData, "Something went wrong " + e);
+                return View("Index", active);
             }
 
         }

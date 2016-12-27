@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Application name</a>
+                <a class="navbar-brand" href="/">Euro Space Center 🚀</a>
             </div>
             <nav class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

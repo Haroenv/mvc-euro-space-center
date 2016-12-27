@@ -16,8 +16,8 @@
             @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="input-group">
-                    <span class="input-group-addon" id="sizing-addon2"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
-                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", aria_describedby = "sizing-addon2" } })
+                    <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-envelope"></i></span>
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control"} })
                 </div>
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
             </div>
@@ -27,8 +27,8 @@
             @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", aria_describedby = "sizing-addon2", @type = "password" } })
+                    <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-lock"></i></span>
+                    @Html.PasswordFor(model => model.password, new { @class = "form-control"})
                 </div>
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>

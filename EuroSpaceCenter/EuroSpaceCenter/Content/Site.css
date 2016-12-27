@@ -17,3 +17,17 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* make images not overflow */
+img {
+    max-width: 100%;
+}
+
+.panel-image img {
+    width: 100%;
+}
+
+.emoji {
+    	font-weight: normal;
+	font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
+}
