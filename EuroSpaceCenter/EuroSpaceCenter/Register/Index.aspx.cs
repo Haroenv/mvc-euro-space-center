@@ -1,6 +1,7 @@
 ﻿using EuroSpaceCenter.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,6 +20,8 @@ namespace EuroSpaceCenter.Register {
                 try {
                     users.create(u);
                     output.Text = "Check your email!";
+                } catch (SqlException) {
+                    output.Text = "This account has already been made";
                 } catch {
                     output.Text = "Something didn't work, sorry 😞";
                 }
