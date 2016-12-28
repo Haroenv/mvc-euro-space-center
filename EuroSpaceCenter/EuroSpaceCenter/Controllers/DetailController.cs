@@ -18,7 +18,7 @@ namespace EuroSpaceCenter.Controllers {
                 return Redirect("/Search");
             }
             ViewBag.id = id;
-            ViewBag.Ratings = rating.Get(id);
+            ViewBag.Ratings = rating.Get((int)id);
             return View(i);
         }
 
