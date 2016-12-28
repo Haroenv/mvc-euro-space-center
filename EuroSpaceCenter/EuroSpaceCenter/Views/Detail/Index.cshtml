@@ -1,4 +1,5 @@
-﻿@model EuroSpaceCenter.Models.item
+﻿@using EuroSpaceCenter.Models
+@model item
 
 @{
     ViewBag.Title = Model.title;
@@ -7,7 +8,7 @@
 
 <h2>@Model.title</h2>
 <p>@Model.description</p>
-<img src="@Model.image" alt="@Model.alt"/>
+<img src="@Model.image" alt="@Model.alt" />
 
 @using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
     @Html.AntiForgeryToken()
@@ -15,4 +16,28 @@
         @Html.Button("add to my plan", new { @class = "btn btn-success", id = "add" })
         <p class="help-block">Add this item to your park plan <span class="emoji">🗺</span></p>
     </div>
+}
+
+@using (Html.BeginForm("Rate", "Detail", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="message">Message</label>
+        @Html.TextArea("message", new { @class = "form-control", required = "required" })
+    </div>
+    <div class="form-group">
+        <label for="rating">Rating</label>
+        <input type="range" min="1" max="5" step="1" name="rating" id="rating" class="form-control" oninput="this.dataset.value = this.value" required />
+    </div>
+    <div class="form-group">
+        @Html.Button("review", new { @class = "btn" })
+    </div>
+    <input type="hidden" name="items_id" value="@ViewBag.id" id="items_id" />
+}
+
+@foreach (rating r in ViewBag.Ratings) {
+    <article>
+        <h1>@r.rating1 / 5</h1>
+        <p>@r.user.name</p>
+        <p>@r.message</p>
+    </article>
 }

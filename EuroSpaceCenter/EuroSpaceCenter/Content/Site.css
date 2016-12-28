@@ -45,3 +45,18 @@ a.blocklink {
     color: inherit;
     text-decoration: none;
 }
+
+input[type=range] {
+    box-shadow: none;
+    padding: 6px 0;
+}
+
+input[type=range]:active, input[type=range]:focus {
+    box-shadow: none;
+}
+
+input[type=range]:after {
+    content: attr(data-value);
+    transform: translateY(2em);
+    display: block;
+}
