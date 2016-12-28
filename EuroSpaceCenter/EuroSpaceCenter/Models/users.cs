@@ -14,7 +14,7 @@ namespace EuroSpaceCenter.Models {
                     if (a == null) {
                         return false;
                     }
-                    return util.Email.sendInvite(u, a);
+                    return util.Email.sendVerification(u, a);
                 } catch (Exception e) {
                     throw e;
                 }
