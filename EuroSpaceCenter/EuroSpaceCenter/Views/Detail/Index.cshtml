@@ -35,10 +35,8 @@
     <input type="hidden" name="items_id" value="@ViewBag.id" id="items_id" />
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <h3>Ratings</h3>
-    </div>
+<section id="ratings">
+    <h3>Ratings</h3>
     <div class="row">
         @foreach (rating r in ViewBag.Ratings) {
             <div class="col-sm-1">
@@ -48,9 +46,11 @@
             </div>
             <div class="col-sm-5">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>@r.user.name</strong>
-                        @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left">
+                            <strong>@r.user.name</strong>
+                            @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
+                        </div>
                         <strong class="pull-right sr-only" data-rating="@r.rating1">@r.rating1 / 5</strong>
                     </div>
                     <div class="panel-body">
@@ -60,7 +60,7 @@
             </div>
         }
     </div>
-</div>
+</section>
 <script>
     NodeList.prototype.forEach = Array.prototype.forEach; // polyfill
     var ratings = document.querySelectorAll('[data-rating]');
