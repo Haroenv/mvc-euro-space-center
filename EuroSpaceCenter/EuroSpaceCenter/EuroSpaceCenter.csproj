@@ -159,6 +159,7 @@
     <Compile Include="util\Email.cs" />
     <Compile Include="util\Encryption.cs" />
     <Compile Include="util\Flash.cs" />
+    <Compile Include="util\HtmlButtonExtension.cs" />
     <Compile Include="util\Provider.cs" />
     <Compile Include="util\Rand.cs" />
   </ItemGroup>
