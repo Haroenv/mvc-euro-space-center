@@ -36,6 +36,42 @@ namespace EuroSpaceCenter.Controllers {
             return View(i);
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(attraction i) {
+        //    if (ModelState.IsValid) {
+        //        attraction result = attraction.Create(i);
+        //        Flash.Set(TempData, "Created 🍻");
+        //        return RedirectToAction("Index", "Detail", i.id);
+        //    }
+        //    Flash.Set(TempData, "oops! 😬");
+        //    return View(i);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(show i) {
+        //    if (ModelState.IsValid) {
+        //        show result = show.Create(i);
+        //        Flash.Set(TempData, "Created 🍻");
+        //        return RedirectToAction("Index", "Detail", i.id);
+        //    }
+        //    Flash.Set(TempData, "oops! 😬");
+        //    return View(i);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(restaurant i) {
+        //    if (ModelState.IsValid) {
+        //        restaurant result = restaurant.Create(i);
+        //        Flash.Set(TempData, "Created 🍻");
+        //        return RedirectToAction("Index", "Detail", i.id);
+        //    }
+        //    Flash.Set(TempData, "oops! 😬");
+        //    return View(i);
+        //}
+
         public ActionResult Extra(string category) {
             ViewBag.category = category;
             return PartialView();
