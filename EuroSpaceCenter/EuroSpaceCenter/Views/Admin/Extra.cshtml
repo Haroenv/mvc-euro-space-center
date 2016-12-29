@@ -25,6 +25,12 @@
             <p class="help-block">The moment when this show is going on.</p>
             <p class="help-block">Recurring shows are currently not supported</p>
         </div>
+        <link href="https://unpkg.com/jquery-datetimepicker@2.5.4/build/jquery.datetimepicker.min.css" rel="stylesheet"/>
+        <script async defer>
+            $.getScript("https://unpkg.com/jquery-datetimepicker@2.5.4/build/jquery.datetimepicker.full.min.js", function () {
+                $('#datetime').datetimepicker();
+            })
+        </script>
         break;
     default:
         <div class="form-group">
