@@ -19,6 +19,7 @@ namespace EuroSpaceCenter.Controllers {
             }
             ViewBag.id = id;
             ViewBag.Ratings = rating.Get((int)id);
+            ViewBag.Rating = new rating();
             return View(i);
         }
 
@@ -28,11 +29,19 @@ namespace EuroSpaceCenter.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Rate(rating r) {
             try {
-                r.users_id = user.Get(User.Identity.Name).id;
-                r.datetime = DateTime.Now;
-                rating.Rate(r);
-                Flash.Set(TempData, "Rated! 🍾");
-                return Redirect("/Detail?id=" + r.items_id);
+                if (ModelState.IsValid) {
+                    r.users_id = user.Get(User.Identity.Name).id;
+                    r.datetime = DateTime.Now;
+                    rating.Rate(r);
+                    Flash.Set(TempData, "Rated! 🍾");
+                    return Redirect("/Detail?id=" + r.items_id);
+                }
+                item i = item.Get(r.items_id);
+                ViewBag.Ratings = rating.Get(r.items_id);
+                ViewBag.id = r.items_id;
+                ViewBag.Rating = r;
+                Flash.Set(TempData, "You forgot to fill in something 😧");
+                return View("Index", i);
             } catch {
                 Flash.Set(TempData, "Something went wrong 😕");
                 return Redirect("/Detail?id=" + r.items_id);
