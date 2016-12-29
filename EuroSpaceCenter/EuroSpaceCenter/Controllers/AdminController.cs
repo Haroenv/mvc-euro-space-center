@@ -18,7 +18,8 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         // GET: Admin/Create
-        public ActionResult Create(string type) {
+        public ActionResult Create(string id) {
+            ViewBag.category = id;
             return View();
         }
 
