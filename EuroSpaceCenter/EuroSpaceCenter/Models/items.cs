@@ -27,6 +27,21 @@ namespace EuroSpaceCenter.Models {
             }
         }
 
+        internal static item Create(item i) {
+            using (var db = new DataClassesDataContext()) {
+                if (i.attraction != null) {
+                    db.attractions.InsertOnSubmit(i.attraction);
+                } else if (i.show != null) {
+                    db.shows.InsertOnSubmit(i.show);
+                } else if (i.restaurant != null) {
+                    db.restaurants.InsertOnSubmit(i.restaurant);
+                }
+                db.items.InsertOnSubmit(i);
+                db.SubmitChanges();
+                return i;
+            }
+        }
+
         internal static List<item> GetAll() {
             using (var db = new DataClassesDataContext()) {
                 return db.items.ToList();

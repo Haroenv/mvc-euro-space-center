@@ -19,7 +19,6 @@ namespace EuroSpaceCenter.Controllers {
 
         // GET: Admin/Create
         public ActionResult Create(string type) {
-            
             return View();
         }
 
@@ -34,6 +33,11 @@ namespace EuroSpaceCenter.Controllers {
             }
             Flash.Set(TempData, "oops! 😬");
             return View(i);
+        }
+
+        public ActionResult Extra(string category) {
+            ViewBag.category = category;
+            return PartialView();
         }
     }
 }

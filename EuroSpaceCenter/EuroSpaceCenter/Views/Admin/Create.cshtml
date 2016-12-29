@@ -1,0 +1,61 @@
+﻿@model EuroSpaceCenter.Models.item
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create a new item</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(i => i.title)
+        @Html.EditorFor(i => i.title, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.description)
+        @Html.TextAreaFor(i => i.description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.image)
+        @Html.EditorFor(i => i.image, new { htmlAttributes = new { @class = "form-control", inputmode = "url", placeholder = "url to the image of this item", oninput = "preview.src = this.value" } })
+        <label for="preview">preview</label>
+        <img class="img-responsive" id="preview" />
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.alt)
+        @Html.EditorFor(i => i.alt, new { htmlAttributes = new { @class = "form-control", placeholder = "description of the image for non-sighted users" } })
+    </div>
+    <div class="form-group">
+        <label for="category">category</label>
+        <select id="category" name="category" class="form-control">
+            <option value="null">-- pick a category --</option>
+            <option value="attraction">Attraction</option>
+            <option value="show">Show</option>
+            <option value="restaurant">Restaurant</option>
+        </select>
+    </div>
+    <div id="extra" class="form-group"></div>
+    <div class="form-group">
+        @Html.Button("create 📝", new { @class = "btn btn-primary" })
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#category").on("input", function () {
+                $("#extra").load(
+                    "@Url.Action("Extra","Admin")",
+                    { 'category': $('#category').val() },
+                    function (response, status, xhr) {
+                        if (status == "error") {
+                            alert("An error occurred while loading the results.");
+                        }
+                    });
+            });
+        });
+    </script>
+}

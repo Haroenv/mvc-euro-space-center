@@ -7,7 +7,7 @@
 
 <div class="form-group">
     <label for="search">Search</label>
-    <input type="search" id="search" class="form-control"/>
+    <input type="search" id="search" class="form-control" />
 </div>
 
 <div class="row">
@@ -29,10 +29,13 @@
 </div>
 
 
-<script src="https://unpkg.com/holmes.js@1.15.1"></script>
-<script>
-    holmes({
-        hiddenAttr: true,
-        find: '.item'
-    });
-</script>
+@section scripts {
+    @* loaded over CDN, thus better than downloading it here *@
+    <script src="https://unpkg.com/holmes.js@1.15.1"></script>
+    <script>
+        holmes({
+            hiddenAttr: true,
+            find: '.item'
+        });
+    </script>
+}
