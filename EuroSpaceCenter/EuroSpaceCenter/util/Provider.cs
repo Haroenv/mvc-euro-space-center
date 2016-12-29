@@ -9,7 +9,7 @@ namespace EuroSpaceCenter.util {
     public class Provider : RoleProvider {
 
         public override bool IsUserInRole(string username, string roleName) {
-            user u = users.Get(username);
+            user u = user.Get(username);
             if (roleName == "admin") {
                 return u.admin;
             }
@@ -17,7 +17,7 @@ namespace EuroSpaceCenter.util {
         }
 
         public override string[] GetRolesForUser(string username) {
-            user u = users.Get(username);
+            user u = user.Get(username);
             if (u.admin) {
                 return new string[] { "admin" };
             }

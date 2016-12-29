@@ -12,7 +12,7 @@ namespace EuroSpaceCenter.Controllers {
         // GET: Account
         [Authorize]
         public ActionResult Index() {
-            var u = users.Get(User.Identity.Name);
+            var u = user.Get(User.Identity.Name);
             u.password = "";
             return View(u);
         }
@@ -22,10 +22,10 @@ namespace EuroSpaceCenter.Controllers {
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Index(user u) {
-            var active = users.Get(User.Identity.Name);
+            var active = user.Get(User.Identity.Name);
             try {
                 if (ModelState.IsValid) {
-                    users.Update(active, u);
+                    user.Update(active, u);
                     FormsAuthentication.SetAuthCookie(u.email, false);
                     Flash.Set(TempData, "Information edited.");
                     return View(u);
@@ -42,13 +42,13 @@ namespace EuroSpaceCenter.Controllers {
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Password(user u) {
-            var active = users.Get(User.Identity.Name);
+            var active = user.Get(User.Identity.Name);
             try {
                 if (Request.Form.Get("password1") != u.password) {
                     ModelState.AddModelError(String.Empty, "Passwords don't match");
                 }
                 if (ModelState.IsValid) {
-                    users.SetPassword(User.Identity.Name, u.password);
+                    user.SetPassword(User.Identity.Name, u.password);
                     Flash.Set(TempData, "Password edited.");
                 }
                 return View("Index", active);
@@ -69,7 +69,7 @@ namespace EuroSpaceCenter.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Login(user u) {
             if (ModelState.IsValid) {
-                user active = users.Get(u.email, u.password);
+                user active = user.Get(u.email, u.password);
                 if (active != null) {
                     FormsAuthentication.SetAuthCookie(active.email, false);
                     return Redirect("/");
@@ -95,7 +95,7 @@ namespace EuroSpaceCenter.Controllers {
         // Get Account/Activate?code=qsdfqsdf
         public ActionResult Activate(string code) {
             try {
-                if (activations.activate(code)) {
+                if (activation.activate(code)) {
                     Flash.Set(TempData, "You've been registered! 🎉");
                     return Redirect(url: "/");
                 } else {

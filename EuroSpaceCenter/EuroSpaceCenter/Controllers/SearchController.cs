@@ -15,12 +15,12 @@ namespace EuroSpaceCenter.Controllers
             if (cat != null) {
                 // zoek categorien
                 try {
-                    ViewBag.Items = items.Get(cat);
+                    ViewBag.Items = item.Get(cat);
                 } catch {
-                    ViewBag.Items = items.GetAll();
+                    ViewBag.Items = item.GetAll();
                 }
             } else {
-                ViewBag.Items = items.GetAll();
+                ViewBag.Items = item.GetAll();
             }
             return View();
         }

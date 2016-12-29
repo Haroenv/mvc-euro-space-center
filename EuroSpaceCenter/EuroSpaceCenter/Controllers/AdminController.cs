@@ -11,15 +11,15 @@ namespace EuroSpaceCenter.Controllers {
     public class AdminController : Controller {
         // GET: Admin
         public ActionResult Index() {
-            ViewBag.Restaurants = items.Get("restaurants");
-            ViewBag.Attractions = items.Get("attractions");
-            ViewBag.Shows = items.Get("shows");
+            ViewBag.Restaurants = item.Get("restaurants");
+            ViewBag.Attractions = item.Get("attractions");
+            ViewBag.Shows = item.Get("shows");
             return View();
         }
 
         // GET: Admin/Create
-        public ActionResult Create(string id) {
-            ViewBag.category = id;
+        public ActionResult Create(string cat) {
+            ViewBag.category = cat;
             return View();
         }
 
@@ -28,7 +28,7 @@ namespace EuroSpaceCenter.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create(item i) {
             if (ModelState.IsValid) {
-                item result = items.Create(i);
+                item result = item.Create(i);
                 Flash.Set(TempData, "Created 🍻");
                 return RedirectToAction("Index", "Detail", i.id);
             }

@@ -18,7 +18,7 @@ namespace EuroSpaceCenter.Register {
                     admin = false
                 };
                 try {
-                    users.Create(u);
+                    user.Create(u);
                     output.Text = "Check your email!";
                 } catch (SqlException) {
                     output.Text = "This account has already been made";

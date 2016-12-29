@@ -13,7 +13,7 @@ namespace EuroSpaceCenter.Controllers {
             if (id == null) {
                 return Redirect("/Search");
             }
-            item i = items.Get((int)id);
+            item i = item.Get((int)id);
             if (i == null) {
                 return Redirect("/Search");
             }
@@ -28,7 +28,7 @@ namespace EuroSpaceCenter.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Rate(rating r) {
             try {
-                r.users_id = users.Get(User.Identity.Name).id;
+                r.users_id = user.Get(User.Identity.Name).id;
                 r.datetime = DateTime.Now;
                 rating.Rate(r);
                 Flash.Set(TempData, "Rated! 🍾");

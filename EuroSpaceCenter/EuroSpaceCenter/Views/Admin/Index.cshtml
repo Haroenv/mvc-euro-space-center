@@ -11,7 +11,7 @@
 
 <section>
     <h3>Attractions</h3>
-    <a href="/Admin/Create/attraction" class="btn btn-success">New attraction</a>
+    <a href="/Admin/Create?cat=attraction" class="btn btn-success">New attraction</a>
     <ul>
         @foreach (item i in ViewBag.Attractions) {
             <li><a class="item" href="/Detail?id=@i.id">@i.title</a></li>
@@ -21,7 +21,7 @@
 
 <section>
     <h3>Shows</h3>
-    <a href="/Admin/Create/show" class="btn btn-success">New show</a>
+    <a href="/Admin/Create?cat=show" class="btn btn-success">New show</a>
     <ul>
         @foreach (item i in ViewBag.Shows) {
             <li><a class="item" href="/Detail?id=@i.id">@i.title</a></li>
@@ -31,7 +31,7 @@
 
 <section>
     <h3>Restaurants</h3>
-    <a href="/Admin/Create/restaurant" class="btn btn-success">New restaurant</a>
+    <a href="/Admin/Create?cat=restaurant" class="btn btn-success">New restaurant</a>
     <ul>
         @foreach (item i in ViewBag.Restaurants) {
             <li><a class="item" href="/Detail?id=@i.id">@i.title</a></li>
