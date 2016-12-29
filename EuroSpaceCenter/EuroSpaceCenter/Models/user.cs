@@ -10,7 +10,7 @@ namespace EuroSpaceCenter.Models {
                     u.password = util.Encryption.Hash.CreateHash(u.password);
                     db.users.InsertOnSubmit(u);
                     db.SubmitChanges();
-                    var a = activations.create(u);
+                    var a = activation.create(u);
                     if (a == null) {
                         return false;
                     }

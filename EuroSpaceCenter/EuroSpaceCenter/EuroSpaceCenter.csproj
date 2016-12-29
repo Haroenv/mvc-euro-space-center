@@ -145,10 +145,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\activations.cs" />
-    <Compile Include="Models\items.cs" />
+    <Compile Include="Models\activation.cs" />
+    <Compile Include="Models\item.cs" />
     <Compile Include="Models\rating.cs" />
-    <Compile Include="Models\users.cs" />
+    <Compile Include="Models\user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
