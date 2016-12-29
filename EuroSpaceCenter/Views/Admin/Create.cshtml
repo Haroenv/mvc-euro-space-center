@@ -78,7 +78,14 @@
             $('#extra :input').each(function (i, el) {
                 extr[el.name] = el.value;
             });
-            console.log(extr);
+            $.ajax({
+                async: false,
+                type: 'POST',
+                url: '/Admin/Create',
+                type: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: extr
+            });
             debugger;
             return true;
         });

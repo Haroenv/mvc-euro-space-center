@@ -26,9 +26,16 @@ namespace EuroSpaceCenter.Controllers {
         // POST: Admin/create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(item i) {
+        public ActionResult Create(item i, restaurant r = null, attraction a = null, show s = null) {
             if (ModelState.IsValid) {
                 item result = item.Create(i);
+                if (r != null) {
+                    restaurant.Create((restaurant)r);
+                } else if (a != null) {
+                    attraction.Create((attraction)a);
+                } else if (s != null) {
+                    show.Create((show)s);
+                }
                 Flash.Set(TempData, "Created 🍻");
                 return RedirectToAction("Index", "Detail", i.id);
             }
@@ -36,41 +43,38 @@ namespace EuroSpaceCenter.Controllers {
             return View(i);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(attraction i) {
-        //    if (ModelState.IsValid) {
-        //        attraction result = attraction.Create(i);
-        //        Flash.Set(TempData, "Created 🍻");
-        //        return RedirectToAction("Index", "Detail", i.id);
-        //    }
-        //    Flash.Set(TempData, "oops! 😬");
-        //    return View(i);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(attraction a) {
+            try {
+                attraction result = attraction.Create(a);
+                return Content("ok");
+            } catch {
+                return new HttpStatusCodeResult(500);
+            }
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(show i) {
-        //    if (ModelState.IsValid) {
-        //        show result = show.Create(i);
-        //        Flash.Set(TempData, "Created 🍻");
-        //        return RedirectToAction("Index", "Detail", i.id);
-        //    }
-        //    Flash.Set(TempData, "oops! 😬");
-        //    return View(i);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(show s) {
+            try { 
+                show result = show.Create(s);
+                return Content("ok");
+            } catch {
+                return new HttpStatusCodeResult(500);
+            }
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(restaurant i) {
-        //    if (ModelState.IsValid) {
-        //        restaurant result = restaurant.Create(i);
-        //        Flash.Set(TempData, "Created 🍻");
-        //        return RedirectToAction("Index", "Detail", i.id);
-        //    }
-        //    Flash.Set(TempData, "oops! 😬");
-        //    return View(i);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(restaurant r) {
+            try {
+                restaurant result = restaurant.Create(r);
+                return Content("ok");
+            } catch {
+                return new HttpStatusCodeResult(500);
+            }
+        }
 
         public ActionResult Extra(string category) {
             ViewBag.category = category;
