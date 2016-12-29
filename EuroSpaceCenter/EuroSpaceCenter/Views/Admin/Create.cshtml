@@ -58,8 +58,9 @@
                 });
         }
         $(document).ready(function () {
-            $("#category").on("input", loadExtra);
-            console.log("@ViewBag.category");
+            $("#category").on("input", function (e) {
+                loadExtra(e.target.value);
+            });
             if ("@ViewBag.category".length > 0) {
                 loadExtra("@ViewBag.category");
                 $("#category").val("@ViewBag.category");
