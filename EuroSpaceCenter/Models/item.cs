@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace EuroSpaceCenter.Models {
+    [MetadataType(typeof(ItemValidation))]
+
     public partial class item {
         internal static item Get(int id) {
             using (var db = new DataClassesDataContext()) {
@@ -47,5 +50,20 @@ namespace EuroSpaceCenter.Models {
                 return i;
             }
         }
+    }
+
+    public class ItemValidation {
+        [Required(ErrorMessage = "Items have a title, like 'Moonshot Fountain'")]
+        public int title;
+
+        [Required(ErrorMessage = "When items don't have a description, potential clients will be less likely to go to our park 😨")]
+        public DateTime description;
+
+        [Required(ErrorMessage = "Nice images bring nice people 😉")]
+        [Url]
+        public string image;
+
+        [Required(ErrorMessage = "This describes the image for blind users 😎")]
+        public int alt;
     }
 }

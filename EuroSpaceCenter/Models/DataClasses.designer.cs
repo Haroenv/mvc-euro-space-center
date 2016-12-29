@@ -1597,7 +1597,7 @@ namespace EuroSpaceCenter.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-    }
+	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].restaurants")]
 	public partial class restaurant : INotifyPropertyChanging, INotifyPropertyChanged

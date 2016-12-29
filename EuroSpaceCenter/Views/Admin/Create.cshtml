@@ -11,25 +11,29 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
         <div class="form-group">
             @Html.LabelFor(i => i.title)
             @Html.EditorFor(i => i.title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(i => i.title, null, new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(i => i.description)
             @Html.TextAreaFor(i => i.description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(i => i.description, null, new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(i => i.image)
             @Html.EditorFor(i => i.image, new { htmlAttributes = new { @class = "form-control", inputmode = "url", placeholder = "url to the image of this item", oninput = "preview.src = this.value" } })
+            @Html.ValidationMessageFor(i => i.image, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
             <label for="preview">preview</label>
             <img class="img-responsive" id="preview" />
         </div>
         <div class="form-group">
             @Html.LabelFor(i => i.alt)
             @Html.EditorFor(i => i.alt, new { htmlAttributes = new { @class = "form-control", placeholder = "description of the image for non-sighted users" } })
+            @Html.ValidationMessageFor(i => i.alt, null, new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label for="category">category</label>
