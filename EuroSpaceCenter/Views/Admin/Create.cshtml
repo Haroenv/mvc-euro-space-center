@@ -4,74 +4,76 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container container--small">
 
-<h2>Create a new <span id="type">item</span></h2>
+    <h2>Create a new <span id="type">item</span></h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(i => i.title)
-        @Html.EditorFor(i => i.title, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(i => i.description)
-        @Html.TextAreaFor(i => i.description, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(i => i.image)
-        @Html.EditorFor(i => i.image, new { htmlAttributes = new { @class = "form-control", inputmode = "url", placeholder = "url to the image of this item", oninput = "preview.src = this.value" } })
-        <label for="preview">preview</label>
-        <img class="img-responsive" id="preview" />
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(i => i.alt)
-        @Html.EditorFor(i => i.alt, new { htmlAttributes = new { @class = "form-control", placeholder = "description of the image for non-sighted users" } })
-    </div>
-    <div class="form-group">
-        <label for="category">category</label>
-        <select id="category" name="category" class="form-control">
-            <option value="null">-- pick a category --</option>
-            <option value="attraction">Attraction</option>
-            <option value="show">Show</option>
-            <option value="restaurant">Restaurant</option>
-        </select>
-    </div>
-    <div id="extra" class="form-group"></div>
-    <div class="form-group">
-        @Html.Button("create 📝", new { @class = "btn btn-primary" })
-    </div>
-}
-
-@if (ViewBag.errors != null) {
-    foreach (var error in ViewBag.errors) {
-        @error.ErrorMessage
+        <div class="form-group">
+            @Html.LabelFor(i => i.title)
+            @Html.EditorFor(i => i.title, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(i => i.description)
+            @Html.TextAreaFor(i => i.description, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(i => i.image)
+            @Html.EditorFor(i => i.image, new { htmlAttributes = new { @class = "form-control", inputmode = "url", placeholder = "url to the image of this item", oninput = "preview.src = this.value" } })
+            <label for="preview">preview</label>
+            <img class="img-responsive" id="preview" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(i => i.alt)
+            @Html.EditorFor(i => i.alt, new { htmlAttributes = new { @class = "form-control", placeholder = "description of the image for non-sighted users" } })
+        </div>
+        <div class="form-group">
+            <label for="category">category</label>
+            <select id="category" name="category" class="form-control">
+                <option value="null">-- pick a category --</option>
+                <option value="attraction">Attraction</option>
+                <option value="show">Show</option>
+                <option value="restaurant">Restaurant</option>
+            </select>
+        </div>
+        <div id="extra" class="form-group"></div>
+        <div class="form-group">
+            @Html.Button("create 📝", new { @class = "btn btn-primary" })
+        </div>
     }
-}
 
-@section scripts {
-    <script>
-        function loadExtra(category) {
-            type.innerText = category;
-            $("#extra").load(
-                "@Url.Action("Extra","Admin")",
-                { 'category': category },
-                function (response, status, xhr) {
-                    if (status == "error") {
-                        alert("An error occurred while loading the results.");
-                    }
-                });
+    @if (ViewBag.errors != null) {
+        foreach (var error in ViewBag.errors) {
+            @error.ErrorMessage
         }
-        $(document).ready(function () {
-            $("#category").on("input", function (e) {
-                loadExtra(e.target.value);
-            });
-            if ("@ViewBag.category".length > 0) {
-                loadExtra("@ViewBag.category");
-                $("#category").val("@ViewBag.category");
+    }
+
+    @section scripts {
+        <script>
+            function loadExtra(category) {
+                type.innerText = category;
+                $("#extra").load(
+                    "@Url.Action("Extra","Admin")",
+                    { 'category': category },
+                    function (response, status, xhr) {
+                        if (status == "error") {
+                            alert("An error occurred while loading the results.");
+                        }
+                    });
             }
-        });
-    </script>
-}
+            $(document).ready(function () {
+                $("#category").on("input", function (e) {
+                    loadExtra(e.target.value);
+                });
+                if ("@ViewBag.category".length > 0) {
+                    loadExtra("@ViewBag.category");
+                    $("#category").val("@ViewBag.category");
+                }
+            });
+        </script>
+    }
+</div>

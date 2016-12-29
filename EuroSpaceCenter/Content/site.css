@@ -44,12 +44,17 @@ input[type=range] {
     padding: 6px 0;
 }
 
-    input[type=range]:active, input[type=range]:focus {
-        box-shadow: none;
-    }
+input[type=range]:active, input[type=range]:focus {
+    box-shadow: none;
+}
 
-    input[type=range]:after {
-        content: attr(data-value);
-        transform: translateY(2em);
-        display: block;
-    }
+input[type=range]:after {
+    content: attr(data-value);
+    transform: translateY(2em);
+    display: block;
+}
+
+/* smaller container */
+.container.container--small {
+    max-width: 50em !important;
+}

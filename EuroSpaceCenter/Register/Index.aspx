@@ -29,7 +29,7 @@
             </nav>
         </div>
     </div>
-    <form id="form1" runat="server" class="container">
+    <form id="form1" runat="server" class="container container--small">
         <h2>Register</h2>
         <p>Make an account for Euro Space Center</p>
         <div class="form-group">
