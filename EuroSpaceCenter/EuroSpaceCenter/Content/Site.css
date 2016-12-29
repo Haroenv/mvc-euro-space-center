@@ -28,8 +28,8 @@ img {
 }
 
 .emoji {
-    	font-weight: normal;
-	font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
+    font-weight: normal;
+    font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
 }
 
 /* background for jumbo */
@@ -51,12 +51,12 @@ input[type=range] {
     padding: 6px 0;
 }
 
-input[type=range]:active, input[type=range]:focus {
-    box-shadow: none;
-}
+    input[type=range]:active, input[type=range]:focus {
+        box-shadow: none;
+    }
 
-input[type=range]:after {
-    content: attr(data-value);
-    transform: translateY(2em);
-    display: block;
-}
+    input[type=range]:after {
+        content: attr(data-value);
+        transform: translateY(2em);
+        display: block;
+    }

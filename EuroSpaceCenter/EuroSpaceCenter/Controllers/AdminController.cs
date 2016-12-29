@@ -18,14 +18,22 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         // GET: Admin/Create
-        public ActionResult Create() {
+        public ActionResult Create(string type) {
+            
             return View();
         }
 
         // POST: Admin/create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(item i) {
-            return View();
+            if (ModelState.IsValid) {
+                item result = items.Create(i);
+                Flash.Set(TempData, "Created 🍻");
+                return RedirectToAction("Index", "Detail", i.id);
+            }
+            Flash.Set(TempData, "oops! 😬");
+            return View(i);
         }
     }
 }
