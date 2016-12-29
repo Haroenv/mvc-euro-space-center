@@ -43,6 +43,14 @@ namespace EuroSpaceCenter.Models {
                 return i;
             }
         }
+
+        internal static void Delete(int id) {
+            using(var db = new DataClassesDataContext()) {
+                var it = db.items.SingleOrDefault(i => i.id == id);
+                db.items.DeleteOnSubmit(it);
+                db.SubmitChanges();
+            }
+        }
     }
 
     public class ItemValidation {

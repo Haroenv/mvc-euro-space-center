@@ -10,7 +10,7 @@ namespace EuroSpaceCenter.Controllers {
     [CustomAuthorizeAttribute(Roles = "admin")]
     public class AdminController : Controller {
         // GET: Admin
-        public ActionResult Index() {
+        public ViewResult Index() {
             ViewBag.Restaurants = item.Get("restaurants");
             ViewBag.Attractions = item.Get("attractions");
             ViewBag.Shows = item.Get("shows");
@@ -18,7 +18,7 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         // GET: Admin/Create
-        public ActionResult Create(string cat) {
+        public ViewResult Create(string cat) {
             ViewBag.category = cat;
             return View();
         }
@@ -59,7 +59,13 @@ namespace EuroSpaceCenter.Controllers {
             return View(i);
         }
 
-        public ActionResult Extra(string category) {
+        public RedirectResult Delete(int id) {
+            item.Delete(id);
+            Flash.Set(TempData, "That's gone! 💨");
+            return Redirect("/Search");
+        }
+
+        public PartialViewResult Extra(string category) {
             ViewBag.category = category;
             return PartialView();
         }
