@@ -1,5 +1,6 @@
 ﻿using EuroSpaceCenter.Models;
 using EuroSpaceCenter.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -24,6 +25,20 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         [HttpPost]
+        public ActionResult Delete(int id) {
+            //try {
+                if (parkplan.HasUser(user_id: user.Get(User.Identity.Name).id, parkplan_id: id)) {
+                    parkplan.Delete(id);
+                    return new HttpStatusCodeResult(204);
+                } else {
+                    return new HttpStatusCodeResult(403);
+                }
+            //} catch (Exception ex){
+            //    return Content(ex.ToString());
+            //}
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(parkplan plan) {
             if (TryValidateModel(plan)) {
@@ -34,7 +49,7 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         public ActionResult Invite(int id, int user_id) {
-            if (parkplan.HasUser(user_id: id, parkplan_id: id)) {
+            if (parkplan.HasUser(user_id: user_id, parkplan_id: id)) {
                 parkplan.Invite(users_id: user_id, parkplan_id: id);
                 Flash.Set(TempData, "Invited");
                 return RedirectToAction("Detail", new { id = id });

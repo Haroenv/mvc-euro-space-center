@@ -1,0 +1,32 @@
+﻿@model EuroSpaceCenter.Models.parkplan
+
+@using (Html.BeginForm("Create", "Plan", FormMethod.Post, new { @class="container container--small" })) {
+    <h3>Create a new plan</h3>
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label" })
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+  
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger", type = "date" })
+  
+    </div>
+
+    <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+}

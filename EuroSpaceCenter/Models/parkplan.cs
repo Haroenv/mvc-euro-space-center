@@ -34,6 +34,21 @@ namespace EuroSpaceCenter.Models {
             }
         }
 
+        internal static void Delete(int id) {
+            using (var db = new DataClassesDataContext()) {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<parkplan>(t => t.parkplans_has_items);
+                options.LoadWith<parkplan>(t => t.users_has_parkplans);
+                db.LoadOptions = options;
+
+                var plan = db.parkplans.FirstOrDefault(p => p.id == id);
+                db.users_has_parkplans.DeleteAllOnSubmit(plan.users_has_parkplans);
+                db.parkplans_has_items.DeleteAllOnSubmit(plan.parkplans_has_items);
+                db.parkplans.DeleteOnSubmit(plan);
+                db.SubmitChanges();
+            }
+        }
+
         internal static void Invite(int users_id, int parkplan_id) {
             using (var db = new DataClassesDataContext()) {
                 db.users_has_parkplans.InsertOnSubmit(new users_has_parkplan() { users_id = users_id, parkplans_id = parkplan_id, accepted = false });
