@@ -9,7 +9,7 @@ namespace EuroSpaceCenter.Controllers {
     public class PlanController : Controller {
 
         public ActionResult Index() {
-            IEnumerable<users_has_parkplan> all = parkplan.GetAll(user.Get(User.Identity.Name).id);
+            List<users_has_parkplan> all = parkplan.GetAll(user.Get(User.Identity.Name).id);
             var accepted = all.Where(uhp => uhp.accepted).Select(uhp => uhp.parkplan);
             ViewBag.UnAccepted = all.Where(uhp => !uhp.accepted).Select(uhp => uhp.parkplan);
             return View(accepted);
@@ -19,11 +19,16 @@ namespace EuroSpaceCenter.Controllers {
             return View(parkplan.Get(parkplan_id: id));
         }
 
+        public ActionResult Create() {
+            return View();
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(parkplan plan) {
             if (TryValidateModel(plan)) {
                 var p = plan.Create(user.Get(User.Identity.Name).id);
-                return RedirectToAction("Detail", p.id);
+                return RedirectToAction("Detail", new { id = p.id });
             }
             return View(plan);
         }
@@ -32,7 +37,7 @@ namespace EuroSpaceCenter.Controllers {
             if (parkplan.HasUser(user_id: id, parkplan_id: id)) {
                 parkplan.Invite(users_id: user_id, parkplan_id: id);
                 Flash.Set(TempData, "Invited");
-                return RedirectToAction("Detail", id);
+                return RedirectToAction("Detail", new { id = id });
             } else {
                 Flash.Set(TempData, "That's not your plan 💁");
                 return RedirectToAction("Index");

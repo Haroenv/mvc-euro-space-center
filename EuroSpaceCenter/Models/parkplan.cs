@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
 using System.Linq;
 using System.Web;
 
 namespace EuroSpaceCenter.Models {
+    [MetadataType(typeof(ParkplanValidation))]
     public partial class parkplan {
         internal parkplan Create(int users_id) {
             using (var db = new DataClassesDataContext()) {
@@ -22,13 +24,13 @@ namespace EuroSpaceCenter.Models {
             }
         }
 
-        internal static IEnumerable<users_has_parkplan> GetAll(int user_id) {
+        internal static List<users_has_parkplan> GetAll(int user_id) {
             using (var db = new DataClassesDataContext()) {
                 DataLoadOptions options = new DataLoadOptions();
                 options.LoadWith<users_has_parkplan>(t => t.parkplan);
                 db.LoadOptions = options;
 
-                return db.users_has_parkplans.Where(uhp => uhp.users_id == user_id);
+                return db.users_has_parkplans.Where(uhp => uhp.users_id == user_id).ToList();
             }
         }
 
@@ -56,5 +58,18 @@ namespace EuroSpaceCenter.Models {
                 return db.users_has_parkplans.Any(uhp => uhp.parkplans_id == parkplan_id && uhp.users_id == user_id);
             }
         }
+    }
+
+    public class ParkplanValidation {
+        [Required(ErrorMessage = "The name you can recognise your visit as")]
+        public string name;
+
+        [Required(ErrorMessage = "When you will come")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        public DateTime date;
+
+        [Required(ErrorMessage = "Explain why other people should come 😊")]
+        public string description;
     }
 }

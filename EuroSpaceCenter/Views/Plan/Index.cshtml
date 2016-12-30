@@ -1,0 +1,43 @@
+﻿@using EuroSpaceCenter.Models
+@model IEnumerable<parkplan>
+
+@{
+    ViewBag.Title = "Plans";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My plans</h2>
+
+<div class="row">
+    <div class="list-group col-md-4">
+        @foreach (parkplan plan in Model) {
+            <a class="list-group-item" href="/Plan/Detail/@plan.id">
+                <span class="btn btn-danger label btn-sm pull-right" data-id="@plan.id">❌</span>
+                @plan.name
+            </a>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function remove(id) {
+            $.ajax({
+                method: 'POST',
+                url: '/Plan/Delete/' + id,
+                succes: function () {
+                    console.log(e)
+                }
+            });
+        }
+
+        $('[data-id]').each(function (i, el) {
+            $(el).on('click', function (e) {
+                e.preventDefault();
+                if (confirm('Deleting this will delete this plan for everyone. Are you sure?')) {
+                    remove(el.dataset.id);
+                }
+            })
+        })
+    </script>
+}

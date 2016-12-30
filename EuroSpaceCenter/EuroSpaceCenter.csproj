@@ -217,10 +217,14 @@
     <Content Include="Views\Admin\Extra.cshtml" />
     <Content Include="Views\Detail\Review.cshtml" />
     <Content Include="Views\Detail\Edit.cshtml" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\Plan\Create.cshtml" />
+    <Content Include="Views\Plan\Detail.cshtml" />
+    <Content Include="Views\Plan\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Plan\" />
+    <Folder Include="Views\Meme\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

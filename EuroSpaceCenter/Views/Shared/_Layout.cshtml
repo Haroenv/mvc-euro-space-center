@@ -32,6 +32,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Account", "Index", "Account", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Account" && ViewContext.RouteData.Values["action"].ToString() == "account" ? "active" : "") })</li>
+                                <li>@Html.ActionLink("Park plans", "Index", "Plan")</li>
                                 <li>@Html.ActionLink("Logout", "Logout", "Account", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Login" && ViewContext.RouteData.Values["action"].ToString() == "logout" ? "active" : "") })</li>
                             </ul>
                         </li>
