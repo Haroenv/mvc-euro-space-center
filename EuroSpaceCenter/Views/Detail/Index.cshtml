@@ -8,12 +8,16 @@
 
 <div class="container container--small">
     <h2>@Model.title</h2>
+    @if (User.IsInRole("admin")) {
+        @Html.ActionLink("Edit", "Edit", new  { id = ViewBag.id }, new { @class = "btn btn-success" })
+    }
     <p>@Model.description</p>
     <img src="@Model.image" alt="@Model.alt" />
 
     @using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
         @Html.AntiForgeryToken()
         <div class="form-group">
+            <input type="hidden" name="id" value="@ViewBag.id" />
             @Html.Button("add to my plan", new { @class = "btn btn-success", id = "add" })
             <p class="help-block">Add this item to your park plan <span class="emoji">🗺</span></p>
         </div>
