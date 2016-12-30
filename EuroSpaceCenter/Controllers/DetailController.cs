@@ -14,12 +14,13 @@ namespace EuroSpaceCenter.Controllers {
             if (i == null) {
                 return Redirect("/Search");
             }
+            ViewBag.id = id;
             ViewBag.Ratings = rating.Get((int)id);
             ViewBag.Rating = new rating();
             return View(i);
         }
 
-        // POST Detail/Rate
+        // POST Detail/Rate/
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -34,6 +35,7 @@ namespace EuroSpaceCenter.Controllers {
                 }
                 item i = item.Get(r.items_id);
                 ViewBag.Ratings = rating.Get(r.items_id);
+                ViewBag.id = r.items_id;
                 ViewBag.Rating = r;
                 Flash.Set(TempData, "You forgot to fill in something 😧");
                 return View("Index", i);
