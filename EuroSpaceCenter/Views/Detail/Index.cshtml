@@ -9,19 +9,17 @@
 <div class="container container--small">
     <h2>@Model.title</h2>
     @if (User.IsInRole("admin")) {
-        @Html.ActionLink("Edit", "Edit", new  { id = ViewBag.id }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Edit", "Edit", new { id = ViewBag.id }, new { @class = "btn btn-success" })
     }
     <p>@Model.description</p>
     <img src="@Model.image" alt="@Model.alt" />
     @if (ViewBag.Properties != null) {
         <dl class="dl-horizontal">
             @foreach (var property in ViewBag.Properties) {
-                if (property.Name != "item" && property.Name != "items_id") {
-                    <dt>@property.Name</dt>
-                    //doesn't work because the type isn't sure on beforehand 😞
-                    @*<dt>@property.GetCustomAttribute<DisplayAttribute>().GetName()</dt>*@
-                    <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
-                }
+                <dt>@property.Name</dt>
+                //doesn't work because the type isn't sure on beforehand 😞
+                @*<dt>@property.GetCustomAttribute<DisplayAttribute>().GetName()</dt>*@
+                <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
             }
         </dl>
     }
