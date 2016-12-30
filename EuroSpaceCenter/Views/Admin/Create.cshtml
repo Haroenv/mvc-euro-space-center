@@ -44,7 +44,7 @@
                 <option value="restaurant">Restaurant</option>
             </select>
         </div>
-        <div id="extra" class="form-group"></div>
+        <fieldset disabled id="extra" class="form-group"></fieldset>
         <div class="form-group">
             @Html.Button("create 📝", new { @class = "btn btn-primary" })
         </div>
@@ -70,25 +70,6 @@
                     }
                 });
         }
-
-        @*$('#mainform').submit(function () {
-            var extr = {
-                items_id: "@ViewBag.id"
-            };
-            $('#extra :input').each(function (i, el) {
-                extr[el.name] = el.value;
-            });
-            $.ajax({
-                async: false,
-                type: 'POST',
-                url: '/Admin/Create',
-                type: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: extr
-            });
-            debugger;
-            return true;
-        });*@
 
         $(document).ready(function () {
             $("#category").on("input", function (e) {
