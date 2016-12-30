@@ -152,6 +152,7 @@
     </Compile>
     <Compile Include="Models\activation.cs" />
     <Compile Include="Models\item.cs" />
+    <Compile Include="Models\parkplan.cs" />
     <Compile Include="Models\rating.cs" />
     <Compile Include="Models\restaurant.cs" />
     <Compile Include="Models\show.cs" />
@@ -198,9 +199,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
