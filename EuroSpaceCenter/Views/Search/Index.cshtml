@@ -10,12 +10,19 @@
     <input type="search" id="search" class="form-control" />
 </div>
 
-<div class="row">
+<div data-isotope='{ "itemSelector": ".item", "percentPosition": true,"masonry": {"columnWidth": ".grid-sizer"}}'>
+    <div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>
     @foreach (item i in ViewBag.Items) {
-        <a class="col-md-3 item blocklink" href="/Detail?id=@i.id">
+        <a class="col-xs-6 col-sm-4 col-md-3 blocklink item" href="/Detail?id=@i.id">
             <article class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">@i.title</h2>
+                <div class="panel-heading clearfix">
+                    <h2 class="panel-title pull-left">@i.title</h2>
+                    @if (User.IsInRole("admin")) {
+                        using (Html.BeginForm("Delete", "Admin", FormMethod.Post)) {
+                            <input type="hidden" name="id" value="@i.id" />
+                            @Html.Button("❌", new { @class = "btn btn-danger pull-right" });
+                        }
+                    }
                 </div>
                 <div class="panel-image">
                     <img src="@i.image" alt="@i.alt" />
@@ -32,6 +39,7 @@
 @section scripts {
     @* loaded over CDN, thus better than downloading it here *@
     <script src="https://unpkg.com/holmes.js@1.15.1"></script>
+    <script src="https://unpkg.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js"></script>
     <script>
         holmes({
             hiddenAttr: true,
