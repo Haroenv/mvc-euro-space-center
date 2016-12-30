@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using EuroSpaceCenter.Models;
+using System.Web.Mvc;
 
 namespace EuroSpaceCenter.Controllers {
     [Authorize]
@@ -8,12 +9,16 @@ namespace EuroSpaceCenter.Controllers {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Create(parkplan plan) {
+            return View();
+        }
+
         public ActionResult Join() {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Add(int id) {
             return View();
         }

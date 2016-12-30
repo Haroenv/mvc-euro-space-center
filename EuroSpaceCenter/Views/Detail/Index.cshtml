@@ -7,7 +7,12 @@
 }
 
 <div class="container container--small">
-    <h2>@Model.title</h2>
+    <h2>
+        @Model.title 
+        @if (ViewBag.PropModel != null) {
+            <span class="label label-info">@ViewBag.PropModel.GetType().Name</span>
+        }
+    </h2>
     @if (User.IsInRole("admin")) {
         @Html.ActionLink("Edit", "Edit", new { id = ViewBag.id }, new { @class = "btn btn-success" })
     }
