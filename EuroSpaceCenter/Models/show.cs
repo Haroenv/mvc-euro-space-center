@@ -19,6 +19,9 @@ namespace EuroSpaceCenter.Models {
                 var old = db.shows.SingleOrDefault(it => it.items_id == i.items_id);
                 if (old != null) {
                     foreach (PropertyInfo property in typeof(show).GetProperties()) {
+                        if (property.Name == "item") {
+                            break;
+                        }
                         property.SetValue(old, property.GetValue(i, null), null);
                     }
                 } else {

@@ -21,6 +21,9 @@ namespace EuroSpaceCenter.Models {
                 var old = db.attractions.SingleOrDefault(it => it.item_id == i.item_id);
                 if (old != null) {
                     foreach (PropertyInfo property in typeof(attraction).GetProperties()) {
+                        if (property.Name == "item") {
+                            break;
+                        }
                         property.SetValue(old, property.GetValue(i, null), null);
                     }
                 } else {

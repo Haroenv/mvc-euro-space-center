@@ -58,35 +58,41 @@ namespace EuroSpaceCenter.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Show(int? id, show i) {
+        public RedirectResult Show(int? id, show i) {
             try {
+                i.items_id = (int)id;
                 show.Update(i);
-            } catch (Exception) {
-                Flash.Set(TempData, "Ay caramba, I made a mistake 😦");
+                Flash.Set(TempData, "Yep! Updated");
+            } catch (Exception e) {
+                Flash.Set(TempData, "Ay caramba, I made a mistake 😦" + e);
             }
-            return View(item.Get((int)id));
+            return Redirect("/Detail/?id=" + item.Get((int)id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Attraction(int? id, attraction i) {
+        public RedirectResult Attraction(int? id, attraction i) {
             try {
+                i.item_id = (int)id;
                 attraction.Update(i);
+                Flash.Set(TempData, "Boom! Updated");
             } catch (Exception) {
                 Flash.Set(TempData, "Something went wrong 😦");
             }
-            return View(item.Get((int)id));
+            return Redirect("/Detail/?id=" + item.Get((int)id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Restaurant(int? id, restaurant i) {
+        public RedirectResult Restaurant(int? id, restaurant i) {
             try {
+                i.items_id = (int)id;
                 restaurant.Update(i);
+                Flash.Set(TempData, "Bam! Updated");
             } catch (Exception) {
                 Flash.Set(TempData, "Sorry 😦");
             }
-            return View(item.Get((int)id));
+            return Redirect("/Detail/?id=" + item.Get((int)id));
         }
 
         public RedirectResult Delete(int id) {
