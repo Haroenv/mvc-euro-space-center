@@ -1,9 +1,6 @@
 ﻿using EuroSpaceCenter.Models;
 using EuroSpaceCenter.util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EuroSpaceCenter.Controllers {
@@ -17,13 +14,12 @@ namespace EuroSpaceCenter.Controllers {
             if (i == null) {
                 return Redirect("/Search");
             }
-            ViewBag.id = id;
             ViewBag.Ratings = rating.Get((int)id);
             ViewBag.Rating = new rating();
             return View(i);
         }
 
-        // POST Detail/Rate/{id}
+        // POST Detail/Rate
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -38,7 +34,6 @@ namespace EuroSpaceCenter.Controllers {
                 }
                 item i = item.Get(r.items_id);
                 ViewBag.Ratings = rating.Get(r.items_id);
-                ViewBag.id = r.items_id;
                 ViewBag.Rating = r;
                 Flash.Set(TempData, "You forgot to fill in something 😧");
                 return View("Index", i);
@@ -46,6 +41,20 @@ namespace EuroSpaceCenter.Controllers {
                 Flash.Set(TempData, "Something went wrong 😕");
                 return Redirect("/Detail?id=" + r.items_id);
             }
+        }
+
+        [CustomAuthorize(Roles = "admin")]
+        public ActionResult Edit(int? id) {
+            if (id == null) {
+                Flash.Set(TempData, "You didn't supply an id 🆔");
+                return Redirect("/Search");
+            }
+            item i = item.Get((int)id);
+            if (i == null) {
+                Flash.Set(TempData, "This item doesn't exist 😞");
+                return Redirect("/Search");
+            }
+            return View(i);
         }
     }
 }
