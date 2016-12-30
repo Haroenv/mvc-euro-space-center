@@ -16,8 +16,12 @@
     @if (ViewBag.Properties != null) {
         <dl class="dl-horizontal">
             @foreach (var property in ViewBag.Properties) {
-                <dt>@property.Name</dt>
-                <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
+                if (property.Name != "item" && property.Name != "items_id") {
+                    <dt>@property.Name</dt>
+                    //doesn't work because the type isn't sure on beforehand 😞
+                    @*<dt>@property.GetCustomAttribute<DisplayAttribute>().GetName()</dt>*@
+                    <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
+                }
             }
         </dl>
     }
