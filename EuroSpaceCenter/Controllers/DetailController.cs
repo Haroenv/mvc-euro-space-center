@@ -58,5 +58,19 @@ namespace EuroSpaceCenter.Controllers {
             }
             return View(i);
         }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = "admin")]
+        public ActionResult Edit(item i) {
+            if (TryValidateModel(i)) {
+                item result = item.Update(i);
+                Flash.Set(TempData, "Updated 🍻");
+                return RedirectToAction("Index", "Detail", i.id);
+            }
+            Flash.Set(TempData, "oops! 😬");
+            return View(i);
+        }
     }
 }

@@ -17,6 +17,7 @@
             <input required type="number" name="max_height" id="max_height" class="form-control"/>
             <p class="help-block">The maximum height a person can be on this attraction</p>
         </div>
+        <input type="hidden" value="attraction" name="hidden_attraction" />
         break;
     case "show":
         <div class="form-group">
@@ -25,6 +26,7 @@
             <p class="help-block">The moment when this show is going on.</p>
             <p class="help-block">Recurring shows are currently not supported</p>
         </div>
+        <input type="hidden" value="show" name="hidden_show" />
         <link href="https://unpkg.com/jquery-datetimepicker@2.5.4/build/jquery.datetimepicker.min.css" rel="stylesheet"/>
         <script async defer>
             $.getScript("https://unpkg.com/jquery-datetimepicker@2.5.4/build/jquery.datetimepicker.full.min.js", function () {

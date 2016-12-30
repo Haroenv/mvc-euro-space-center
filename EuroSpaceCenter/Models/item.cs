@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace EuroSpaceCenter.Models {
@@ -39,6 +40,25 @@ namespace EuroSpaceCenter.Models {
         internal static item Create(item i) {
             using (var db = new DataClassesDataContext()) {
                 db.items.InsertOnSubmit(i);
+                db.SubmitChanges();
+                return i;
+            }
+        }
+
+        internal static item Update(item i) {
+            using (var db = new DataClassesDataContext()) {
+                var old = db.items.SingleOrDefault(it => it.id == i.id);
+                if (old != null) {
+                    foreach (PropertyInfo property in typeof(item).GetProperties()) {
+                        // don't break the linkages :)
+                        if (property.Name == "attraction" || property.Name == "restaurant" || property.Name == "show") {
+                            break;
+                        }
+                        property.SetValue(old, property.GetValue(i, null), null);
+                    }
+                } else {
+                    db.items.InsertOnSubmit(i);
+                }
                 db.SubmitChanges();
                 return i;
             }

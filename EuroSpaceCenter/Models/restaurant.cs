@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Reflection;
 
 namespace EuroSpaceCenter.Models {
     [MetadataType(typeof(RestaurantValidation))]
@@ -10,6 +8,21 @@ namespace EuroSpaceCenter.Models {
         internal static restaurant Create(restaurant i) {
             using (var db = new DataClassesDataContext()) {
                 db.restaurants.InsertOnSubmit(i);
+                db.SubmitChanges();
+                return i;
+            }
+        }
+
+        internal static restaurant Update(restaurant i) {
+            using (var db = new DataClassesDataContext()) {
+                var old = db.restaurants.SingleOrDefault(it => it.items_id == i.items_id);
+                if (old != null) {
+                    foreach (PropertyInfo property in typeof(restaurant).GetProperties()) {
+                        property.SetValue(old, property.GetValue(i, null), null);
+                    }
+                } else {
+                    db.restaurants.InsertOnSubmit(i);
+                }
                 db.SubmitChanges();
                 return i;
             }

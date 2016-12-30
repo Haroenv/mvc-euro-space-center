@@ -1,5 +1,6 @@
 ﻿using EuroSpaceCenter.Models;
 using EuroSpaceCenter.util;
+using System;
 using System.Web.Mvc;
 
 namespace EuroSpaceCenter.Controllers {
@@ -53,6 +54,39 @@ namespace EuroSpaceCenter.Controllers {
             }
             Flash.Set(TempData, "oops! 😬");
             return View(i);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Show(int? id, show i) {
+            try {
+                show.Update(i);
+            } catch (Exception) {
+                Flash.Set(TempData, "Ay caramba, I made a mistake 😦");
+            }
+            return View(item.Get((int)id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Attraction(int? id, attraction i) {
+            try {
+                attraction.Update(i);
+            } catch (Exception) {
+                Flash.Set(TempData, "Something went wrong 😦");
+            }
+            return View(item.Get((int)id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Restaurant(int? id, restaurant i) {
+            try {
+                restaurant.Update(i);
+            } catch (Exception) {
+                Flash.Set(TempData, "Sorry 😦");
+            }
+            return View(item.Get((int)id));
         }
 
         public RedirectResult Delete(int id) {

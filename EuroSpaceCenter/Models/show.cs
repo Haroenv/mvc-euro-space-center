@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Reflection;
 
 namespace EuroSpaceCenter.Models {
     [MetadataType(typeof(ShowValidation))]
@@ -10,6 +9,21 @@ namespace EuroSpaceCenter.Models {
         internal static show Create(show i) {
             using (var db = new DataClassesDataContext()) {
                 db.shows.InsertOnSubmit(i);
+                db.SubmitChanges();
+                return i;
+            }
+        }
+
+        internal static show Update(show i) {
+            using (var db = new DataClassesDataContext()) {
+                var old = db.shows.SingleOrDefault(it => it.items_id == i.items_id);
+                if (old != null) {
+                    foreach (PropertyInfo property in typeof(show).GetProperties()) {
+                        property.SetValue(old, property.GetValue(i, null), null);
+                    }
+                } else {
+                    db.shows.InsertOnSubmit(i);
+                }
                 db.SubmitChanges();
                 return i;
             }
