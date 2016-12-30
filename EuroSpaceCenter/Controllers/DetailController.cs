@@ -25,7 +25,7 @@ namespace EuroSpaceCenter.Controllers {
                 ViewBag.Properties = i.show.GetType().GetProperties().Where(itm => itm.Name != "item" && itm.Name != "items_id");
                 ViewBag.PropModel = i.show;
             } else if (i.restaurant != null) {
-                ViewBag.Properties = i.attraction.GetType().GetProperties().Where(itm => itm.Name != "item" && itm.Name != "items_id");
+                ViewBag.Properties = i.restaurant.GetType().GetProperties().Where(itm => itm.Name != "item" && itm.Name != "items_id");
                 ViewBag.PropModel = i.restaurant;
             }
             return View(i);
