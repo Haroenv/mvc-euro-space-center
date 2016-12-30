@@ -10,7 +10,7 @@
     <input type="search" id="search" class="form-control" />
 </div>
 
-<div data-isotope='{ "itemSelector": ".item", "percentPosition": true,"masonry": {"columnWidth": ".grid-sizer"}}'>
+<div class="isotope">
     <div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>
     @foreach (item i in ViewBag.Items) {
         <a class="col-xs-6 col-sm-4 col-md-3 blocklink item" href="/Detail?id=@i.id">
@@ -18,7 +18,7 @@
                 <div class="panel-heading clearfix">
                     <h2 class="panel-title pull-left">@i.title</h2>
                     @if (User.IsInRole("admin")) {
-                        using (Html.BeginForm("Delete", "Admin", FormMethod.Post)) {
+                        using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { @class = "deleteform" })) {
                             <input type="hidden" name="id" value="@i.id" />
                             @Html.Button("❌", new { @class = "btn btn-danger pull-right" });
                         }
@@ -38,12 +38,25 @@
 
 @section scripts {
     @* loaded over CDN, thus better than downloading it here *@
-    <script src="https://unpkg.com/holmes.js@1.15.1"></script>
     <script src="https://unpkg.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js"></script>
     <script>
-        holmes({
-            hiddenAttr: true,
-            find: '.item'
+        var $grid = $('.isotope').isotope({
+            itemSelector: ".item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".grid-sizer"
+            },
+            filter: function () {
+                return qsRegex ? $(this).text().match(qsRegex) : true;
+            }
+        });
+
+        var qsRegex;
+
+        // use value of search field to filter
+        var $quicksearch = $('input[type=search]').on('input', function () {
+            qsRegex = new RegExp($quicksearch.val(), 'gi');
+            $grid.isotope();
         });
     </script>
 }
