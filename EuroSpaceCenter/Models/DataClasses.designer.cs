@@ -522,7 +522,7 @@ namespace EuroSpaceCenter.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _item_id;
+		private int _items_id;
 		
 		private System.Nullable<int> _min_height;
 		
@@ -534,8 +534,8 @@ namespace EuroSpaceCenter.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void Onitem_idChanging(int value);
-    partial void Onitem_idChanged();
+    partial void Onitems_idChanging(int value);
+    partial void Onitems_idChanged();
     partial void Onmin_heightChanging(System.Nullable<int> value);
     partial void Onmin_heightChanged();
     partial void Onmax_heightChanging(System.Nullable<int> value);
@@ -548,26 +548,26 @@ namespace EuroSpaceCenter.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int item_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int items_id
 		{
 			get
 			{
-				return this._item_id;
+				return this._items_id;
 			}
 			set
 			{
-				if ((this._item_id != value))
+				if ((this._items_id != value))
 				{
 					if (this._item.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.Onitem_idChanging(value);
+					this.Onitems_idChanging(value);
 					this.SendPropertyChanging();
-					this._item_id = value;
-					this.SendPropertyChanged("item_id");
-					this.Onitem_idChanged();
+					this._items_id = value;
+					this.SendPropertyChanged("items_id");
+					this.Onitems_idChanged();
 				}
 			}
 		}
@@ -612,7 +612,7 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_attraction", Storage="_item", ThisKey="item_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_attraction", Storage="_item", ThisKey="items_id", OtherKey="id", IsForeignKey=true)]
 		public item item
 		{
 			get
@@ -635,11 +635,11 @@ namespace EuroSpaceCenter.Models
 					if ((value != null))
 					{
 						value.attraction = this;
-						this._item_id = value.id;
+						this._items_id = value.id;
 					}
 					else
 					{
-						this._item_id = default(int);
+						this._items_id = default(int);
 					}
 					this.SendPropertyChanged("item");
 				}
@@ -819,7 +819,7 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_attraction", Storage="_attraction", ThisKey="id", OtherKey="item_id", IsUnique=true, IsForeignKey=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="item_attraction", Storage="_attraction", ThisKey="id", OtherKey="items_id", IsUnique=true, IsForeignKey=false)]
 		public attraction attraction
 		{
 			get

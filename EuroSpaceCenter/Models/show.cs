@@ -35,6 +35,7 @@ namespace EuroSpaceCenter.Models {
 
     public class ShowValidation {
         [Required(ErrorMessage = "A show always has a particular moment it's on. Repeating shows don't exist yet.")]
+        [Display(Name = "Moment")]
         public DateTime datetime;
     }
 }

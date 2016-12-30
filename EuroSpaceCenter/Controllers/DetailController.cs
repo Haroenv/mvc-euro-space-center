@@ -1,6 +1,7 @@
 ﻿using EuroSpaceCenter.Models;
 using EuroSpaceCenter.util;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace EuroSpaceCenter.Controllers {
@@ -17,6 +18,16 @@ namespace EuroSpaceCenter.Controllers {
             ViewBag.id = id;
             ViewBag.Ratings = rating.Get((int)id);
             ViewBag.Rating = new rating();
+            if (i.attraction != null) {
+                ViewBag.Properties = i.attraction.GetType().GetProperties().Where(itm => itm.Name != "item" || itm.Name != "items_id");
+                ViewBag.PropModel = i.attraction;
+            } else if (i.show != null) {
+                ViewBag.Properties = i.show.GetType().GetProperties().Where(itm => itm.Name != "item" || itm.Name != "items_id");
+                ViewBag.PropModel = i.show;
+            } else if (i.restaurant != null) {
+                ViewBag.Properties = i.attraction.GetType().GetProperties().Where(itm => itm.Name != "item" || itm.Name != "items_id");
+                ViewBag.PropModel = i.restaurant;
+            }
             return View(i);
         }
 

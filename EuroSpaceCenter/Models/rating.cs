@@ -18,7 +18,7 @@ namespace EuroSpaceCenter.Models {
         /// <summary>
         /// Get ratings of a certain item
         /// </summary>
-        /// <param name="id">item_id</param>
+        /// <param name="id">items_id</param>
         /// <returns>list of all ratings</returns>
         internal static List<rating> Get(int id) {
             using (var db = new DataClassesDataContext()) {
@@ -33,9 +33,11 @@ namespace EuroSpaceCenter.Models {
     public class RatingValidation {
         [Required(ErrorMessage = "You need to enter a rating")]
         [Range(1, 5, ErrorMessage = "Value for {0} must be between {1} and {2}")]
+        [Display(Name = "rating")]
         public int rating1;
 
         [Required(ErrorMessage = "A rating is done on a certain date")]
+        [Display(Name = "date")]
         public DateTime datetime;
 
         [Required(ErrorMessage = "You need to explain why you rated")]

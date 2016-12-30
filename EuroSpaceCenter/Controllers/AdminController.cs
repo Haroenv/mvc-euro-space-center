@@ -30,7 +30,7 @@ namespace EuroSpaceCenter.Controllers {
         //            r.items_id = i.id;
         //            restaurant.Create(r);
         //        } else if (TryValidateModel(a)) {
-        //            a.item_id = i.id; // oops
+        //            a.items_id = i.id; // oops
         //            attraction.Create(a);
         //        } else if (TryValidateModel(s)) {
         //            s.items_id = i.id;
@@ -73,7 +73,7 @@ namespace EuroSpaceCenter.Controllers {
         [ValidateAntiForgeryToken]
         public RedirectResult Attraction(int? id, attraction i) {
             try {
-                i.item_id = (int)id;
+                i.items_id = (int)id;
                 attraction.Update(i);
                 Flash.Set(TempData, "Boom! Updated");
             } catch (Exception) {

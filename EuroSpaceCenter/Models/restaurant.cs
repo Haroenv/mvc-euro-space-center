@@ -33,6 +33,7 @@ namespace EuroSpaceCenter.Models {
     }
     public class RestaurantValidation {
         [Required(ErrorMessage = "Customers should know if they need to bring extra cash or a visa card.")]
+        [Display(Name = "Payment type")]
         public string payment_type;
     }
 }

@@ -13,6 +13,14 @@
     }
     <p>@Model.description</p>
     <img src="@Model.image" alt="@Model.alt" />
+    @if (ViewBag.Properties != null) {
+        <dl class="dl-horizontal">
+            @foreach (var property in ViewBag.Properties) {
+                <dt>@property.Name</dt>
+                <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
+            }
+        </dl>
+    }
 
     @using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
         @Html.AntiForgeryToken()

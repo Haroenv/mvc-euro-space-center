@@ -18,7 +18,7 @@ namespace EuroSpaceCenter.Models {
 
         internal static attraction Update(attraction i) {
             using (var db = new DataClassesDataContext()) {
-                var old = db.attractions.SingleOrDefault(it => it.item_id == i.item_id);
+                var old = db.attractions.SingleOrDefault(it => it.items_id == i.items_id);
                 if (old != null) {
                     foreach (PropertyInfo property in typeof(attraction).GetProperties()) {
                         if (property.Name == "item") {
@@ -36,9 +36,11 @@ namespace EuroSpaceCenter.Models {
     }
     public class AttractionValidation {
         [Required(ErrorMessage = "Imagine a poor kid reading about a cool thing on your site and then only once it's there it figures out it can't go on yet!")]
+        [Display(Name = "Minimum height")]
         public int min_height;
 
         [Required(ErrorMessage = "Don't make them bump their heads!")]
+        [Display(Name = "Maximum height")]
         public int max_height;
     }
 

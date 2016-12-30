@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Linq;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -11,6 +12,11 @@ namespace EuroSpaceCenter.Models {
     public partial class item {
         internal static item Get(int id) {
             using (var db = new DataClassesDataContext()) {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<item>(t => t.restaurant);
+                options.LoadWith<item>(t => t.show);
+                options.LoadWith<item>(t => t.attraction);
+                db.LoadOptions = options;
                 return db.items.SingleOrDefault(i => i.id == id);
             }
         }
@@ -18,12 +24,19 @@ namespace EuroSpaceCenter.Models {
         internal static List<item> Get(string cat) {
             using (var db = new DataClassesDataContext()) {
                 //return db.items.Where(i => i[cat] != null).ToList();
+                DataLoadOptions options = new DataLoadOptions();
                 switch (cat) {
                     case "attractions":
+                        options.LoadWith<item>(t => t.attraction);
+                        db.LoadOptions = options;
                         return db.items.Where(i => i.attraction != null).ToList();
                     case "shows":
+                        options.LoadWith<item>(t => t.show);
+                        db.LoadOptions = options;
                         return db.items.Where(i => i.show != null).ToList();
                     case "restaurants":
+                        options.LoadWith<item>(t => t.restaurant);
+                        db.LoadOptions = options;
                         return db.items.Where(i => i.restaurant != null).ToList();
                     default:
                         throw new Exception("no such category");
