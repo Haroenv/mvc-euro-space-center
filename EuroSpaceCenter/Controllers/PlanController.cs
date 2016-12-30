@@ -25,17 +25,17 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Delete(int id) {
-            //try {
+        public HttpStatusCodeResult Delete(int id) {
+            try {
                 if (parkplan.HasUser(user_id: user.Get(User.Identity.Name).id, parkplan_id: id)) {
                     parkplan.Delete(id);
                     return new HttpStatusCodeResult(204);
                 } else {
                     return new HttpStatusCodeResult(403);
                 }
-            //} catch (Exception ex){
-            //    return Content(ex.ToString());
-            //}
+            } catch (Exception){
+                return HttpStatusCodeResult(500);
+            }
         }
 
         [HttpPost]
@@ -48,6 +48,8 @@ namespace EuroSpaceCenter.Controllers {
             return View(plan);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Invite(int id, int user_id) {
             if (parkplan.HasUser(user_id: user_id, parkplan_id: id)) {
                 parkplan.Invite(users_id: user_id, parkplan_id: id);

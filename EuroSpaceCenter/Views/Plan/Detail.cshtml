@@ -35,10 +35,11 @@
 <form action="/Plan/Invite/@Model.id" method="post" class="form-inline">
     <div class="form-group">
         <label for="recipient">Invite</label>
-        <input type="email" name="recipient" id="recipient" class="form-control" placeholder="their@email.com"/>
+        <input type="email" name="recipient" id="recipient" class="form-control" placeholder="their@email.com" />
     </div>
-   <div class="form-group">
-       <button class="btn btn-default">Invite</button>
-   </div>
+    <div class="form-group">
+        <button class="btn btn-default">Invite</button>
+    </div>
+    @Html.AntiForgeryToken()
 </form>
 <hr />
