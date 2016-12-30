@@ -5,43 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
+<div class="container container--small">
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Log in to Euro Space Center! 🚀</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="input-group">
-                    <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-envelope"></i></span>
-                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control"} })
+        <div class="form-horizontal">
+            <h4>Log in to Euro Space Center! 🚀</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="input-group">
-                    <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-lock"></i></span>
-                    @Html.PasswordFor(model => model.password, new { @class = "form-control"})
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.PasswordFor(model => model.password, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }
+
+    <div>
+        <a href="javascript:history.back()">Back</a>
     </div>
-}
-
-<div>
-    <a href="javascript:history.back()">Back</a>
 </div>
