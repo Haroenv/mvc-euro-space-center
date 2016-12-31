@@ -70,16 +70,7 @@ namespace EuroSpaceCenter.Controllers {
                     var u = user.Get(email);
                     // does invitee exist?
                     if (u == null) {
-                        u = new user();
-                        // create this user without password
-                        u.email = email;
-                        u.name = "";
-                        u.verified = false;
-                        u.password = Rand.String(10); // this is how WebPanel does it and I now understand why 😠😠😠
-                        Email.Send(u.email, null, $"Your friend just signed you up for ESC, but you didn't have an account yet. You can temporarily log in with this password: <code>{u.password}</code>", "Log In", "http://eurospacecenter.haroenviaene.ikdoeict.be/Account/Login", "New Account");
-                        user.Create(u);
-                        // UX here is really hard
-                        parkplan.Invite(users_id: u.id, parkplan_id: id);
+                        Email.Send(u.email, null, $"Your friend just signed you up for ESC, but you didn't have an account yet. You can Register at this link", "Log In", "http://eurospacecenter.haroenviaene.ikdoeict.be/Register/Index?plan=" + id, "New Account");
                         Flash.Set(TempData, "This user didn't have an account yet, they are invited now!");
                         return RedirectToAction("Detail", new { id = id });
                     } else {
