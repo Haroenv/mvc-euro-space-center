@@ -7,6 +7,10 @@ using System.Web.Http;
 
 namespace EuroSpaceCenter.Controllers {
     public class ItemsController : ApiController {
+
+        /// <summary>
+        /// Get all of the items in Euro Space Center
+        /// </summary>
         [HttpGet]
         public IHttpActionResult Items() {
             var items = item.GetAllDisposed().Select(i => new {
@@ -30,6 +34,10 @@ namespace EuroSpaceCenter.Controllers {
             return Json(items);
         }
 
+        /// <summary>
+        /// Get details about a single item
+        /// </summary>
+        /// <param name="id">the id of the item</param>
         [HttpGet]
         public IHttpActionResult Single(int id) {
             var i = item.Get(id);

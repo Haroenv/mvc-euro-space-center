@@ -7,6 +7,9 @@ using System.Web.Http;
 namespace EuroSpaceCenter.Controllers {
     public class AttractionsController : ApiController {
 
+        /// <summary>
+        /// Get all of the attractions in Euro Space Center
+        /// </summary>
         [HttpGet]
         public IHttpActionResult Attractions() {
             var items = item.GetAllDisposed().Where(i => i.attraction != null).Select(i => new {

@@ -7,6 +7,10 @@ using System.Web.Http;
 
 namespace EuroSpaceCenter.Controllers {
     public class ShowsController : ApiController {
+
+        /// <summary>
+        /// Get all of the shows in Euro Space Center
+        /// </summary>
         [HttpGet]
         public IHttpActionResult Shows() {
             var items = item.GetAllDisposed().Where(i => i.show != null).Select(i => new {

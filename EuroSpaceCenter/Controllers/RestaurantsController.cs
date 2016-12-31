@@ -6,6 +6,11 @@ using System.Web.Http;
 
 namespace EuroSpaceCenter.Controllers {
     public class RestaurantsController : ApiController {
+
+        /// <summary>
+        /// Get all of the restaurants in Euro Space Center
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Restaurants() {
             var items = item.GetAllDisposed().Where(i => i.restaurant != null).Select(i => new {
