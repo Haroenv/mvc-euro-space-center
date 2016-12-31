@@ -13,7 +13,7 @@
             @Html.ValidationMessageFor(model => model.rating1, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            @Html.Button("review", new { @class = "btn" })
+            @Html.Button("review", new { @class = "btn btn-success" })
         </div>
         <input type="hidden" name="items_id" value="@ViewBag.id" id="items_id" />
 }
