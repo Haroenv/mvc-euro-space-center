@@ -11,7 +11,7 @@ namespace EuroSpaceCenter.util {
 
         internal static bool sendVerification(user u, activation a) {
             string cta = "Verify now!";
-            string link = $"https://eurospacecenter.haroenviaene.ikdoeict.net/Account/Activate?code={a.code}";
+            string link = $"http://eurospacecenter.haroenviaene.ikdoeict.net/Account/Activate?code={a.code}";
             string body = $"Welcome to Euro Space Center. You have just registered for an account!<br/> We just quickly want you to verify that you're actually you and then you're ready for liftoff 🚀.<br/> If the button doesn't work, try navigating 🛰 to {link}";
             string subject = "Activation";
             return Send(u.email, u.name, body, cta, link, subject);
@@ -19,7 +19,7 @@ namespace EuroSpaceCenter.util {
 
         internal static bool sendPlanInvite(user u, parkplan p) {
             string cta = "Join the plan!";
-            string link = $"https://eurospacecenter.haroenviaene.ikdoeict.net/Plan/Join?id={p.id}";
+            string link = $"http://eurospacecenter.haroenviaene.ikdoeict.net/Plan/Join?id={p.id}";
             string body = $"Welcome to Euro Space Center. Someone invited you to be joined at their visit!<br/> We just quickly want you to verify that you're actually you and then you're ready for liftoff 🚀.<br/> If the button doesn't work, try navigating 🛰 to {link}.<br/> Don't worry if you don't have an account yet, you can make one now!";
             string subject = "Join a visit";
             return Send(u.email, u.name, body, cta, link, subject);
