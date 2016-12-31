@@ -60,7 +60,6 @@ namespace EuroSpaceCenter.Controllers {
             return View(rating.GetAll());
         }
 
-        [HttpPost]
         public RedirectToRouteResult DeleteRating(int id) {
             rating.Delete(id);
             Flash.Set(TempData, "That's gone! 💨");
