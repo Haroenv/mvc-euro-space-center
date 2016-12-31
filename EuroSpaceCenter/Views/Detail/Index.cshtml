@@ -30,7 +30,7 @@
     }
 
     @if (User.Identity.IsAuthenticated) {
-        @using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
+        using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
             @Html.AntiForgeryToken()
             <div class="form-group">
                 <input type="hidden" name="item_id" value="@ViewBag.id" />

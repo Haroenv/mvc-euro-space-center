@@ -28,6 +28,9 @@ namespace EuroSpaceCenter.Controllers {
                 ViewBag.Properties = i.restaurant.GetType().GetProperties().Where(itm => itm.Name != "item" && itm.Name != "items_id");
                 ViewBag.PropModel = i.restaurant;
             }
+            if (User.Identity.IsAuthenticated) {
+                ViewBag.Parkplans = parkplan.GetAll(user.Get(User.Identity.Name).id).Where(uhp => uhp.accepted).Select(uhp => uhp.parkplan);
+            }
             return View(i);
         }
 

@@ -1,4 +1,6 @@
-﻿@model EuroSpaceCenter.Models.parkplan
+﻿@using EuroSpaceCenter.Models
+@using System.Linq
+@model parkplan
 
 @{
     ViewBag.Title = "Detail";
@@ -32,10 +34,19 @@
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<ul>
+    @foreach (user i in ViewBag.Users) {
+        <li>
+            @i.name
+        </li>
+    }
+</ul>
+
 <form action="/Plan/Invite/@Model.id" method="post" class="form-inline">
     <div class="form-group">
-        <label for="recipient">Invite</label>
-        <input type="email" name="recipient" id="recipient" class="form-control" placeholder="their@email.com" />
+        <label for="email">Invite</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="their@email.com" />
     </div>
     <div class="form-group">
         <button class="btn btn-default">Invite</button>
@@ -43,3 +54,33 @@
     @Html.AntiForgeryToken()
 </form>
 <hr />
+
+<ul class="list-group">
+    @foreach (item i in ViewBag.Items) {
+        <li class="list-group-item">
+            @i.title
+            <span class="btn btn-danger label btn-sm pull-right" data-id="@i.id">❌</span>
+        </li>
+    }
+</ul>
+
+@section scripts {
+    <script>
+        function remove(id) {
+            $.ajax({
+                method: 'POST',
+                url: '/Plan/Remove/' + @Model.id + '?item_id=' + id,
+            });
+        }
+
+        $('[data-id]').each(function (i, el) {
+            $(el).on('click', function (e) {
+                e.preventDefault();
+                if (confirm('Deleting this will delete this plan for everyone. Are you sure?')) {
+                    remove(el.dataset.id);
+                    $(el).closest('.list-group-item').fadeOut(300, function () { $(this).remove(); });
+                }
+            })
+        })
+    </script>
+}
