@@ -21,6 +21,15 @@ namespace EuroSpaceCenter.Controllers {
             return View(parkplan.Get(parkplan_id: id));
         }
 
+        public HttpStatusCodeResult Set(int id) {
+            if (parkplan.HasUser(user_id: user.Get(User.Identity.Name).id, parkplan_id: id)) {
+                Session.Add("plan", new { id = id });
+                return new HttpStatusCodeResult(200);
+            } else {
+                return new HttpStatusCodeResult(403);
+            }
+        }
+
         public ActionResult Create() {
             return View();
         }
@@ -80,7 +89,7 @@ namespace EuroSpaceCenter.Controllers {
         [HttpPost]
         public ActionResult Add(int id, int item_id) {
             if (parkplan.HasUser(parkplan_id: id, user_id: user.Get(User.Identity.Name).id)) {
-                parkplan.AddItem(item_id);
+                parkplan.AddItem(id, item_id);
                 return new HttpStatusCodeResult(204);
             }
             return new HttpStatusCodeResult(403);
@@ -89,7 +98,7 @@ namespace EuroSpaceCenter.Controllers {
         [HttpPost]
         public HttpStatusCodeResult Remove(int id, int item_id) {
             if (parkplan.HasUser(parkplan_id: id, user_id: user.Get(User.Identity.Name).id)) {
-                parkplan.RemoveItem(item_id);
+                parkplan.RemoveItem(id, item_id);
                 return new HttpStatusCodeResult(204);
             }
             return new HttpStatusCodeResult(403);

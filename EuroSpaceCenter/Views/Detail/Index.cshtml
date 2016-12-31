@@ -29,13 +29,20 @@
         </dl>
     }
 
-    @using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            <input type="hidden" name="id" value="@ViewBag.id" />
-            @Html.Button("add to my plan", new { @class = "btn btn-success", id = "add" })
-            <p class="help-block">Add this item to your park plan <span class="emoji">🗺</span></p>
-        </div>
+    @if (User.Identity.IsAuthenticated) {
+        @using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input type="hidden" name="item_id" value="@ViewBag.id" />
+                <select name="id">
+                    @foreach (parkplan plan in ViewBag.Parkplans) {
+                        <option value="@plan.id">@plan.name</option>
+                    }
+                </select>
+                @Html.Button("add to my plan", new { @class = "btn btn-success", id = "add" })
+                <p class="help-block">Add this item to your <a href="/Plan">park plan <span class="emoji">🗺</span></a></p>
+            </div>
+        }
     }
 
     @Html.Partial("Review", (rating)ViewBag.Rating)

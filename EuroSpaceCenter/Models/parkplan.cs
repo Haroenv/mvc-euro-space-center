@@ -21,6 +21,13 @@ namespace EuroSpaceCenter.Models {
 
         internal static parkplan Get(int parkplan_id) {
             using (var db = new DataClassesDataContext()) {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<parkplan>(t => t.parkplans_has_items);
+                options.LoadWith<parkplan>(t => t.users_has_parkplans);
+                options.LoadWith<users_has_parkplan>(t => t.user);
+                options.LoadWith<parkplans_has_item>(t => t.item);
+                db.LoadOptions = options;
+
                 return db.parkplans.SingleOrDefault(p => p.id == parkplan_id);
             }
         }
