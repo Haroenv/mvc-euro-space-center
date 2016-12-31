@@ -8,6 +8,14 @@
     <title>Register to Euro Space Center</title>
     <link href="/Content/bootstrap.css" rel="stylesheet" />
     <link href="/Content/site.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/Content/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/Content/icon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/Content/icon/favicon-16x16.png" sizes="16x16" />
+    <link rel="manifest" href="/Content/icon/manifest.json" />
+    <link rel="mask-icon" href="/Content/icon/safari-pinned-tab.svg"/>
+    <link rel="shortcut icon" href="/Content/icon/favicon.ico" />
+    <meta name="msapplication-config" content="/Content/icon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
 </head>
 <body>
     <div class="navbar navbar-default navbar-static-top">
