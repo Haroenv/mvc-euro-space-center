@@ -43,6 +43,12 @@ namespace EuroSpaceCenter.Models {
             }
         }
 
+        internal static user Get(int id) {
+            using (var db = new DataClassesDataContext()) {
+                return db.users.SingleOrDefault(u => u.id == id);
+            }
+        }
+
         internal static user Get(string email, string password) {
             using (var db = new DataClassesDataContext()) {
                 user user = db.users.SingleOrDefault(u => u.email == email);
