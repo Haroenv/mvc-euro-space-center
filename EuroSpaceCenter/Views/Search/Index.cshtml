@@ -38,6 +38,7 @@
 
 @section scripts {
     @* loaded over CDN, thus better than downloading it here *@
+    <script src="https://unpkg.com/object-fit-images@2.5.9/dist/ofi.browser.js"></script>
     <script src="https://unpkg.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js"></script>
     <script>
         var $grid = $('.isotope').isotope({
@@ -62,5 +63,6 @@
         $(window).on("load", function () {
             $(".isotope").isotope('layout');
         });
+        $(function () { objectFitImages() });
     </script>
 }
