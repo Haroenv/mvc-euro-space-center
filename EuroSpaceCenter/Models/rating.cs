@@ -27,6 +27,24 @@ namespace EuroSpaceCenter.Models {
                 return db.ratings.Where(r => r.items_id == id).OrderByDescending(r => r.datetime).ToList();
             }
         }
+
+        internal static List<rating> GetAll() {
+            using (var db = new DataClassesDataContext()) {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<rating>(t => t.user);
+                options.LoadWith<rating>(t => t.item);
+                db.LoadOptions = options;
+                return db.ratings.ToList();
+            }
+        }
+
+        internal static void Delete(int id) {
+            using (var db = new DataClassesDataContext()) {
+                var it = db.ratings.SingleOrDefault(i => i.id == id);
+                db.ratings.DeleteOnSubmit(it);
+                db.SubmitChanges();
+            }
+        }
     }
 
     public class RatingValidation {

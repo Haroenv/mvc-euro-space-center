@@ -56,6 +56,17 @@ namespace EuroSpaceCenter.Controllers {
             return View(i);
         }
 
+        public ActionResult Ratings() {
+            return View(rating.GetAll());
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult DeleteRating(int id) {
+            rating.Delete(id);
+            Flash.Set(TempData, "That's gone! 💨");
+            return RedirectToAction("Ratings");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public RedirectResult Show(int? id, show i) {

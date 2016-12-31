@@ -1,0 +1,36 @@
+﻿@using EuroSpaceCenter.Models
+@model List<rating>
+
+@{
+    ViewBag.Title = "Ratings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Ratings</h3>
+<div class="row">
+    @foreach (rating r in Model) {
+        <div class="col-sm-1">
+            <div class="thumbnail">
+                @Html.GravatarImage(r.user.email)
+            </div>
+        </div>
+            <div class="col-sm-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left">
+                            <strong>@r.user.name</strong>
+                            @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
+                        </div>
+                        <strong class="pull-right" data-rating="@r.rating1">@r.rating1 / 5</strong>
+                    </div>
+                    <div class="panel-body">
+                        @r.message
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <strong>@r.item.title</strong>
+                        <a href="/Admin/DeleteReview/@r.id" class="btn btn-sm btn-danger pull-right">delete</a>
+                    </div>
+                </div>
+            </div>
+    }
+</div>

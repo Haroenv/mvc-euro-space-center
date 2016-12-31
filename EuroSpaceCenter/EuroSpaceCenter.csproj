@@ -296,6 +296,7 @@
     <Content Include="Views\Plan\Edit.cshtml" />
     <Content Include="Views\Plan\CreatePlanForm.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Admin\Ratings.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

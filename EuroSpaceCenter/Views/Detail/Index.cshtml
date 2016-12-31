@@ -45,7 +45,10 @@
         }
     }
 
-    @Html.Partial("Review", (rating)ViewBag.Rating)
+    @if (User.Identity.IsAuthenticated) {
+
+        @Html.Partial("Review", (rating)ViewBag.Rating)
+    }
 </div>
 
 <section id="ratings">
