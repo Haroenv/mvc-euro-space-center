@@ -15,6 +15,7 @@ namespace EuroSpaceCenter.Models {
                 options.LoadWith<item>(t => t.restaurant);
                 options.LoadWith<item>(t => t.show);
                 options.LoadWith<item>(t => t.attraction);
+                options.LoadWith<item>(t => t.ratings);
                 db.LoadOptions = options;
                 return db.items.SingleOrDefault(i => i.id == id);
             }
@@ -45,6 +46,18 @@ namespace EuroSpaceCenter.Models {
 
         internal static List<item> GetAll() {
             using (var db = new DataClassesDataContext()) {
+                return db.items.ToList();
+            }
+        }
+
+        internal static List<item> GetAllDisposed() {
+            using (var db = new DataClassesDataContext()) {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<item>(t => t.restaurant);
+                options.LoadWith<item>(t => t.show);
+                options.LoadWith<item>(t => t.attraction);
+                options.LoadWith<item>(t => t.ratings);
+                db.LoadOptions = options;
                 return db.items.ToList();
             }
         }

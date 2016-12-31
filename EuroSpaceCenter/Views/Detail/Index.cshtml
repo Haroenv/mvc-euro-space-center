@@ -8,7 +8,7 @@
 
 <div class="container container--small">
     <h2>
-        @Model.title 
+        @Model.title
         @if (ViewBag.PropModel != null) {
             <span class="label label-info">@ViewBag.PropModel.GetType().Name</span>
         }
@@ -74,11 +74,14 @@
         }
     </div>
 </section>
-<script>
-    NodeList.prototype.forEach = Array.prototype.forEach; // polyfill
-    var ratings = document.querySelectorAll('[data-rating]');
-    ratings.forEach(function (r) {
-        r.innerText = '☄'.repeat(r.dataset.rating) + '⚪'.repeat(5 - r.dataset.rating);
-        r.classList.add('emoji');
-    })
-</script>
+
+@section scripts {
+    <script>
+        NodeList.prototype.forEach = Array.prototype.forEach; // polyfill
+        var ratings = document.querySelectorAll('[data-rating]');
+        ratings.forEach(function (r) {
+            r.innerText = '☄'.repeat(r.dataset.rating) + '⚪'.repeat(5 - r.dataset.rating);
+            r.classList.add('emoji');
+        })
+    </script>
+}
