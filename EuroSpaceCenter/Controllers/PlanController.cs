@@ -70,7 +70,7 @@ namespace EuroSpaceCenter.Controllers {
                     var u = user.Get(email);
                     // does invitee exist?
                     if (u == null) {
-                        Email.Send(u.email, null, $"Your friend just signed you up for ESC, but you didn't have an account yet. You can Register at this link", "Log In", "http://eurospacecenter.haroenviaene.ikdoeict.be/Register/Index?plan=" + id, "New Account");
+                        Email.Send(u.email, null, $"Your friend just signed you up for ESC, but you didn't have an account yet. You can Register at this link", "Log In", "http://eurospacecenter.haroenviaene.ikdoeict.be/Register/Index?plan=" + id, "Invited");
                         Flash.Set(TempData, "This user didn't have an account yet, they are invited now!");
                         return RedirectToAction("Detail", new { id = id });
                     } else {
