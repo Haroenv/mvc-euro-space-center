@@ -25,10 +25,5 @@ namespace EuroSpaceCenter.Controllers {
 
             return Json(items);
         }
-
-        [HttpGet]
-        public IHttpActionResult Single(int id) {
-            return Redirect("/api/Items/" + id);
-        }
     }
 }

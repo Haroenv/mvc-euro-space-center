@@ -1,4 +1,5 @@
 ﻿using EuroSpaceCenter.Models;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,11 +25,6 @@ namespace EuroSpaceCenter.Controllers {
             });
 
             return Json(items);
-        }
-
-        [HttpGet]
-        public IHttpActionResult Single(int id) {
-            return RedirectToRoute("/api/Items/", id);
         }
     }
 }
