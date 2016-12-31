@@ -38,7 +38,11 @@
 <ul>
     @foreach (user i in ViewBag.Users) {
         <li>
-            @i.name
+            @if (i.name != "") {
+                @i.name
+            } else {
+                @i.email
+            }
         </li>
     }
 </ul>

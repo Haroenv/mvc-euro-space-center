@@ -70,8 +70,10 @@ namespace EuroSpaceCenter.Controllers {
                     var u = user.Get(email);
                     // does invitee exist?
                     if (u == null) {
+                        u = new user();
                         // create this user without password
                         u.email = email;
+                        u.name = "";
                         u.verified = false;
                         u.password = Rand.String(10); // this is how WebPanel does it and I now understand why 😠😠😠
                         Email.Send(u.email, null, $"Your friend just signed you up for ESC, but you didn't have an account yet. You can temporarily log in with this password: <code>{u.password}</code>", "Log In", "http://eurospacecenter.haroenviaene.ikdoeict.be/Account/Login", "New Account");
@@ -87,7 +89,7 @@ namespace EuroSpaceCenter.Controllers {
                     }
                 } catch (Exception e) {
                     Flash.Set(TempData, "That didn't work 😲");
-                    return RedirectToAction("Detail", id);
+                    return RedirectToAction("Detail", new { id = id });
                 }
             }
             Flash.Set(TempData, "That's not your plan 💁");
