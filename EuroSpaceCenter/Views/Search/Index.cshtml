@@ -18,7 +18,7 @@
                 <div class="panel-heading clearfix">
                     <h2 class="panel-title pull-left">@i.title</h2>
                     @if (User.IsInRole("admin")) {
-                        using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { @class = "deleteform", onsubmit=$"return confirm('Are you sure you want to delete \"{@i.title}\"?')" })) {
+                        using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { @class = "deleteform", onsubmit = $"return confirm('Are you sure you want to delete \"{@i.title}\"?')" })) {
                             <input type="hidden" name="id" value="@i.id" />
                             @Html.Button("❌", new { @class = "btn btn-danger pull-right" });
                         }
@@ -57,6 +57,10 @@
         var $quicksearch = $('input[type=search]').on('input', function () {
             qsRegex = new RegExp($quicksearch.val(), 'gi');
             $grid.isotope();
+        });
+
+        $(window).on("load", function () {
+            $(".isotope").isotope('layout');
         });
     </script>
 }
