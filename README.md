@@ -11,10 +11,8 @@ To do this you should create `EuroSpaceCenter/EuroSpaceCenter/secret.xml` with c
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <appSettings>
-  <add key="emailAddress" value="email address to send from" />
-  <add key="emailPass" value="yep, your password" />
-  <add key="emailServer" value="your smtp address" />
-  <add key="emailPort" value="smtp port (integer!)" />
+  <add key="mailgunKey" value="mailgun api key" />
+  <add key="mailgunDomain" value="domain used for mailgun (like mail.haroen.me) --> make sure that postmaster@doman exists" />
 </appSettings>
 ```
 
