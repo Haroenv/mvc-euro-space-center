@@ -6,7 +6,7 @@ A website made for the course .net web solutions at Odisee UC Ghent. Course give
 
 This code needs email credentials to be able to send some nice and exciting register and invite emails. 
 
-To do this you should create `EuroSpaceCenter/EuroSpaceCenter/secret.xml` with content like this: 
+To do this you should create `EuroSpaceCenter/secret.xml` with content like this: 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
