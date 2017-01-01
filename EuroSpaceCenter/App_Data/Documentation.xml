@@ -491,7 +491,12 @@
             Get all of the items in Euro Space Center
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:EuroSpaceCenter.Controllers.ItemsController.Single(System.Int32)" -->
+        <member name="M:EuroSpaceCenter.Controllers.ItemsController.Single(System.Int32)">
+            <summary>
+            Get details about a single item
+            </summary>
+            <param name="id">the id of the item</param>
+        </member>
         <member name="M:EuroSpaceCenter.Controllers.RestaurantsController.Restaurants">
             <summary>
             Get all of the restaurants in Euro Space Center

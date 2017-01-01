@@ -11,6 +11,14 @@ namespace EuroSpaceCenter {
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Error",
+                url: "{id}",
+                defaults: new {
+                    controller = "Error",
+                    action = "NotFound"
+            });
         }
     }
 }

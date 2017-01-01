@@ -39,7 +39,6 @@ namespace EuroSpaceCenter.Controllers {
         /// Get details about a single item
         /// </summary>
         /// <param name="id">the id of the item</param>
-        /// <returns>
         [HttpGet]
         [ResponseType(typeof(Item))]
         public IHttpActionResult Single(int id) {
