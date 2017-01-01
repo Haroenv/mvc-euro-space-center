@@ -215,6 +215,7 @@
     <Compile Include="util\HtmlTimeExtension.cs" />
     <Compile Include="util\Provider.cs" />
     <Compile Include="util\Rand.cs" />
+    <Compile Include="util\Text.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Documentation.xml" />

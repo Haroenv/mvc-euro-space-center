@@ -1,4 +1,5 @@
 ﻿@using EuroSpaceCenter.Models
+@using EuroSpaceCenter.util
 
 @{
     ViewBag.Title = "Index";
@@ -41,7 +42,7 @@
                     <img src="@i.image" alt="@i.alt" />
                 </div>
                 <div class="panel-body text-center">
-                    <p>@i.description</p>
+                    <p>@i.description.Truncate(145)</p>
                 </div>
             </article>
         </a>

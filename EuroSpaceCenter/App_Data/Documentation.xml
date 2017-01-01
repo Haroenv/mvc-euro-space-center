@@ -675,6 +675,19 @@
             <param name="outputBytes">The length of the hash to generate, in bytes.</param>
             <returns>A hash of the password.</returns>
         </member>
+        <member name="T:EuroSpaceCenter.util.Text">
+            <summary>
+            Text methods
+            </summary>
+        </member>
+        <member name="M:EuroSpaceCenter.util.Text.Truncate(System.String,System.Int32)">
+            <summary>
+            Truncate a text 
+            </summary>
+            <param name="value">The text to truncate</param>
+            <param name="maxChars">Amount of characters allowed</param>
+            <returns>the truncated string</returns>
+        </member>
         <member name="T:GravatarHtmlHelper">
             <summary>
             Globally Recognised Avatar - http://gravatar.com
