@@ -1,6 +1,12 @@
-# Euro Space Center
+# [Euro Space Center](http://eurospacecenter.haroenviaene.ikdoeict.net/)
 
 A website made for the course .net web solutions at Odisee UC Ghent. Course given by Kevin Picalausa 2016-2017.
+
+> note: this is completely unaffiliated from Euro Space Center ([eurospacecenter.be](https://eurospacecenter.be))
+
+## Online version
+
+The website is deployed at <http://eurospacecenter.haroenviaene.ikdoeict.net/>
 
 ## Setup
 
