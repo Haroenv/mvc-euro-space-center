@@ -5,16 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="form-group">
-    <label for="search">Search</label>
-    <input type="search" id="search" class="form-control" />
-    @* also possible frontend, but I won't do that *@
-    <select class="form-control" id="category">
-        <option value="all">all</option>
-        <option value="attractions">experience</option>
-        <option value="shows">show</option>
-        <option value="restaurants">restaurant</option>
-    </select>
+<div class="row">
+    <div class="form-group col-sm-10">
+        <label for="search">Search</label>
+        <input type="search" id="search" class="form-control" />
+        @* also possible frontend, but I won't do that because that isn't linq *@
+
+    </div>
+    <div class="form-group col-sm-2">
+        <label for="category">category</label>
+        <select class="form-control" id="category">
+            <option value="all">all</option>
+            <option value="attractions">experience</option>
+            <option value="shows">show</option>
+            <option value="restaurants">restaurant</option>
+        </select>
+    </div>
 </div>
 
 <div class="isotope" style="visibility: hidden; opacity: 0; transition: opacity ease .2s;">
