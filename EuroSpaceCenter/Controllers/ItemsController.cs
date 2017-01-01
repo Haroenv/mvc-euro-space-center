@@ -29,7 +29,8 @@ namespace EuroSpaceCenter.Controllers {
                     datetime = r.datetime,
                     rating = r.rating1,
                     message = r.message
-                })
+                }),
+                url = Url.Content($"~/Detail?id={i.id}")
             });
 
             return Json(items);
@@ -62,7 +63,8 @@ namespace EuroSpaceCenter.Controllers {
                     datetime = r.datetime,
                     rating = r.rating1,
                     message = r.message
-                })
+                }),
+                url = Url.Content($"~/Detail?id={i.id}")
             };
 
             return Json(result);
@@ -83,5 +85,6 @@ namespace EuroSpaceCenter.Controllers {
         public double rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
+        public string url { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EuroSpaceCenter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -26,7 +27,8 @@ namespace EuroSpaceCenter.Controllers {
                     datetime = r.datetime,
                     rating = r.rating1,
                     message = r.message
-                })
+                }),
+                url = Url.Content($"~/Detail?id={i.id}")
             });
 
             return Json(items);
@@ -45,5 +47,7 @@ namespace EuroSpaceCenter.Controllers {
         public double rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
+        public Uri url { get; set; }
+
     }
 }
