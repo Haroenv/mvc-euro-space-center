@@ -16,7 +16,7 @@ namespace EuroSpaceCenter.Controllers {
                     ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Average(r => r.rating1));
                 }
             } else {
-                ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Average(r => r.rating1));
+                ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN);
             }
             ViewBag.Cat = cat;
             return View();
