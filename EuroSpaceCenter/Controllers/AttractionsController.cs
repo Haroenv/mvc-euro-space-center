@@ -21,7 +21,7 @@ namespace EuroSpaceCenter.Controllers {
                 min_height = i.attraction.min_height,
                 max_height = i.attraction.max_height,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new Rating(){
+                ratings = i.ratings.Select(r => new RatingEntity(){
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -43,7 +43,7 @@ namespace EuroSpaceCenter.Controllers {
         public int? max_height { get; set; }
         public int? min_height { get; set; }
         public double rating { get; set; }
-        public IEnumerable<Rating> ratings { get; set; }
+        public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
     }
 }

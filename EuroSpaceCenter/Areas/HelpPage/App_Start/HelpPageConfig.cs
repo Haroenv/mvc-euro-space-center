@@ -48,8 +48,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                     min_height = 60,
                     max_height = 220,
                     rating = 2.52,
-                    ratings = new Rating[] {
-                        new Rating() {
+                    ratings = new RatingEntity[] {
+                        new RatingEntity() {
                             datetime = DateTime.Now,
                             rating = 2,
                             message = "That was okay I guess"
@@ -64,8 +64,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         id = 5,
                         payment_type = "Cash, Cheque, Large rocks found on the sea bed",
                         rating = 4.32,
-                        ratings = new Rating[] {
-                            new Rating() {
+                        ratings = new RatingEntity[] {
+                            new RatingEntity() {
                                 datetime = DateTime.Now,
                                 rating = 1,
                                 message = "horrible service"
@@ -79,8 +79,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         id = 5,
                         datetime = DateTime.Now,
                         rating = 5.00,
-                        ratings = new Rating[] {
-                            new Rating() {
+                        ratings = new RatingEntity[] {
+                            new RatingEntity() {
                                 datetime = DateTime.Now,
                                 rating = 5,
                                 message = "This is the cooolest show ever"
@@ -95,8 +95,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         min_height = 60,
                         max_height = 220,
                         rating = 2.52,
-                        ratings = new Rating[] {
-                            new Rating() {
+                        ratings = new RatingEntity[] {
+                            new RatingEntity() {
                                 datetime = DateTime.Now,
                                 rating = 2,
                                 message = "That was okay I guess"
@@ -111,8 +111,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         id = 5,
                         payment_type = "Cash, Cheque, Large rocks found on the sea bed",
                         rating = 4.32,
-                        ratings = new Rating[] {
-                            new Rating() {
+                        ratings = new RatingEntity[] {
+                            new RatingEntity() {
                                 datetime = DateTime.Now,
                                 rating = 1,
                                 message = "horrible service"
@@ -127,8 +127,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         id = 5,
                         datetime = DateTime.Now,
                         rating = 5.00,
-                        ratings = new Rating[] {
-                            new Rating() {
+                        ratings = new RatingEntity[] {
+                            new RatingEntity() {
                                 datetime = DateTime.Now,
                                 rating = 5,
                                 message = "This is the cooolest show ever"
@@ -144,8 +144,8 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         min_height = 60,
                         max_height = 220,
                         rating = 2.52,
-                        ratings = new Rating[] {
-                            new Rating() {
+                        ratings = new RatingEntity[] {
+                            new RatingEntity() {
                                 datetime = DateTime.Now,
                                 rating = 2,
                                 message = "That was okay I guess"
