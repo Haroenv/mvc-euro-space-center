@@ -21,7 +21,7 @@ namespace EuroSpaceCenter.Controllers {
                 alt = i.alt,
                 datetime = i.show.datetime,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new Rating(){
+                ratings = i.ratings.Select(r => new RatingEntity(){
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -42,7 +42,7 @@ namespace EuroSpaceCenter.Controllers {
         public int id { get; set; }
         public string image { get; set; }
         public double rating { get; set; }
-        public IEnumerable<Rating> ratings { get; set; }
+        public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
     }
 }

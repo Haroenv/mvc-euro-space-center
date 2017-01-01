@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace EuroSpaceCenter.Controllers {
-    internal class Rating {
-        public Rating() {
+    internal class RatingEntity {
+        public RatingEntity() {
         }
 
         public DateTime datetime { get; set; }
