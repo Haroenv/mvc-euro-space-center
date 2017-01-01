@@ -6,53 +6,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container container--small">
-    <h2>
-        @Model.title
-        @if (ViewBag.PropModel != null) {
-            <span class="label label-info">@ViewBag.PropModel.GetType().Name</span>
-        }
-        @if (ViewBag.Score != double.NaN) {
-            <span data-rating="@Math.Ceiling(ViewBag.Score)">@Math.Ceiling(ViewBag.Score) / 5</span>
-        }
-    </h2>
+
+<h2>
+    @Model.title
+    @if (ViewBag.PropModel != null) {
+        <span class="label label-info">@ViewBag.PropModel.GetType().Name</span>
+    }
+    @if (ViewBag.Score != double.NaN) {
+        <span data-rating="@Math.Ceiling(ViewBag.Score)">@Math.Ceiling(ViewBag.Score) / 5</span>
+    }
     @if (User.IsInRole("admin")) {
         @Html.ActionLink("Edit", "Edit", new { id = @Model.id }, new { @class = "btn btn-success" })
     }
-    <p>@Model.description</p>
-    <img src="@Model.image" alt="@Model.alt" />
-    @if (ViewBag.Properties != null) {
-        <dl class="dl-horizontal">
-            @foreach (var property in ViewBag.Properties) {
-                <dt>@property.Name</dt>
-                //doesn't work because the type isn't sure on beforehand 😞
-                @*<dt>@property.GetCustomAttribute<DisplayAttribute>().GetName()</dt>*@
-                <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
-            }
-        </dl>
-    }
+</h2>
 
-    @if (User.Identity.IsAuthenticated) {
-        using (Html.BeginForm("Add", "Plan", FormMethod.Post, new { id = "addToPlan" })) {
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                <input type="hidden" name="item_id" value="@ViewBag.id" />
-                <select name="id">
-                    @foreach (parkplan plan in ViewBag.Parkplans) {
-                        <option value="@plan.id">@plan.name</option>
-                    }
-                </select>
-                @Html.Button("add to my plan", new { @class = "btn btn-success", id = "add" })
-                <p class="help-block">Add this item to your <a href="/Plan">park plan <span class="emoji">🗺</span></a></p>
+<div class="row">
+    <div class="col-md-5">
+        <img src="@Model.image" alt="@Model.alt" class="img-responsive img-rounded" />
+    </div>
+    <div class="col-md-7">
+        <section class="panel panel-default" id="description">
+            <div class="panel-heading">
+                <h4>Description</h4>
             </div>
+            <p class="panel-body">@Model.description</p>
+        </section>
+        @if (ViewBag.Properties != null) {
+            <section class="panel panel-default" id="details">
+                <div class="panel-heading">
+                    <h4>Details</h4>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        @foreach (var property in ViewBag.Properties) {
+                            <dt>@property.Name</dt>
+                            //doesn't work because the type isn't sure on beforehand 😞
+                            @*<dt>@property.GetCustomAttribute<DisplayAttribute>().GetName()</dt>*@
+                            <dd>@property.GetValue(ViewBag.PropModel, null)</dd>
+                        }
+                    </dl>
+                </div>
+            </section>
         }
-    }
-
-    @if (User.Identity.IsAuthenticated) {
-
-        @Html.Partial("Review", (rating)ViewBag.Rating)
-    }
+        @if (User.Identity.IsAuthenticated) {
+            using (Html.BeginForm("Add", "Plan", FormMethod.Post, new { id = "addToPlan" })) {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="item_id" value="@Model.id" />
+                <label for="id">Add this item to your <a href="/Plan">park plan <span class="emoji">🗺</span></a></label>
+                <div class="input-group">
+                    <select name="id" id="id" class="form-control">
+                        @foreach (parkplan plan in ViewBag.Parkplans) {
+                            <option value="@plan.id">@plan.name</option>
+                        }
+                    </select>
+                    <div class="input-group-btn">
+                        @Html.Button("Add", new { @class = "btn btn-success", id = "add" })
+                    </div>
+                </div>
+            }
+        }
+    </div>
 </div>
+
+@if (User.Identity.IsAuthenticated) {
+
+    @Html.Partial("Review", (rating)ViewBag.Rating)
+}
+
 
 <section id="ratings">
     <h3>Ratings</h3>
@@ -93,7 +113,6 @@
         $('#addToPlan').on('submit', function (e) {
             e.preventDefault();
             $(this).find('[name="id"]').val();
-            debugger;
             $.ajax({
                 method: 'POST',
                 url: '/Plan/Add/' + $(this).find('[name="id"]').val() + '?item_id=@Model.id',
