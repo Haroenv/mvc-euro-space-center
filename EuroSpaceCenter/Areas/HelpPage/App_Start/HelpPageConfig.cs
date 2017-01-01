@@ -2,6 +2,7 @@
 // package to your project.
 ////#define Handle_PageResultOfT
 
+using EuroSpaceCenter.Controllers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,10 +37,121 @@ namespace EuroSpaceCenter.Areas.HelpPage {
             // Uncomment the following to use "sample string" as the sample for all actions that have string as the body parameter or return type.
             // Also, the string arrays will be used for IEnumerable<string>. The sample objects will be serialized into different media type 
             // formats by the available formatters.
-            config.SetSampleObjects(new Dictionary<Type, object>
-            {
+            config.SetSampleObjects(new Dictionary<Type, object> {
                 {typeof(string), "some word"},
-                {typeof(IEnumerable<string>), new string[]{ "some word", "another word"}}
+                {typeof(IEnumerable<string>), new string[]{ "some word", "another word"}},
+                {typeof(Item), new Item() {
+                    title = "Floating in space",
+                    image = "http://www.universetoday.com/wp-content/uploads/2008/09/dewinne.jpg",
+                    alt = "A guy in a blue floating in some kind of box. He has some flag on his torso",
+                    id = 5,
+                    min_height = 60,
+                    max_height = 220,
+                    rating = 2.52,
+                    ratings = new Rating[] {
+                        new Rating() {
+                            datetime = DateTime.Now,
+                            rating = 2,
+                            message = "That was okay I guess"
+                        }
+                    }
+                } },
+                {typeof(IEnumerable<Item>), new Item[] {
+                    new Item() {
+                        title = "Le grand resto",
+                        image = "http://c8.alamy.com/comp/ATD901/people-dancing-in-a-nightclub-or-bar-restaurant-ATD901.jpg",
+                        alt = "some people dancing around in a restaurant",
+                        id = 5,
+                        payment_type = "Cash, Cheque, Large rocks found on the sea bed",
+                        rating = 4.32,
+                        ratings = new Rating[] {
+                            new Rating() {
+                                datetime = DateTime.Now,
+                                rating = 1,
+                                message = "horrible service"
+                            }
+                        }
+                },
+                    new Item() {
+                        title = "The Rocket Show",
+                        image = "http://cdn2.teen.com/wp-content/gallery/rocket-power-fun-facts-trivia/rocket-power-fun-facts-trivia-sports-surfing.jpg",
+                        alt = "Three people standing on a surfboard",
+                        id = 5,
+                        datetime = DateTime.Now,
+                        rating = 5.00,
+                        ratings = new Rating[] {
+                            new Rating() {
+                                datetime = DateTime.Now,
+                                rating = 5,
+                                message = "This is the cooolest show ever"
+                            }
+                        }
+                },
+                    new Item() {
+                        title = "Floating in space",
+                        image = "http://www.universetoday.com/wp-content/uploads/2008/09/dewinne.jpg",
+                        alt = "A guy in a blue floating in some kind of box. He has some flag on his torso",
+                        id = 5,
+                        min_height = 60,
+                        max_height = 220,
+                        rating = 2.52,
+                        ratings = new Rating[] {
+                            new Rating() {
+                                datetime = DateTime.Now,
+                                rating = 2,
+                                message = "That was okay I guess"
+                            }
+                        }
+                } } },
+                {typeof(IEnumerable<Restaurant>), new Restaurant[] {
+                    new Restaurant() {
+                        title = "Le grand resto",
+                        image = "http://c8.alamy.com/comp/ATD901/people-dancing-in-a-nightclub-or-bar-restaurant-ATD901.jpg",
+                        alt = "some people dancing around in a restaurant",
+                        id = 5,
+                        payment_type = "Cash, Cheque, Large rocks found on the sea bed",
+                        rating = 4.32,
+                        ratings = new Rating[] {
+                            new Rating() {
+                                datetime = DateTime.Now,
+                                rating = 1,
+                                message = "horrible service"
+                            }
+                        }
+                } } },
+                {typeof(IEnumerable<Show>), new Show[] {
+                    new Show() {
+                        title = "The Rocket Show",
+                        image = "http://cdn2.teen.com/wp-content/gallery/rocket-power-fun-facts-trivia/rocket-power-fun-facts-trivia-sports-surfing.jpg",
+                        alt = "Three people standing on a surfboard",
+                        id = 5,
+                        datetime = DateTime.Now,
+                        rating = 5.00,
+                        ratings = new Rating[] {
+                            new Rating() {
+                                datetime = DateTime.Now,
+                                rating = 5,
+                                message = "This is the cooolest show ever"
+                            }
+                        }
+                } } },
+                {typeof(IEnumerable<Attraction>), new Attraction[] {
+                    new Attraction() {
+                        title = "Floating in space",
+                        image = "http://www.universetoday.com/wp-content/uploads/2008/09/dewinne.jpg",
+                        alt = "A guy in a blue floating in some kind of box. He has some flag on his torso",
+                        id = 5,
+                        min_height = 60,
+                        max_height = 220,
+                        rating = 2.52,
+                        ratings = new Rating[] {
+                            new Rating() {
+                                datetime = DateTime.Now,
+                                rating = 2,
+                                message = "That was okay I guess"
+                            }
+                        }
+                } } }
             });
 
             // Extend the following to provide factories for types not handled automatically (those lacking parameterless
