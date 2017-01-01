@@ -34,7 +34,7 @@
                     @if (User.IsInRole("admin")) {
                         using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { @class = "deleteform", onsubmit = $"return confirm('Are you sure you want to delete \"{@i.title}\"?')" })) {
                             <input type="hidden" name="id" value="@i.id" />
-                            @Html.Button("<i class="glyphicon glypicon-remove"></i>", new { @class = "btn btn-xs btn-danger pull-right" });
+                            @Html.Button("<i class='glyphicon glyphicon-remove'></i>", new { @class = "btn btn-xs btn-danger pull-right" });
                         }
                     }
                 </div>
