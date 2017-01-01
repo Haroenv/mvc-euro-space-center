@@ -14,23 +14,34 @@
                 @Html.GravatarImage(r.user.email)
             </div>
         </div>
-            <div class="col-sm-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <div class="pull-left">
-                            <strong>@r.user.name</strong>
-                            @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
-                        </div>
-                        <strong class="pull-right" data-rating="@r.rating1">@r.rating1 / 5</strong>
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="pull-left">
+                        <strong>@r.user.name</strong>
+                        @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
                     </div>
-                    <div class="panel-body">
-                        @r.message
-                    </div>
-                    <div class="panel-footer clearfix">
-                        <strong><a href="/Detail?id=@r.item.id">@r.item.title</a></strong>
-                        <a href="/Admin/DeleteRating/@r.id" class="btn btn-sm btn-danger pull-right">delete</a>
-                    </div>
+                    <strong class="pull-right" data-rating="@r.rating1">@r.rating1 / 5</strong>
+                </div>
+                <div class="panel-body">
+                    @r.message
+                </div>
+                <div class="panel-footer clearfix">
+                    <strong><a href="/Detail?id=@r.item.id">@r.item.title</a></strong>
+                    <a href="/Admin/DeleteRating/@r.id" class="btn btn-sm btn-danger pull-right">delete</a>
                 </div>
             </div>
+        </div>
     }
 </div>
+
+@section scripts {
+    <script>
+        NodeList.prototype.forEach = Array.prototype.forEach; // polyfill
+        var ratings = document.querySelectorAll('[data-rating]');
+        ratings.forEach(function (r) {
+            r.innerText = '☄'.repeat(r.dataset.rating) + '⚪'.repeat(5 - r.dataset.rating);
+            r.classList.add('emoji');
+        });
+    </script>
+}
