@@ -45,7 +45,7 @@ namespace EuroSpaceCenter.Controllers {
         public double rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
-        public Uri url { get; set; }
+        public string url { get; set; }
 
     }
 }
