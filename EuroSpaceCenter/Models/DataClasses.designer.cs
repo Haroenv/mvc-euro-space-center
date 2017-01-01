@@ -1173,6 +1173,8 @@ namespace EuroSpaceCenter.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
+		private int _id;
+		
 		private int _parkplans_id;
 		
 		private int _items_id;
@@ -1185,6 +1187,8 @@ namespace EuroSpaceCenter.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void Onparkplans_idChanging(int value);
     partial void Onparkplans_idChanged();
     partial void Onitems_idChanging(int value);
@@ -1198,7 +1202,27 @@ namespace EuroSpaceCenter.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parkplans_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parkplans_id", DbType="Int NOT NULL")]
 		public int parkplans_id
 		{
 			get
@@ -1222,7 +1246,7 @@ namespace EuroSpaceCenter.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items_id", DbType="Int NOT NULL")]
 		public int items_id
 		{
 			get

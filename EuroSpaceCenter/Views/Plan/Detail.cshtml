@@ -1,5 +1,4 @@
 ﻿@using EuroSpaceCenter.Models
-@using System.Linq
 @model parkplan
 
 @{
@@ -59,14 +58,14 @@
 </form>
 <hr />
 
-@using (Html.BeginForm("Add", "Plan", FormMethod.Post, new { @class = "form-inline" })) {
+@using (Html.BeginForm("Add", "Plan", FormMethod.Post, new { @class = "form-inline", id = "addform" })) {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(m => m.id)
     <div class="form-group">
         <label>Item</label>
-        <select class="form-control" name="item_id">
+        <select class="form-control" name="item_id" id="item_id">
             <option selected disabled value="0">-- select something to do --</option>
-            @foreach(item i in ViewBag.Items) {
+            @foreach (item i in ViewBag.Items) {
                 <option value="@i.id">@i.title</option>
             }
         </select>
@@ -77,9 +76,9 @@
 }
 
 <ul class="list-group">
-    @foreach (item i in ViewBag.Items) {
+    @foreach (parkplans_has_item i in ViewBag.PlanItems) {
         <li class="list-group-item">
-            @i.title
+            <a href="/Detail?id=@i.item.id">@i.item.title</a>
             <span class="btn btn-danger label btn-sm pull-right" data-id="@i.id">❌</span>
         </li>
     }
@@ -87,20 +86,34 @@
 
 @section scripts {
     <script>
-        function remove(id) {
+        function remove(el) {
+            if (confirm('Deleting this will delete this plan for everyone. Are you sure?')) {
+                $(el).closest('.list-group-item').fadeOut(300, function () { $(this).remove(); });
+                $.ajax({
+                    method: 'POST',
+                    url: '/Plan/Remove/' + @Model.id + '?plan_has_item=' + el.dataset.id,
+                });
+            }
+        }
+
+        $('#addform').on('submit', function (e) {
+            e.preventDefault();
+            var $sel = $(this).find("option:selected");
+            var $item = $('<li class="list-group-item"><a href="/Detail?id=' + $sel.val() + '">' + $sel.text() + '</a></li>');
+            $('.list-group').append($item);
             $.ajax({
                 method: 'POST',
-                url: '/Plan/Remove/' + @Model.id + '?item_id=' + id,
-            });
-        }
+                url: '/Plan/Add/' + @Model.id + '?item_id=' + $sel.val(),
+                success: function (res) {
+                    $item.append('<span class="btn btn-danger label btn-sm pull-right" data-id="' + res.id + '" onclick="remove(this);">❌</span>');
+                }
+            })
+        });
 
         $('[data-id]').each(function (i, el) {
             $(el).on('click', function (e) {
                 e.preventDefault();
-                if (confirm('Deleting this will delete this plan for everyone. Are you sure?')) {
-                    remove(el.dataset.id);
-                    $(el).closest('.list-group-item').fadeOut(300, function () { $(this).remove(); });
-                }
+                remove(el);
             })
         })
     </script>

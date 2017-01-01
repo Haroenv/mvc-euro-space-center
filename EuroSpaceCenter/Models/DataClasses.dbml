@@ -51,8 +51,9 @@
   </Table>
   <Table Name="[haroen.viaeneharoen.viaene].parkplans_has_items" Member="parkplans_has_items">
     <Type Name="parkplans_has_item">
-      <Column Name="parkplans_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="items_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="parkplans_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="items_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="item_parkplans_has_item" Member="item" ThisKey="items_id" OtherKey="id" Type="item" IsForeignKey="true" />
       <Association Name="parkplan_parkplans_has_item" Member="parkplan" ThisKey="parkplans_id" OtherKey="id" Type="parkplan" IsForeignKey="true" />
     </Type>

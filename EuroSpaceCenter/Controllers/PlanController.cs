@@ -19,7 +19,8 @@ namespace EuroSpaceCenter.Controllers {
         // plans are public on purpose
         public ActionResult Detail(int id) {
             var plan = parkplan.Get(parkplan_id: id);
-            ViewBag.Items = plan.parkplans_has_items.Select(t => t.item);
+            ViewBag.Items = item.GetAll();
+            ViewBag.PlanItems = plan.parkplans_has_items.ToList();
             ViewBag.Users = plan.users_has_parkplans.Select(t => t.user);
             return View(plan);
         }
@@ -91,8 +92,8 @@ namespace EuroSpaceCenter.Controllers {
         public ActionResult Add(int id, int item_id) {
             try {
                 if (parkplan.HasUser(parkplan_id: id, user_id: user.Get(User.Identity.Name).id)) {
-                    parkplan.AddItem(id, item_id);
-                    return new HttpStatusCodeResult(204);
+                    int has_id = parkplan.AddItem(id, item_id);
+                    return Json(new { id = has_id });
                 }
                 return new HttpStatusCodeResult(403);
             } catch {
@@ -101,9 +102,9 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         [HttpPost]
-        public HttpStatusCodeResult Remove(int id, int item_id) {
+        public HttpStatusCodeResult Remove(int id, int plan_has_item) {
             if (parkplan.HasUser(parkplan_id: id, user_id: user.Get(User.Identity.Name).id)) {
-                parkplan.RemoveItem(id, item_id);
+                parkplan.RemoveItem(plan_has_item);
                 return new HttpStatusCodeResult(204);
             }
             return new HttpStatusCodeResult(403);

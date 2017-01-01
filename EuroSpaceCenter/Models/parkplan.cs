@@ -66,18 +66,20 @@ namespace EuroSpaceCenter.Models {
             }
         }
 
-        internal static void RemoveItem(int parkplan_id, int item_id) {
+        internal static void RemoveItem(int id) {
             using (var db = new DataClassesDataContext()) {
-                var phi = db.parkplans_has_items.SingleOrDefault(has => has.items_id == item_id && has.parkplans_id == parkplan_id);
+                var phi = db.parkplans_has_items.SingleOrDefault(has => has.id == id);
                 db.parkplans_has_items.DeleteOnSubmit(phi);
                 db.SubmitChanges();
             }
         }
 
-        internal static void AddItem(int parkplan_id, int item_id) {
+        internal static int AddItem(int parkplan_id, int item_id) {
             using (var db = new DataClassesDataContext()) {
-                db.parkplans_has_items.InsertOnSubmit(new parkplans_has_item() { items_id = item_id, parkplans_id = parkplan_id });
+                var ret = new parkplans_has_item() { items_id = item_id, parkplans_id = parkplan_id };
+                db.parkplans_has_items.InsertOnSubmit(ret);
                 db.SubmitChanges();
+                return ret.id;
             }
         }
 
