@@ -1,6 +1,6 @@
 ﻿@model EuroSpaceCenter.Models.parkplan
 
-@using (Html.BeginForm("Create", "Plan", FormMethod.Post, new { @class="container container--small" })) {
+@using (Html.BeginForm("Create", "Plan", FormMethod.Post)) {
     <h3>Create a new plan</h3>
     @Html.AntiForgeryToken()
 

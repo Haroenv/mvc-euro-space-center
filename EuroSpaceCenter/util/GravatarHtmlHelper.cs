@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
@@ -68,7 +68,7 @@ public static class GravatarHtmlHelper {
     /// Returns a Globally Recognised Avatar as an &lt;img /&gt; - http://gravatar.com
     /// </summary>
     /// <param name="emailAddress">Email Address for the Gravatar</param>
-	/// <param name="defaultImage">Default image if user hasn't created a Gravatar</param>
+    /// <param name="defaultImage">Default image if user hasn't created a Gravatar</param>
     /// <param name="size">Size in pixels (default: 80)</param>
     /// <param name="defaultImageUrl">URL to a custom default image (e.g: 'Url.Content("~/images/no-grvatar.png")' )</param>
     /// <param name="forceDefaultImage">Prefer the default image over the users own Gravatar</param>
