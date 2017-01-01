@@ -10,7 +10,6 @@
 
 <div class="row">
     <div class="list-group col-md-4">
-
         @foreach (parkplan plan in Model) {
             <a class="list-group-item" href="/Plan/Detail/@plan.id">
                 <span class="btn btn-danger label btn-sm pull-right" data-id="@plan.id">❌</span>
@@ -36,7 +35,7 @@
                 e.preventDefault();
                 if (confirm('Deleting this will delete this plan for everyone. Are you sure?')) {
                     remove(el.dataset.id);
-                    $(el).closest('.list-group-item').fadeOut(300, function() { $(this).remove(); });
+                    $(el).closest('.list-group-item').fadeOut(300, function () { $(this).remove(); });
                 }
             })
         })
