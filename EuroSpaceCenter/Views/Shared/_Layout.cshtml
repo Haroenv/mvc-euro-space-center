@@ -61,23 +61,21 @@
                 @TempData["message"]
             </div>
         }
-        @RenderBody()
-        <hr />
-
-        <footer class="clearfix" style="min-height: 4em; margin-bottom: 1em">
-            <div class="pull-left">
-                <a href="#"><img style="height: 4em" src="/Content/logo_adventureworld_color.png"></a>
-            </div>
-            <div class="pull-right" style="text-align: center;">
-                <span>Made 😡 by <a href="https://haroen.me">Haroen</a> for Odisee | </span>
-                <span>🚀 Euro Space Center | </span>
-                <span><a href="/Help">📑 API</a> | </span>
-                <span><a href="https://github.com/Haroenv/mvc-euro-space-center"><span class="emoji">⚙</span> code</a> | </span>
-                <span><a href="http://spacefun.umutsagram.ikdoeict.net">🛰 Space Fun</a> | </span>
-                <span><a href="http://marspark.eliasmeire.ikdoeict.net/">🌌 Mars Park</a></span>
-            </div>
-        </footer>
+        <main>@RenderBody()</main>
     </div>
+    <footer class="clearfix footer">
+        <div class="pull-left">
+            <a href="#"><img style="max-height: 40px" src="/Content/logo_adventureworld_color.png"></a>
+        </div>
+        <div class="pull-right">
+            <span>Made 😡 by <a href="https://haroen.me">Haroen</a> for Odisee | </span>
+            <span>🚀 Euro Space Center | </span>
+            <span><a href="/Help">📑 API</a> | </span>
+            <span><a href="https://github.com/Haroenv/mvc-euro-space-center"><span class="emoji">⚙</span> code</a> | </span>
+            <span><a href="http://spacefun.umutsagram.ikdoeict.net">🛰 Space Fun</a> | </span>
+            <span><a href="http://marspark.eliasmeire.ikdoeict.net/">🌌 Mars Park</a></span>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
