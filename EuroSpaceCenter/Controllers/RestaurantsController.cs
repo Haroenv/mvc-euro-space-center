@@ -11,7 +11,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the restaurants in Euro Space Center
         /// </summary>
         [HttpGet]
-        [ResponseType(typeof(List<Restaurant>))]
+        [ResponseType(typeof(IEnumerable<Restaurant>))]
         public IHttpActionResult Restaurants() {
             var items = item.GetAllDisposed().Where(i => i.restaurant != null).Select(i => new Restaurant() {
                 id = i.id,
@@ -20,7 +20,7 @@ namespace EuroSpaceCenter.Controllers {
                 alt = i.alt,
                 payment_type = i.restaurant.payment_type,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new {
+                ratings = i.ratings.Select(r => new Rating() {
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -41,7 +41,7 @@ namespace EuroSpaceCenter.Controllers {
         public string image { get; set; }
         public string payment_type { get; set; }
         public double rating { get; set; }
-        public System.Collections.Generic.IEnumerable<object> ratings { get; set; }
+        public IEnumerable<Rating> ratings { get; set; }
         public string title { get; set; }
     }
 }

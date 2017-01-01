@@ -12,7 +12,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the shows in Euro Space Center
         /// </summary>
         [HttpGet]
-        [ResponseType(typeof(List<Show>))]
+        [ResponseType(typeof(IEnumerable<Show>))]
         public IHttpActionResult Shows() {
             var items = item.GetAllDisposed().Where(i => i.show != null).Select(i => new Show() {
                 id = i.id,
@@ -21,7 +21,7 @@ namespace EuroSpaceCenter.Controllers {
                 alt = i.alt,
                 datetime = i.show.datetime,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new {
+                ratings = i.ratings.Select(r => new Rating(){
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -42,7 +42,7 @@ namespace EuroSpaceCenter.Controllers {
         public int id { get; set; }
         public string image { get; set; }
         public double rating { get; set; }
-        public System.Collections.Generic.IEnumerable<object> ratings { get; set; }
+        public IEnumerable<Rating> ratings { get; set; }
         public string title { get; set; }
     }
 }

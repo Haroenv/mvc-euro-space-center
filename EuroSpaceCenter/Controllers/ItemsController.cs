@@ -12,7 +12,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the items in Euro Space Center
         /// </summary>
         [HttpGet]
-        [ResponseType(typeof(List<Item>))]
+        [ResponseType(typeof(IEnumerable<Item>))]
         public IHttpActionResult Items() {
             var items = item.GetAllDisposed().Select(i => new Item() {
                 id = i.id,
@@ -24,7 +24,7 @@ namespace EuroSpaceCenter.Controllers {
                 min_height = i.attraction != null ? i.attraction.max_height : null,
                 max_height = i.attraction != null ? i.attraction.min_height : null,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new {
+                ratings = i.ratings.Select(r => new Rating() {
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -57,7 +57,7 @@ namespace EuroSpaceCenter.Controllers {
                 min_height = i.attraction != null ? i.attraction.max_height : null,
                 max_height = i.attraction != null ? i.attraction.min_height : null,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new {
+                ratings = i.ratings.Select(r => new Rating() {
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -81,7 +81,7 @@ namespace EuroSpaceCenter.Controllers {
         public int? min_height { get; set; }
         public string payment_type { get; set; }
         public double rating { get; set; }
-        public IEnumerable<object> ratings { get; set; }
+        public IEnumerable<Rating> ratings { get; set; }
         public string title { get; set; }
     }
 }

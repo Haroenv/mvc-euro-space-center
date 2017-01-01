@@ -11,7 +11,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the attractions in Euro Space Center
         /// </summary>
         [HttpGet]
-        [ResponseType(typeof(List<Attraction>))]
+        [ResponseType(typeof(IEnumerable<Attraction>))]
         public IHttpActionResult Attractions() {
             var items = item.GetAllDisposed().Where(i => i.attraction != null).Select(i => new Attraction() {
                 id = i.id,
@@ -21,7 +21,7 @@ namespace EuroSpaceCenter.Controllers {
                 min_height = i.attraction.min_height,
                 max_height = i.attraction.max_height,
                 rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
-                ratings = i.ratings.Select(r => new {
+                ratings = i.ratings.Select(r => new Rating(){
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
@@ -43,7 +43,7 @@ namespace EuroSpaceCenter.Controllers {
         public int? max_height { get; set; }
         public int? min_height { get; set; }
         public double rating { get; set; }
-        public System.Collections.Generic.IEnumerable<object> ratings { get; set; }
+        public IEnumerable<Rating> ratings { get; set; }
         public string title { get; set; }
     }
 }
