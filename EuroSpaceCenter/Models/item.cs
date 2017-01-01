@@ -16,6 +16,7 @@ namespace EuroSpaceCenter.Models {
                 options.LoadWith<item>(t => t.show);
                 options.LoadWith<item>(t => t.attraction);
                 options.LoadWith<item>(t => t.ratings);
+                options.LoadWith<rating>(t => t.user);
                 db.LoadOptions = options;
                 return db.items.SingleOrDefault(i => i.id == id);
             }

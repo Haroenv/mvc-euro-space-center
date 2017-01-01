@@ -12,6 +12,9 @@
         @if (ViewBag.PropModel != null) {
             <span class="label label-info">@ViewBag.PropModel.GetType().Name</span>
         }
+        @if (ViewBag.Score != double.NaN) {
+            <span data-rating="@Math.Ceiling(ViewBag.Score)">@Math.Ceiling(ViewBag.Score) / 5</span>
+        }
     </h2>
     @if (User.IsInRole("admin")) {
         @Html.ActionLink("Edit", "Edit", new { id = ViewBag.id }, new { @class = "btn btn-success" })
