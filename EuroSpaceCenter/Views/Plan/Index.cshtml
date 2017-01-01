@@ -12,7 +12,7 @@
     <div class="list-group col-md-4">
         @foreach (parkplan plan in Model) {
             <a class="list-group-item" href="/Plan/Detail/@plan.id">
-                <span class="btn btn-danger label btn-sm pull-right" data-id="@plan.id">❌</span>
+                <span class="btn btn-danger label btn-sm pull-right" data-id="@plan.id"><i class="glyphicon glypicon-remove"></i></span>
                 @plan.name
             </a>
         }

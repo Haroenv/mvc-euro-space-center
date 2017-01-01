@@ -1,4 +1,4 @@
-﻿@using EuroSpaceCenter.Models
+@using EuroSpaceCenter.Models
 @model parkplan
 
 @{
@@ -78,7 +78,7 @@
 <ul class="list-group">@foreach (parkplans_has_item i in ViewBag.PlanItems) {
     <li class="list-group-item">
         <a href="/Detail?id=@i.item.id">@i.item.title</a>
-        <span class="btn btn-danger label btn-sm pull-right" data-id="@i.id">❌</span>
+        <span class="btn btn-danger label btn-sm pull-right" data-id="@i.id"><i class="glyphicon glypicon-remove"></i></span>
     </li>
 }</ul>
 
@@ -109,7 +109,7 @@
                 method: 'POST',
                 url: '/Plan/Add/' + @Model.id + '?item_id=' + $sel.val(),
                 success: function (res) {
-                    $item.append('<span class="btn btn-danger label btn-sm pull-right" data-id="' + res.id + '" onclick="remove(this);">❌</span>');
+                    $item.append('<span class="btn btn-danger label btn-sm pull-right" data-id="' + res.id + '" onclick="remove(this);"><i class="glyphicon glypicon-remove"></i></span>');
                 }
             })
         });
