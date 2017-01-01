@@ -1,4 +1,5 @@
 ﻿using EuroSpaceCenter.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace EuroSpaceCenter.Controllers {
@@ -10,12 +11,12 @@ namespace EuroSpaceCenter.Controllers {
             if (cat != null) {
                 // zoek categorien
                 try {
-                    ViewBag.Items = item.Get(cat);
+                    ViewBag.Items = item.Get(cat).OrderBy(i => i.ratings.Average(r => r.rating1));
                 } catch {
-                    ViewBag.Items = item.GetAll();
+                    ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Average(r => r.rating1));
                 }
             } else {
-                ViewBag.Items = item.GetAll();
+                ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Average(r => r.rating1));
             }
             ViewBag.Cat = cat;
             return View();
