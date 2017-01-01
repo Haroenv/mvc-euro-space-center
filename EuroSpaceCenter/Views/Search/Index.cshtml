@@ -17,7 +17,7 @@
     </select>
 </div>
 
-<div class="isotope" style="visibility: hidden;">
+<div class="isotope" style="visibility: hidden; opacity: 0; transition: opacity ease .2s;">
     <div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>
     @foreach (item i in ViewBag.Items) {
         <a class="col-xs-6 col-sm-4 col-md-3 blocklink item" href="/Detail?id=@i.id">
@@ -60,7 +60,10 @@
             }
         });
 
-        $grid.css({visibility: 'visible'});
+        $grid.css({
+            visibility: 'visible',
+            opacity: 1
+        });
 
         var qsRegex;
 
