@@ -501,7 +501,6 @@
             <summary>
             Get all of the restaurants in Euro Space Center
             </summary>
-            <returns></returns>
         </member>
         <member name="M:EuroSpaceCenter.Controllers.ShowsController.Shows">
             <summary>

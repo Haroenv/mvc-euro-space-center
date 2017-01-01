@@ -15,7 +15,7 @@ namespace EuroSpaceCenter.Controllers {
             if (i == null) {
                 return Redirect("/Search");
             }
-            ViewBag.id = id;
+
             ViewBag.Ratings = i.ratings.ToList();
             ViewBag.Score = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN;
             ViewBag.Rating = new rating();

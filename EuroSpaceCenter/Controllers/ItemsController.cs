@@ -1,9 +1,8 @@
 ﻿using EuroSpaceCenter.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using System;
 
 namespace EuroSpaceCenter.Controllers {
     public class ItemsController : ApiController {
@@ -13,7 +12,7 @@ namespace EuroSpaceCenter.Controllers {
         /// </summary>
         [HttpGet]
         public IHttpActionResult Items() {
-            var items = item.GetAllDisposed().Select(i => new {
+            var items = item.GetAllDisposed().Select(i => new Item() {
                 id = i.id,
                 title = i.title,
                 image = i.image,
@@ -45,7 +44,7 @@ namespace EuroSpaceCenter.Controllers {
                 return NotFound();
             }
 
-            var result = new {
+            var result = new Item() {
                 id = i.id,
                 title = i.title,
                 image = i.image,
@@ -65,5 +64,21 @@ namespace EuroSpaceCenter.Controllers {
 
             return Json(result);
         }
+    }
+
+    internal class Item {
+        public Item() {
+        }
+
+        public string alt { get; set; }
+        public DateTime? datetime { get; set; }
+        public int id { get; set; }
+        public string image { get; set; }
+        public int? max_height { get; set; }
+        public int? min_height { get; set; }
+        public string payment_type { get; set; }
+        public double rating { get; set; }
+        public IEnumerable<object> ratings { get; set; }
+        public string title { get; set; }
     }
 }

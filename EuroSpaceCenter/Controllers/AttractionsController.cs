@@ -1,7 +1,5 @@
 ﻿using EuroSpaceCenter.Models;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace EuroSpaceCenter.Controllers {
@@ -12,7 +10,7 @@ namespace EuroSpaceCenter.Controllers {
         /// </summary>
         [HttpGet]
         public IHttpActionResult Attractions() {
-            var items = item.GetAllDisposed().Where(i => i.attraction != null).Select(i => new {
+            var items = item.GetAllDisposed().Where(i => i.attraction != null).Select(i => new Attraction() {
                 id = i.id,
                 title = i.title,
                 image = i.image,
@@ -30,5 +28,19 @@ namespace EuroSpaceCenter.Controllers {
 
             return Json(items);
         }
+    }
+
+    internal class Attraction {
+        public Attraction() {
+        }
+
+        public string alt { get; set; }
+        public int id { get; set; }
+        public string image { get; set; }
+        public int? max_height { get; set; }
+        public int? min_height { get; set; }
+        public double rating { get; set; }
+        public System.Collections.Generic.IEnumerable<object> ratings { get; set; }
+        public string title { get; set; }
     }
 }

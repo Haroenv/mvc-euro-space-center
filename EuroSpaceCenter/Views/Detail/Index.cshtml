@@ -17,7 +17,7 @@
         }
     </h2>
     @if (User.IsInRole("admin")) {
-        @Html.ActionLink("Edit", "Edit", new { id = ViewBag.id }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Edit", "Edit", new { id = @Model.id }, new { @class = "btn btn-success" })
     }
     <p>@Model.description</p>
     <img src="@Model.image" alt="@Model.alt" />
@@ -33,7 +33,7 @@
     }
 
     @if (User.Identity.IsAuthenticated) {
-        using (Html.BeginForm("Add", "Plan", FormMethod.Post)) {
+        using (Html.BeginForm("Add", "Plan", FormMethod.Post, new { id = "addToPlan" })) {
             @Html.AntiForgeryToken()
             <div class="form-group">
                 <input type="hidden" name="item_id" value="@ViewBag.id" />
@@ -88,6 +88,19 @@
         ratings.forEach(function (r) {
             r.innerText = '☄'.repeat(r.dataset.rating) + '⚪'.repeat(5 - r.dataset.rating);
             r.classList.add('emoji');
-        })
+        });
+
+        $('#addToPlan').on('submit', function (e) {
+            e.preventDefault();
+            $(this).find('[name="id"]').val();
+            debugger;
+            $.ajax({
+                method: 'POST',
+                url: '/Plan/Add/' + $(this).find('[name="id"]').val() + '?item_id=@Model.id',
+                success: function () {
+
+                }
+            })
+        });
     </script>
 }

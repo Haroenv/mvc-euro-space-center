@@ -1,8 +1,6 @@
 ﻿using EuroSpaceCenter.Models;
 using System;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace EuroSpaceCenter.Controllers {
@@ -13,7 +11,7 @@ namespace EuroSpaceCenter.Controllers {
         /// </summary>
         [HttpGet]
         public IHttpActionResult Shows() {
-            var items = item.GetAllDisposed().Where(i => i.show != null).Select(i => new {
+            var items = item.GetAllDisposed().Where(i => i.show != null).Select(i => new Show() {
                 id = i.id,
                 title = i.title,
                 image = i.image,
@@ -30,5 +28,18 @@ namespace EuroSpaceCenter.Controllers {
 
             return Json(items);
         }
+    }
+
+    internal class Show {
+        public Show() {
+        }
+
+        public string alt { get; set; }
+        public DateTime? datetime { get; set; }
+        public int id { get; set; }
+        public string image { get; set; }
+        public double rating { get; set; }
+        public System.Collections.Generic.IEnumerable<object> ratings { get; set; }
+        public string title { get; set; }
     }
 }
