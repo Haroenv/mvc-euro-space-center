@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: 'The Last Call';
-    src: url('thelastcall-regular-webfont.eot');
-    src: url('thelastcall-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('thelastcall-regular-webfont.woff2') format('woff2'),
-         url('thelastcall-regular-webfont.woff') format('woff'),
-         url('thelastcall-regular-webfont.ttf') format('truetype'),
-         url('thelastcall-regular-webfont.svg#the_last_callregular') format('svg');
+    src: url('/fonts/thelastcall-regular-webfont.eot');
+    src: url('/fonts/thelastcall-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/thelastcall-regular-webfont.woff2') format('woff2'),
+         url('/fonts/thelastcall-regular-webfont.woff') format('woff'),
+         url('/fonts/thelastcall-regular-webfont.ttf') format('truetype'),
+         url('/fonts/thelastcall-regular-webfont.svg#the_last_callregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
