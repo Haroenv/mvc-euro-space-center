@@ -51,7 +51,7 @@
         @if (User.Identity.IsAuthenticated) {
             using (Html.BeginForm("Add", "Plan", FormMethod.Post, new { id = "addToPlan" })) {
                 @Html.AntiForgeryToken()
-                <input type="hidden" name="item_id" value="@Model.id" />
+                <input type="hidden" name="items_id" value="@ViewBag.ID" />
                 <label for="id">Add this item to your <a href="/Plan">park plan <span class="emoji">🗺</span></a></label>
                 <div class="input-group">
                     <select name="id" id="id" class="form-control">
