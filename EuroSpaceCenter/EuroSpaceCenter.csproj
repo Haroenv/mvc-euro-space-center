@@ -230,6 +230,7 @@
     <Content Include="Content\icon\favicon.ico" />
     <Content Include="Content\icon\mstile-150x150.png" />
     <Content Include="Content\icon\safari-pinned-tab.svg" />
+    <Content Include="Content\logo_adventureworld_color.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
