@@ -75,14 +75,18 @@
     </div>
 }
 
-<ul class="list-group">
-    @foreach (parkplans_has_item i in ViewBag.PlanItems) {
-        <li class="list-group-item">
-            <a href="/Detail?id=@i.item.id">@i.item.title</a>
-            <span class="btn btn-danger label btn-sm pull-right" data-id="@i.id">❌</span>
-        </li>
+<ul class="list-group">@foreach (parkplans_has_item i in ViewBag.PlanItems) {
+    <li class="list-group-item">
+        <a href="/Detail?id=@i.item.id">@i.item.title</a>
+        <span class="btn btn-danger label btn-sm pull-right" data-id="@i.id">❌</span>
+    </li>
+}</ul>
+
+<style>
+    .list-group:empty:after {
+        content: 'There are no items on this plan'
     }
-</ul>
+</style>
 
 @section scripts {
     <script>
