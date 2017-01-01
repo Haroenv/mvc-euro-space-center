@@ -33,7 +33,7 @@
                     @if (User.IsInRole("admin")) {
                         using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { @class = "deleteform", onsubmit = $"return confirm('Are you sure you want to delete \"{@i.title}\"?')" })) {
                             <input type="hidden" name="id" value="@i.id" />
-                            @Html.Button("❌", new { @class = "btn btn-danger pull-right" });
+                            @Html.Button("❌", new { @class = "btn btn-sm btn-danger pull-right" });
                         }
                     }
                 </div>
