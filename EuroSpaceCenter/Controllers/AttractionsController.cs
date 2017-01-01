@@ -1,6 +1,8 @@
 ﻿using EuroSpaceCenter.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace EuroSpaceCenter.Controllers {
     public class AttractionsController : ApiController {
@@ -9,6 +11,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the attractions in Euro Space Center
         /// </summary>
         [HttpGet]
+        [ResponseType(typeof(List<Attraction>))]
         public IHttpActionResult Attractions() {
             var items = item.GetAllDisposed().Where(i => i.attraction != null).Select(i => new Attraction() {
                 id = i.id,

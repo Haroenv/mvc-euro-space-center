@@ -1,6 +1,8 @@
 ﻿using EuroSpaceCenter.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace EuroSpaceCenter.Controllers {
     public class RestaurantsController : ApiController {
@@ -9,6 +11,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the restaurants in Euro Space Center
         /// </summary>
         [HttpGet]
+        [ResponseType(typeof(List<Restaurant>))]
         public IHttpActionResult Restaurants() {
             var items = item.GetAllDisposed().Where(i => i.restaurant != null).Select(i => new Restaurant() {
                 id = i.id,

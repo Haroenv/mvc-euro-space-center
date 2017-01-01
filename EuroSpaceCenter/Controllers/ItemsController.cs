@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System;
+using System.Web.Http.Description;
 
 namespace EuroSpaceCenter.Controllers {
     public class ItemsController : ApiController {
@@ -11,6 +12,7 @@ namespace EuroSpaceCenter.Controllers {
         /// Get all of the items in Euro Space Center
         /// </summary>
         [HttpGet]
+        [ResponseType(typeof(List<Item>))]
         public IHttpActionResult Items() {
             var items = item.GetAllDisposed().Select(i => new Item() {
                 id = i.id,
@@ -38,6 +40,7 @@ namespace EuroSpaceCenter.Controllers {
         /// </summary>
         /// <param name="id">the id of the item</param>
         [HttpGet]
+        [ResponseType(typeof(Item))]
         public IHttpActionResult Single(int id) {
             var i = item.Get(id);
             if (i == null) {
