@@ -11,9 +11,9 @@ namespace EuroSpaceCenter.Controllers {
             if (cat != null) {
                 // zoek categorien
                 try {
-                    ViewBag.Items = item.Get(cat).OrderBy(i => i.ratings.Average(r => r.rating1));
+                    ViewBag.Items = item.Get(cat).OrderBy(i => i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN);
                 } catch {
-                    ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Average(r => r.rating1));
+                    ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN);
                 }
             } else {
                 ViewBag.Items = item.GetAll().OrderBy(i => i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN);
