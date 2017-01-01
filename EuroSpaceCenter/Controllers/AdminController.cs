@@ -20,35 +20,59 @@ namespace EuroSpaceCenter.Controllers {
             return View();
         }
 
-        //// POST: Admin/create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(item i, restaurant r = null, attraction a = null, show s = null) {
-        //    if (TryValidateModel(i)) {
-        //        item result = item.Create(i);
-        //        if (TryValidateModel(r)) {
-        //            r.items_id = i.id;
-        //            restaurant.Create(r);
-        //        } else if (TryValidateModel(a)) {
-        //            a.items_id = i.id; // oops
-        //            attraction.Create(a);
-        //        } else if (TryValidateModel(s)) {
-        //            s.items_id = i.id;
-        //            show.Create(s);
-        //        }
-        //        Flash.Set(TempData, "Created 🍻");
-        //        return RedirectToAction("Index", "Detail", i.id);
-        //    }
-        //    Flash.Set(TempData, "oops! 😬");
-        //    return View(i);
-        //}
-
         // POST: Admin/create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(item i) {
             if (TryValidateModel(i)) {
-                item result = item.Create(i);
+                try {
+                    item.Create(i);
+                    switch (Request["category"]) {
+                        case "restaurant":
+                            var r = new restaurant() {
+                                items_id = i.id,
+                                payment_type = Request["payment_type"]
+                            };
+                            if (TryValidateModel(r)) {
+                                restaurant.Create(r);
+
+                            } else {
+                                Flash.Set(TempData, "oops, wrong extras! 😬");
+                                return View(i);
+                            }
+                            break;
+                        case "show":
+                            var s = new show() {
+                                items_id = i.id,
+                                datetime = DateTime.Parse(Request["datetime"])
+                            };
+                            if (TryValidateModel(s)) {
+                                show.Create(s);
+                            } else {
+                                Flash.Set(TempData, "oops, wrong extras! 😬");
+                                return View(i);
+                            }
+                            break;
+                        case "attraction":
+                            var a = new attraction() {
+                                items_id = i.id,
+                                max_height = int.Parse(Request["max_height"]),
+                                min_height = int.Parse(Request["min_height"])
+                            };
+                            if (TryValidateModel(a)) {
+                                attraction.Create(a);
+                            } else {
+                                Flash.Set(TempData, "oops, wrong extras! 😬");
+                                return View(i);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } catch {
+                    Flash.Set(TempData, "something went wrong! 😬");
+                    return View(i);
+                }
                 Flash.Set(TempData, "Created 🍻");
                 return RedirectToAction("Index", "Detail", i.id);
             }

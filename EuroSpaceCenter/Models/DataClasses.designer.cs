@@ -1875,7 +1875,8 @@ namespace EuroSpaceCenter.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
+
+    }
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="[haroen.viaeneharoen.viaene].users")]
 	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged

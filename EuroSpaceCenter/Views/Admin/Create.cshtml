@@ -44,7 +44,7 @@
                 <option value="restaurant">Restaurant</option>
             </select>
         </div>
-        <fieldset disabled id="extra" class="form-group"></fieldset>
+        <fieldset id="extra" class="form-group"></fieldset>
         <div class="form-group">
             @Html.Button("create 📝", new { @class = "btn btn-primary" })
         </div>
@@ -61,14 +61,13 @@
     <script>
         function loadExtra(category) {
             type.innerText = category;
-            $("#extra").load(
-                "@Url.Action("Extra","Admin")",
-                { 'category': category },
-                function (response, status, xhr) {
-                    if (status == "error") {
-                        alert("An error occurred while loading the results.");
-                    }
-                });
+            $("#extra").load("@Url.Action("Extra","Admin")", {
+                'category': category
+            }, function (response, status, xhr) {
+                if (status == "error") {
+                    alert("An error occurred while loading the results.");
+                }
+            });
         }
 
         $(document).ready(function () {
