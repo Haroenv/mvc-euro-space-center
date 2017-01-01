@@ -8,9 +8,16 @@
 <div class="form-group">
     <label for="search">Search</label>
     <input type="search" id="search" class="form-control" />
+    @* also possible frontend, but I won't do that *@
+    <select class="form-control" id="category">
+        <option value="all">all</option>
+        <option value="attractions">experience</option>
+        <option value="shows">show</option>
+        <option value="restaurants">restaurant</option>
+    </select>
 </div>
 
-<div class="isotope">
+<div class="isotope" style="visibility: hidden;">
     <div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>
     @foreach (item i in ViewBag.Items) {
         <a class="col-xs-6 col-sm-4 col-md-3 blocklink item" href="/Detail?id=@i.id">
@@ -41,6 +48,7 @@
     <script src="https://unpkg.com/object-fit-images@2.5.9/dist/ofi.browser.js"></script>
     <script src="https://unpkg.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js"></script>
     <script>
+
         var $grid = $('.isotope').isotope({
             itemSelector: ".item",
             percentPosition: true,
@@ -51,6 +59,8 @@
                 return qsRegex ? $(this).text().match(qsRegex) : true;
             }
         });
+
+        $grid.css({visibility: 'visible'});
 
         var qsRegex;
 
@@ -63,6 +73,15 @@
         $(window).on("load", function () {
             $(".isotope").isotope('layout');
         });
+
         $(function () { objectFitImages() });
+
+        if ('@ViewBag.Cat'.length > 0) {
+            $('#category').val('@ViewBag.Cat');
+        }
+
+        $('#category').on('input', function () {
+            window.location.href = '/Search?cat=' + $(this).val();
+        })
     </script>
 }

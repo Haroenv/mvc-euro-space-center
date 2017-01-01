@@ -17,6 +17,7 @@ namespace EuroSpaceCenter.Controllers {
             } else {
                 ViewBag.Items = item.GetAll();
             }
+            ViewBag.Cat = cat;
             return View();
         }
     }
