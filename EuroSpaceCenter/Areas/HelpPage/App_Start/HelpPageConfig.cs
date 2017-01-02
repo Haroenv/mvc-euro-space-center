@@ -4,13 +4,9 @@
 
 using EuroSpaceCenter.Controllers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Web;
 using System.Web.Http;
 #if Handle_PageResultOfT
@@ -44,7 +40,7 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                     title = "Floating in space",
                     image = "http://www.universetoday.com/wp-content/uploads/2008/09/dewinne.jpg",
                     alt = "A guy in a blue floating in some kind of box. He has some flag on his torso",
-                    id = 5,
+                    id = 2,
                     min_height = 60,
                     max_height = 220,
                     rating = 2.52,
@@ -54,7 +50,9 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                             rating = 2,
                             message = "That was okay I guess"
                         }
-                    }
+                    },
+                    url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=2",
+                    description = "You float in space"
                 } },
                 {typeof(IEnumerable<Item>), new Item[] {
                     new Item() {
@@ -70,13 +68,16 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                                 rating = 1,
                                 message = "horrible service"
                             }
-                        }
+                        },
+                        url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=5",
+                        description = "Yummie hon hon"
+
                 },
                     new Item() {
                         title = "The Rocket Show",
                         image = "http://cdn2.teen.com/wp-content/gallery/rocket-power-fun-facts-trivia/rocket-power-fun-facts-trivia-sports-surfing.jpg",
                         alt = "Three people standing on a surfboard",
-                        id = 5,
+                        id = 6,
                         datetime = DateTime.Now,
                         rating = 5.00,
                         ratings = new RatingEntity[] {
@@ -85,13 +86,15 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                                 rating = 5,
                                 message = "This is the cooolest show ever"
                             }
-                        }
+                        },
+                        url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=6",
+                        description = "A fun show about surfing"
                 },
                     new Item() {
                         title = "Floating in space",
                         image = "http://www.universetoday.com/wp-content/uploads/2008/09/dewinne.jpg",
                         alt = "A guy in a blue floating in some kind of box. He has some flag on his torso",
-                        id = 5,
+                        id = 2,
                         min_height = 60,
                         max_height = 220,
                         rating = 2.52,
@@ -101,7 +104,9 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                                 rating = 2,
                                 message = "That was okay I guess"
                             }
-                        }
+                        },
+                        url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=2",
+                        description = "You float in space"
                 } } },
                 {typeof(IEnumerable<Restaurant>), new Restaurant[] {
                     new Restaurant() {
@@ -117,14 +122,16 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                                 rating = 1,
                                 message = "horrible service"
                             }
-                        }
+                        },
+                        url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=5",
+                        description = "Yummie hon hon"
                 } } },
                 {typeof(IEnumerable<Show>), new Show[] {
                     new Show() {
                         title = "The Rocket Show",
                         image = "http://cdn2.teen.com/wp-content/gallery/rocket-power-fun-facts-trivia/rocket-power-fun-facts-trivia-sports-surfing.jpg",
                         alt = "Three people standing on a surfboard",
-                        id = 5,
+                        id = 6,
                         datetime = DateTime.Now,
                         rating = 5.00,
                         ratings = new RatingEntity[] {
@@ -133,14 +140,16 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                                 rating = 5,
                                 message = "This is the cooolest show ever"
                             }
-                        }
+                        },
+                        url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=6",
+                        description = "A fun show about surfing"
                 } } },
                 {typeof(IEnumerable<Attraction>), new Attraction[] {
                     new Attraction() {
                         title = "Floating in space",
                         image = "http://www.universetoday.com/wp-content/uploads/2008/09/dewinne.jpg",
                         alt = "A guy in a blue floating in some kind of box. He has some flag on his torso",
-                        id = 5,
+                        id = 2,
                         min_height = 60,
                         max_height = 220,
                         rating = 2.52,
@@ -150,7 +159,9 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                                 rating = 2,
                                 message = "That was okay I guess"
                             }
-                        }
+                        },
+                        url = "http://eurospacecenter.haroenviaene.ikdoeict.net/Detail?id=2",
+                        description = "You float in space"
                 } } }
             });
 

@@ -20,14 +20,15 @@ namespace EuroSpaceCenter.Controllers {
                 image = i.image,
                 alt = i.alt,
                 payment_type = i.restaurant.payment_type,
-                rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
+                rating = i.ratings.Any() ? (double?)i.ratings.Average(r => r.rating1) : null,
                 ratings = i.ratings.Select(r => new RatingEntity() {
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
                     message = r.message
                 }),
-                url = Url.Content($"~/Detail?id={i.id}")
+                url = Url.Content($"~/Detail?id={i.id}"),
+                description = i.description
             });
 
             return Json(items);
@@ -35,6 +36,7 @@ namespace EuroSpaceCenter.Controllers {
     }
 
     internal class Restaurant {
+
         public Restaurant() {
         }
 
@@ -42,10 +44,11 @@ namespace EuroSpaceCenter.Controllers {
         public int id { get; set; }
         public string image { get; set; }
         public string payment_type { get; set; }
-        public double rating { get; set; }
+        public double? rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
         public string url { get; set; }
+        public string description { get; set; }
 
     }
 }

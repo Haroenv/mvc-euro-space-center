@@ -21,14 +21,15 @@ namespace EuroSpaceCenter.Controllers {
                 alt = i.alt,
                 min_height = i.attraction.min_height,
                 max_height = i.attraction.max_height,
-                rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
+                rating = i.ratings.Any() ? (double?)i.ratings.Average(r => r.rating1) : null,
                 ratings = i.ratings.Select(r => new RatingEntity(){
                     users_id = r.users_id,
                     datetime = r.datetime,
                     rating = r.rating1,
                     message = r.message
                 }),
-                url = Url.Content($"~/Detail?id={i.id}")
+                url = Url.Content($"~/Detail?id={i.id}"),
+                description = i.description
             });
 
             return Json(items);
@@ -40,11 +41,12 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         public string alt { get; set; }
+        public string description { get; internal set; }
         public int id { get; set; }
         public string image { get; set; }
         public int? max_height { get; set; }
         public int? min_height { get; set; }
-        public double rating { get; set; }
+        public double? rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
         public string url { get; set; }
