@@ -72,7 +72,12 @@
             $(el).on('click', function (e) {
                 e.preventDefault();
                 accept(el.dataset.accept);
+                console.log($(this).siblings('[data-reject]'));
+                debugger;
+                $(this).siblings('[data-reject]').data('remove', el.dataset.accept);
+                $(this).siblings('[data-reject]').removeData('reject');
                 $(el).closest('.list-group-item').appendTo('#my_plans .list-group');
+                $(this).remove();
             })
         });
 
