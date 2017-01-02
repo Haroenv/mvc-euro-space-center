@@ -60,7 +60,7 @@
                         }
                     </select>
                     <div class="input-group-btn">
-                        @Html.Button("Add", new { @class = "btn btn-success", id = "add", data_toggle = "tooltip", data_placement = "bottom", title = "yay 🎉" })
+                        @Html.Button("Add", new { @class = "btn btn-success", id = "add", title = "yay 🎉" })
                     </div>
                 </div>
             }
@@ -117,7 +117,7 @@
                 method: 'POST',
                 url: '/Plan/Add/' + $(this).find('[name="id"]').val() + '?item_id=@Model.id',
                 success: function () {
-                    $(this).find('button').tooltip('show');
+                    $(e.target).find('button').tooltip({ placement: 'bottom', trigger: 'manual' }).tooltip('show');
                 }
             })
         });
