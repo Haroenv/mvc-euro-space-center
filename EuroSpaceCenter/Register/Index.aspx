@@ -65,7 +65,7 @@
                 <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
             <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredPasswordValidator" ControlToValidate="password" runat="server" ErrorMessage="You need to have a password"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic" CssClass="form-control-feedback" />
+            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic"/>
         </div>
         <div class="form-group">
             <label for="password1" class="control-label">Repeat password</label>
