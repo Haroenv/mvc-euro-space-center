@@ -90,7 +90,7 @@
             if ($grid.data('isotope').filteredItems.length < 6 && apiNotCalled) {
                 apiNotCalled = false;
                 $.ajax({
-                    url: 'http://spacefun.umutsaglam.ikdoeict.net/api/items',
+                    url: 'http://spacefun.umutsaglam.ikdoeict.net/api/' + ('@ViewBag.Cat'.length > 0 ? '@ViewBag.Cat' : 'items') ,
                     success: function (res) {
                         res.forEach(function (item) {
                             item.park = 'spacefun';
@@ -99,7 +99,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://marspark.eliasmeire.ikdoeict.net/api/items',
+                    url: 'http://marspark.eliasmeire.ikdoeict.net/api/' + ('@ViewBag.Cat'.length > 0 ? '@ViewBag.Cat' : 'items'),
                     success: function (res) {
                         res.forEach(function (item) {
                             item.park = 'marspark';
