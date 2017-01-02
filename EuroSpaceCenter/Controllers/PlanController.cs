@@ -109,5 +109,23 @@ namespace EuroSpaceCenter.Controllers {
             }
             return new HttpStatusCodeResult(403);
         }
+
+        [HttpPost]
+        public HttpStatusCodeResult Accept(int id) {
+            if (parkplan.HasUser(parkplan_id: id, user_id: user.Get(User.Identity.Name).id)) {
+                parkplan.Accept(user.Get(User.Identity.Name).id, id);
+                return new HttpStatusCodeResult(200);
+            }
+            return new HttpStatusCodeResult(403);
+        }
+
+        [HttpPost]
+        public HttpStatusCodeResult Reject(int id) {
+            if (parkplan.HasUser(parkplan_id: id, user_id: user.Get(User.Identity.Name).id)) {
+                parkplan.Reject(user.Get(User.Identity.Name).id, id);
+                return new HttpStatusCodeResult(204);
+            }
+            return new HttpStatusCodeResult(403);
+        }
     }
 }

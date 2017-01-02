@@ -7,16 +7,32 @@
 }
 
 <div class="container container--small">
-    <h2>My plans</h2>
+    <section id="my_plans">
+        <h2>My plans</h2>
 
-    <div class="list-group">
-        @foreach (parkplan plan in Model) {
-            <a class="list-group-item" href="/Plan/Detail/@plan.id">
-                <span class="btn btn-danger label btn-sm pull-right" data-id="@plan.id"><i class="glyphicon glyphicon-remove"></i></span>
-                @plan.name
-            </a>
-        }
-    </div>
+        <div class="list-group">
+            @foreach (parkplan plan in Model) {
+                <a class="list-group-item" href="/Plan/Detail/@plan.id">
+                    <span class="btn btn-danger label btn-sm pull-right" data-remove="@plan.id"><i class="glyphicon glyphicon-remove"></i></span>
+                    @plan.name
+                </a>
+            }
+        </div>
+    </section>
+
+    <section id="invited">
+        <h2>Invited plans</h2>
+
+        <div class="list-group">
+            @foreach (parkplan plan in ViewBag.UnAccepted) {
+                <a class="list-group-item" href="/Plan/Detail/@plan.id">
+                    <span class="btn btn-danger label btn-sm pull-right" data-reject="@plan.id"><i class="glyphicon glyphicon-remove"></i></span>
+                    <span class="btn btn-success label btn-sm pull-right" data-accept="@plan.id"><i class="glyphicon glyphicon-ok"></i></span>
+                    @plan.name
+                </a>
+            }
+        </div>
+    </section>
 
     @Html.Partial("CreatePlanForm", new parkplan())
 </div>
@@ -29,16 +45,47 @@
                 url: '/Plan/Delete/' + id,
             });
         }
+        function accept(id) {
+            $.ajax({
+                method: 'POST',
+                url: '/Plan/Accept/' + id,
+            });
+        }
+        function reject(id) {
+            $.ajax({
+                method: 'POST',
+                url: '/Plan/Reject/' + id,
+            });
+        }
 
-        $('[data-id]').each(function (i, el) {
+        $('[data-remove]').each(function (i, el) {
             $(el).on('click', function (e) {
                 e.preventDefault();
                 if (confirm('Deleting this will delete this plan for everyone. Are you sure?')) {
-                    remove(el.dataset.id);
+                    remove(el.dataset.remove);
                     $(el).closest('.list-group-item').fadeOut(300, function () { $(this).remove(); });
                 }
             })
-        })
+        });
+
+        $('[data-accept]').each(function (i, el) {
+            $(el).on('click', function (e) {
+                e.preventDefault();
+                accept(el.dataset.accept);
+                $(el).closest('.list-group-item').appendTo('#my_plans .list-group');
+            })
+        });
+
+        $('[data-reject]').each(function (i, el) {
+            $(el).on('click', function (e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to reject this invite?')) {
+                    reject(el.dataset.reject);
+                    $(el).closest('.list-group-item').fadeOut(300, function () { $(this).remove(); });
+                }
+            })
+        });
+
     </script>
     <link href="https://unpkg.com/jquery-datetimepicker@2.5.4/build/jquery.datetimepicker.min.css" rel="stylesheet" />
     <script async defer>
