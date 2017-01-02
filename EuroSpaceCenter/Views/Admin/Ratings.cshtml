@@ -7,31 +7,39 @@
 }
 
 <h3>Ratings</h3>
-<div class="row">
+
+<div class="form-group">
+    <input type="search" class="form-control" />
+</div>
+
+<div class="row isotope" style="position: relative;">
+    <div class="grid-sizer col-sm-6 row"></div>
     @foreach (rating r in Model) {
-        <div class="col-sm-1">
-            <div class="thumbnail">
-                @Html.GravatarImage(r.user.email)
+        <article class="item col-sm-6 row">
+            <div class="col-sm-2">
+                <div class="thumbnail">
+                    @Html.GravatarImage(r.user.email)
+                </div>
             </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <div class="pull-left">
-                        <strong>@r.user.name</strong>
-                        @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
+            <div class="col-sm-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left">
+                            <strong>@r.user.name</strong>
+                            @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
+                        </div>
+                        <strong class="pull-right" data-rating="@r.rating1">@r.rating1 / 5</strong>
                     </div>
-                    <strong class="pull-right" data-rating="@r.rating1">@r.rating1 / 5</strong>
-                </div>
-                <div class="panel-body">
-                    @r.message
-                </div>
-                <div class="panel-footer clearfix">
-                    <strong><a href="/Detail?id=@r.item.id">@r.item.title</a></strong>
-                    <a href="/Admin/DeleteRating/@r.id" class="btn btn-sm btn-danger pull-right">delete</a>
+                    <div class="panel-body">
+                        @r.message
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <strong><a href="/Detail?id=@r.item.id">@r.item.title</a></strong>
+                        <a href="/Admin/DeleteRating/@r.id" class="btn btn-sm btn-danger pull-right">delete</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </article>
     }
 </div>
 
@@ -42,6 +50,40 @@
         ratings.forEach(function (r) {
             r.innerText = '☄'.repeat(r.dataset.rating) + '⚪'.repeat(5 - r.dataset.rating);
             r.classList.add('emoji');
+        });
+    </script>
+    @* loaded over CDN, thus better than downloading it here *@
+    <script src="https://unpkg.com/object-fit-images@2.5.9/dist/ofi.browser.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js"></script>
+    <script>
+
+        var $grid = $('.isotope').isotope({
+            itemSelector: ".item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".grid-sizer"
+            },
+            filter: function () {
+                return qsRegex ? $(this).text().match(qsRegex) : true;
+            }
+        });
+
+        $grid.css({
+            visibility: 'visible',
+            opacity: 1
+        });
+
+        var qsRegex;
+        var apiNotCalled = true;
+
+        // use value of search field to filter
+        var $quicksearch = $('input[type=search]').on('input', function () {
+            qsRegex = new RegExp($quicksearch.val(), 'gi');
+            $grid.isotope();
+        });
+
+        $(window).on("load", function () {
+            $(".isotope").isotope('layout');
         });
     </script>
 }
