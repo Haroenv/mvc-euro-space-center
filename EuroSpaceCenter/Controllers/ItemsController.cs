@@ -30,7 +30,8 @@ namespace EuroSpaceCenter.Controllers {
                     rating = r.rating1,
                     message = r.message
                 }),
-                url = Url.Content($"~/Detail?id={i.id}")
+                url = Url.Content($"~/Detail?id={i.id}"),
+                description = i.description
             });
 
             return Json(items);
