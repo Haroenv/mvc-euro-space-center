@@ -77,7 +77,7 @@
 
         function appendToGrid(item) {
             console.log(item);
-            var elem = $("<a class='col-xs-6 col-sm-4 col-md-3 blocklink item' href='" + item.url + "'> <article class='panel panel-info'> <div class='panel-heading clearfix'> <h2 class='panel-title pull-left'>" + item.title + "</h2><span class='pull-right label label-success'>"+item.park+"</span></div><div class='panel-image'> <img src='" + item.image + "' alt='" + item.alt + "'> </div><div class='panel-body text-center'> <p>" + item.description + "</p></div></article></a>");
+            var elem = $("<a class='col-xs-6 col-sm-4 col-md-3 blocklink item' href='" + item.url + "'> <article class='panel panel-info'> <div class='panel-heading clearfix'> <h2 class='panel-title pull-left'>" + item.title + "</h2><span class='pull-right label label-success'>" + item.park + "</span></div><div class='panel-image'> <img src='" + item.image + "' alt='" + item.alt + "'> </div><div class='panel-body text-center'> <p>" + item.description.replace(/^(.{145}).+/, "$1…") + "</p></div></article></a>");
             $grid.append(elem)
               .isotope('appended', elem)
               .isotope('layout');
