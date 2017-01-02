@@ -78,17 +78,64 @@ namespace EuroSpaceCenter.Controllers {
         public Item() {
         }
 
+        /// <summary>
+        /// Alt attribute for the image
+        /// </summary>
         public string alt { get; set; }
+
+        /// <summary>
+        /// Moment of this item (for shows)
+        /// </summary>
         public DateTime? datetime { get; set; }
+
+        /// <summary>
+        /// ID of this item
+        /// </summary>
         public int id { get; set; }
+
+        /// <summary>
+        /// URL to an image for this item
+        /// </summary>
         public string image { get; set; }
+
+        /// <summary>
+        /// Maximum allowed height (attraction)
+        /// </summary>
         public int? max_height { get; set; }
+
+        /// <summary>
+        /// Minimum allowed height (attraction)
+        /// </summary>
         public int? min_height { get; set; }
+
+        /// <summary>
+        /// Array of strings, methods to pay (restaurant)
+        /// </summary>
         public string[] payment_types { get; set; }
+
+        /// <summary>
+        /// Average rating (out of five)
+        /// </summary>
         public double? rating { get; set; }
+
+        /// <summary>
+        /// All the ratings given
+        /// </summary>
         public IEnumerable<RatingEntity> ratings { get; set; }
+
+        /// <summary>
+        /// The identifiable title
+        /// </summary>
         public string title { get; set; }
+
+        /// <summary>
+        /// URL to a detail page for this item
+        /// </summary>
         public string url { get; set; }
+
+        /// <summary>
+        /// Plain text description for this item
+        /// </summary>
         public string description { get; set; }
     }
 }

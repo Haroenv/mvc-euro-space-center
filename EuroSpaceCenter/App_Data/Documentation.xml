@@ -486,6 +486,56 @@
             Get all of the attractions in Euro Space Center
             </summary>
         </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.alt">
+            <summary>
+            Alt attribute for the image
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.id">
+            <summary>
+            ID of this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.image">
+            <summary>
+            URL to an image for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.max_height">
+            <summary>
+            Maximum allowed height (attraction)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.min_height">
+            <summary>
+            Minimum allowed height (attraction)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.rating">
+            <summary>
+            Average rating (out of five)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.ratings">
+            <summary>
+            All the ratings given
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.title">
+            <summary>
+            The identifiable title
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.url">
+            <summary>
+            URL to a detail page for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Attraction.description">
+            <summary>
+            Plain text description for this item
+            </summary>
+        </member>
         <member name="M:EuroSpaceCenter.Controllers.ItemsController.Items">
             <summary>
             Get all of the items in Euro Space Center
@@ -497,14 +547,184 @@
             </summary>
             <param name="id">the id of the item</param>
         </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.alt">
+            <summary>
+            Alt attribute for the image
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.datetime">
+            <summary>
+            Moment of this item (for shows)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.id">
+            <summary>
+            ID of this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.image">
+            <summary>
+            URL to an image for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.max_height">
+            <summary>
+            Maximum allowed height (attraction)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.min_height">
+            <summary>
+            Minimum allowed height (attraction)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.payment_types">
+            <summary>
+            Array of strings, methods to pay (restaurant)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.rating">
+            <summary>
+            Average rating (out of five)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.ratings">
+            <summary>
+            All the ratings given
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.title">
+            <summary>
+            The identifiable title
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.url">
+            <summary>
+            URL to a detail page for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Item.description">
+            <summary>
+            Plain text description for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.RatingEntity.datetime">
+            <summary>
+            The moment this rating was written
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.RatingEntity.message">
+            <summary>
+            A comment given with this rating
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.RatingEntity.rating">
+            <summary>
+            The rating (out of five) given
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.RatingEntity.users_id">
+            <summary>
+            The id of the user that has commmented
+            </summary>
+        </member>
         <member name="M:EuroSpaceCenter.Controllers.RestaurantsController.Restaurants">
             <summary>
             Get all of the restaurants in Euro Space Center
             </summary>
         </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.alt">
+            <summary>
+            Alt attribute for the image
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.id">
+            <summary>
+            ID of this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.image">
+            <summary>
+            URL to an image for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.payment_types">
+            <summary>
+            Array of strings, methods to pay (restaurant)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.rating">
+            <summary>
+            Average rating (out of five)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.ratings">
+            <summary>
+            All the ratings given
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.title">
+            <summary>
+            The identifiable title
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.url">
+            <summary>
+            URL to a detail page for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Restaurant.description">
+            <summary>
+            Plain text description for this item
+            </summary>
+        </member>
         <member name="M:EuroSpaceCenter.Controllers.ShowsController.Shows">
             <summary>
             Get all of the shows in Euro Space Center
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.alt">
+            <summary>
+            Alt attribute for the image
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.datetime">
+            <summary>
+            Moment of this item (for shows)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.id">
+            <summary>
+            ID of this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.image">
+            <summary>
+            URL to an image for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.rating">
+            <summary>
+            Average rating (out of five)
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.ratings">
+            <summary>
+            All the ratings given
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.title">
+            <summary>
+            The identifiable title
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.url">
+            <summary>
+            URL to a detail page for this item
+            </summary>
+        </member>
+        <member name="P:EuroSpaceCenter.Controllers.Show.description">
+            <summary>
+            Plain text description for this item
             </summary>
         </member>
         <member name="M:EuroSpaceCenter.Models.rating.Get(System.Int32)">

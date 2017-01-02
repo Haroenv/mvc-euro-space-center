@@ -40,14 +40,49 @@ namespace EuroSpaceCenter.Controllers {
         public Restaurant() {
         }
 
+        /// <summary>
+        /// Alt attribute for the image
+        /// </summary>
         public string alt { get; set; }
+
+        /// <summary>
+        /// ID of this item
+        /// </summary>
         public int id { get; set; }
+
+        /// <summary>
+        /// URL to an image for this item
+        /// </summary>
         public string image { get; set; }
+
+        /// <summary>
+        /// Array of strings, methods to pay (restaurant)
+        /// </summary>
         public string[] payment_types { get; set; }
+
+        /// <summary>
+        /// Average rating (out of five)
+        /// </summary>
         public double? rating { get; set; }
+
+        /// <summary>
+        /// All the ratings given
+        /// </summary>
         public IEnumerable<RatingEntity> ratings { get; set; }
+
+        /// <summary>
+        /// The identifiable title
+        /// </summary>
         public string title { get; set; }
+
+        /// <summary>
+        /// URL to a detail page for this item
+        /// </summary>
         public string url { get; set; }
+
+        /// <summary>
+        /// Plain text description for this item
+        /// </summary>
         public string description { get; set; }
 
     }
