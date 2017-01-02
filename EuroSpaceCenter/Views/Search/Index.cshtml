@@ -16,7 +16,7 @@
     <div class="form-group col-sm-2">
         <label for="category">category</label>
         <select class="form-control" id="category">
-            <option value="all">all</option>
+            <option value="items">all</option>
             <option value="attractions">experience</option>
             <option value="shows">show</option>
             <option value="restaurants">restaurant</option>
@@ -66,8 +66,6 @@
                 return qsRegex ? $(this).text().match(qsRegex) : true;
             }
         });
-
-        $grid.isotope('shuffle');
 
         $grid.css({
             visibility: 'visible',
