@@ -73,11 +73,41 @@
         });
 
         var qsRegex;
+        var apiNotCalled = true;
+
+        function appendToGrid(item) {
+            console.log(item);
+            var elem = $("<a class='col-xs-6 col-sm-4 col-md-3 blocklink item' href='" + item.url + "'> <article class='panel panel-info'> <div class='panel-heading clearfix'> <h2 class='panel-title pull-left'>" + item.title + "</h2><span class='pull-right label label-success'>"+item.park+"</span></div><div class='panel-image'> <img src='" + item.image + "' alt='" + item.alt + "'> </div><div class='panel-body text-center'> <p>" + item.description + "</p></div></article></a>");
+            $grid.append(elem)
+              .isotope('appended', elem)
+              .isotope('layout');
+        }
 
         // use value of search field to filter
         var $quicksearch = $('input[type=search]').on('input', function () {
             qsRegex = new RegExp($quicksearch.val(), 'gi');
             $grid.isotope();
+            if ($grid.data('isotope').filteredItems.length < 6 && apiNotCalled) {
+                apiNotCalled = false;
+                $.ajax({
+                    url: 'http://spacefun.umutsaglam.ikdoeict.net/api/items',
+                    success: function (res) {
+                        res.forEach(function (item) {
+                            item.park = 'spacefun';
+                            appendToGrid(item);
+                        })
+                    }
+                });
+                $.ajax({
+                    url: 'http://marspark.eliasmeire.ikdoeict.net/api/items',
+                    success: function (res) {
+                        res.forEach(function (item) {
+                            item.park = 'marspark';
+                            appendToGrid(item);
+                        })
+                    }
+                });
+            }
         });
 
         $(window).on("load", function () {
