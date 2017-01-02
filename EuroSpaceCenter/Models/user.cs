@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 
 namespace EuroSpaceCenter.Models {
@@ -46,6 +48,22 @@ namespace EuroSpaceCenter.Models {
         internal static user Get(int id) {
             using (var db = new DataClassesDataContext()) {
                 return db.users.SingleOrDefault(u => u.id == id);
+            }
+        }
+
+        internal static user GetDeferred(string email) {
+            using (var db = new DataClassesDataContext()) {
+                DataLoadOptions options = new DataLoadOptions();
+                options.LoadWith<user>(t => t.ratings);
+                options.LoadWith<rating>(t => t.item);
+                db.LoadOptions = options;
+                return db.users.SingleOrDefault(u => u.email == email);
+            }
+        }
+
+        internal static bool HasRating(string email, int rating_id) {
+            using (var db = new DataClassesDataContext()) {
+                return db.users.SingleOrDefault(u => u.email == email).ratings.Any(r => r.id == rating_id);
             }
         }
 

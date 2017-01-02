@@ -1,4 +1,5 @@
-﻿@model EuroSpaceCenter.Models.user
+﻿@using EuroSpaceCenter.Models
+@model user
 
 @{
     ViewBag.Title = "Account";
@@ -79,4 +80,47 @@
         </div>
 
     </div>
+}
+
+<section class="ratings">
+
+    <h3>My Ratings</h3>
+    <div class="row">
+        @foreach (rating r in ViewBag.Ratings) {
+            <div class="col-sm-1">
+                <div class="thumbnail">
+                    @Html.GravatarImage(r.user.email)
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left">
+                            <strong>@r.user.name</strong>
+                            @Html.Time(r.datetime, "{0:d}", new { @class = "text-muted" })
+                        </div>
+                        <strong class="pull-right" data-rating="@r.rating1">@r.rating1 / 5</strong>
+                    </div>
+                    <div class="panel-body">
+                        @r.message
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <strong><a href="/Detail?id=@r.item.id">@r.item.title</a></strong>
+                        <a href="/Account/DeleteRating/@r.id" class="btn btn-sm btn-danger pull-right">delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        NodeList.prototype.forEach = Array.prototype.forEach; // polyfill
+        var ratings = document.querySelectorAll('[data-rating]');
+        ratings.forEach(function (r) {
+            r.innerText = '☄'.repeat(r.dataset.rating) + '⚪'.repeat(5 - r.dataset.rating);
+            r.classList.add('emoji');
+        });
+    </script>
 }
