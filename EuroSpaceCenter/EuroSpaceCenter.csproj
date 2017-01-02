@@ -312,7 +312,7 @@
     <Content Include="fonts\thelastcall-regular-webfont.svg" />
     <Content Include="fonts\thelastcall-regular-webfont.ttf" />
     <Content Include="fonts\thelastcall-regular-webfont.woff" />
-    <None Include="fonts\thelastcall-regular-webfont.woff2" />
+    <Content Include="fonts\thelastcall-regular-webfont.woff2" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
