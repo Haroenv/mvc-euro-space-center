@@ -23,7 +23,7 @@ namespace EuroSpaceCenter.Controllers {
                 datetime = i.show != null ? i.show.datetime : null,
                 min_height = i.attraction != null ? i.attraction.max_height : null,
                 max_height = i.attraction != null ? i.attraction.min_height : null,
-                rating = i.ratings.Any() ? i.ratings.Average(r => r.rating1) : double.NaN,
+                rating = i.ratings.Any() ? (double?)i.ratings.Average(r => r.rating1) : null,
                 ratings = i.ratings.Select(r => new RatingEntity() {
                     users_id = r.users_id,
                     datetime = r.datetime,
