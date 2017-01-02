@@ -73,7 +73,6 @@ namespace EuroSpaceCenter.Controllers {
     }
 
     internal class Item {
-        internal string description;
 
         public Item() {
         }
@@ -89,5 +88,6 @@ namespace EuroSpaceCenter.Controllers {
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
         public string url { get; set; }
+        public string description { get; set; }
     }
 }

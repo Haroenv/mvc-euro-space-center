@@ -41,7 +41,7 @@ namespace EuroSpaceCenter.Controllers {
         }
 
         public string alt { get; set; }
-        public string description { get; internal set; }
+        public string description { get; set; }
         public int id { get; set; }
         public string image { get; set; }
         public int? max_height { get; set; }

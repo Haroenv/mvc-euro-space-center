@@ -7,6 +7,7 @@ namespace EuroSpaceCenter {
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

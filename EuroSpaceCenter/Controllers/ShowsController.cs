@@ -36,13 +36,13 @@ namespace EuroSpaceCenter.Controllers {
     }
 
     internal class Show {
-        internal string description;
 
         public Show() {
         }
 
         public string alt { get; set; }
         public DateTime? datetime { get; set; }
+        public string description { get; internal set; }
         public int id { get; set; }
         public string image { get; set; }
         public double? rating { get; set; }
