@@ -19,7 +19,7 @@ namespace EuroSpaceCenter.Controllers {
                 title = i.title,
                 image = i.image,
                 alt = i.alt,
-                payment_type = i.restaurant.payment_type,
+                payment_types = i.restaurant.payment_type.Replace(", ", ";").Split(';'),
                 rating = i.ratings.Any() ? (double?)i.ratings.Average(r => r.rating1) : null,
                 ratings = i.ratings.Select(r => new RatingEntity() {
                     users_id = r.users_id,
@@ -43,7 +43,7 @@ namespace EuroSpaceCenter.Controllers {
         public string alt { get; set; }
         public int id { get; set; }
         public string image { get; set; }
-        public string payment_type { get; set; }
+        public string[] payment_types { get; set; }
         public double? rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }

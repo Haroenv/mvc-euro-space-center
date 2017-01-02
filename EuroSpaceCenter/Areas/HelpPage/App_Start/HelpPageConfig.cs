@@ -60,7 +60,7 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         image = "http://c8.alamy.com/comp/ATD901/people-dancing-in-a-nightclub-or-bar-restaurant-ATD901.jpg",
                         alt = "some people dancing around in a restaurant",
                         id = 5,
-                        payment_type = "Cash, Cheque, Large rocks found on the sea bed",
+                        payment_types = "Cash, Cheque, Large rocks found on the sea bed".Replace(", ", ";").Split(';'),
                         rating = 4.32,
                         ratings = new RatingEntity[] {
                             new RatingEntity() {
@@ -114,7 +114,7 @@ namespace EuroSpaceCenter.Areas.HelpPage {
                         image = "http://c8.alamy.com/comp/ATD901/people-dancing-in-a-nightclub-or-bar-restaurant-ATD901.jpg",
                         alt = "some people dancing around in a restaurant",
                         id = 5,
-                        payment_type = "Cash, Cheque, Large rocks found on the sea bed",
+                        payment_types = "Cash, Cheque, Large rocks found on the sea bed".Replace(", ", ";").Split(';'),
                         rating = 4.32,
                         ratings = new RatingEntity[] {
                             new RatingEntity() {

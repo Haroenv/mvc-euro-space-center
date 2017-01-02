@@ -19,7 +19,7 @@ namespace EuroSpaceCenter.Controllers {
                 title = i.title,
                 image = i.image,
                 alt = i.alt,
-                payment_type = i.restaurant != null ? i.restaurant.payment_type : null,
+                payment_types = i.restaurant != null ? i.restaurant.payment_type.Replace(", ", ";").Split(';') : null,
                 datetime = i.show != null ? i.show.datetime : null,
                 min_height = i.attraction != null ? i.attraction.max_height : null,
                 max_height = i.attraction != null ? i.attraction.min_height : null,
@@ -53,7 +53,7 @@ namespace EuroSpaceCenter.Controllers {
                 title = i.title,
                 image = i.image,
                 alt = i.alt,
-                payment_type = i.restaurant != null ? i.restaurant.payment_type : null,
+                payment_types = i.restaurant != null ? i.restaurant.payment_type.Replace(", ", ";").Split(';') : null,
                 datetime = i.show != null ? i.show.datetime : null,
                 min_height = i.attraction != null ? i.attraction.max_height : null,
                 max_height = i.attraction != null ? i.attraction.min_height : null,
@@ -83,7 +83,7 @@ namespace EuroSpaceCenter.Controllers {
         public string image { get; set; }
         public int? max_height { get; set; }
         public int? min_height { get; set; }
-        public string payment_type { get; set; }
+        public string[] payment_types { get; set; }
         public double? rating { get; set; }
         public IEnumerable<RatingEntity> ratings { get; set; }
         public string title { get; set; }
