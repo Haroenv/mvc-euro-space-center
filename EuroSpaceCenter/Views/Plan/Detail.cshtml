@@ -109,7 +109,7 @@
                 method: 'POST',
                 url: '/Plan/Add/' + @Model.id + '?item_id=' + $sel.val(),
                 success: function (res) {
-                    $item.append('<span class="btn btn-danger label btn-sm pull-right" data-id="' + res.id + '" onclick="remove(this);"><i class="glyphicon glypicon-remove"></i></span>');
+                    $item.append('<span class="btn btn-danger label btn-sm pull-right" data-id="' + res.id + '" onclick="remove(this);"><i class="glyphicon glyphicon-remove"></i></span>');
                 }
             })
         });
