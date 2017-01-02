@@ -93,6 +93,8 @@
                     success: function (res) {
                         res.forEach(function (item) {
                             item.park = 'spacefun';
+                            // description is sometimes html and sometimes not, so we strip it
+                            item.description = $('<p>' + item.description + '</p>').text();
                             appendToGrid(item);
                         })
                     }
