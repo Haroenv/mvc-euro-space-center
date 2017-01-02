@@ -68,10 +68,14 @@ namespace EuroSpaceCenter.Controllers {
             if (ModelState.IsValid) {
                 user active = user.Get(u.email, u.password);
                 if (active != null) {
-                    FormsAuthentication.SetAuthCookie(active.email, false);
-                    return Redirect("/");
+                    if (active.verified) {
+                        FormsAuthentication.SetAuthCookie(active.email, false);
+                        return Redirect("/");
+                    } else {
+                        ModelState.AddModelError(String.Empty, "You didn't verify yet, can you check your emails?");
+                    }
                 } else {
-                    ModelState.AddModelError(String.Empty, "Oops! A mistake happened");
+                    ModelState.AddModelError(String.Empty, "Oops! Email or password was wrong");
                 }
             }
             return View(u);
