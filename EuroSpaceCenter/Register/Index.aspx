@@ -65,7 +65,7 @@
                 <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
             <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredPasswordValidator" ControlToValidate="password" runat="server" ErrorMessage="You need to have a password"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 Lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic"/>
+            <asp:RegularExpressionValidator ID="passwordRegex" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" ErrorMessage="Password must be minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number" ControlToValidate="password" Display="Dynamic"/>
         </div>
         <div class="form-group">
             <label for="password1" class="control-label">Repeat password</label>
@@ -74,7 +74,7 @@
                 <asp:TextBox ID="password1" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
             <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredPassword1Validator" ControlToValidate="password1" runat="server" ErrorMessage="You need to repeat the password"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="PasswordEqualsValidator" ControlToCompare="password" ControlToValidate="password1" runat="server" ErrorMessage="You need to type the password the same twice"></asp:CompareValidator>
+            <asp:CompareValidator ID="PasswordEqualsValidator" ControlToCompare="password" ControlToValidate="password1" runat="server" ErrorMessage="You need to type the same password twice"></asp:CompareValidator>
         </div>
         <div class="form-group">
             <asp:Button ID="submit" runat="server" Text="Create" CssClass="btn btn-success" OnClick="submit_Click" />
